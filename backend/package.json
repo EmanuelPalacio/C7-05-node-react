@@ -1,0 +1,11 @@
+{
+  "name": "backend",
+  "version": "0.0.1",
+  "description": "express",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC"
+}
