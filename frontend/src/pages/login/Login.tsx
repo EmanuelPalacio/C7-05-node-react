@@ -7,7 +7,6 @@ const Login: React.FC = () => {
   return (
     <div className={styles.loginContainer}>
       <div className={styles.imgContainer}>
-        {' '}
         <ImageLoginSvg />
       </div>
       <form className={styles.formContainer}>
