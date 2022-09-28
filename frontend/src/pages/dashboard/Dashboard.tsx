@@ -11,7 +11,8 @@ const Dashboard: React.FC = () => {
   ])
 
   const addOrder = () => {
-    setOrders(orders.concat({orderId:orders.length+1,tiempo:15}))
+    setOrders(orders.concat({orderId:orders.length+1,tiempo:15}));
+    
   }
 
   return (
