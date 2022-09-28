@@ -14,7 +14,7 @@ const Login: React.FC = () => {
           <LogoSvg svgProp={{ width: 166, height: 180 }} />
         </span>
         <input className={styles.formContainer_input} type='text' name='username' placeholder='usuario' />
-        <input className={styles.formContainer_input} type='text' name='password' placeholder='contraseña' />
+        <input className={styles.formContainer_input} type='password' name='password' placeholder='contraseña' />
         <button className={styles.formContainer_button}>Iniciar sesión</button>
         <a>¿Olvidaste tu contraseña?</a>
       </form>
