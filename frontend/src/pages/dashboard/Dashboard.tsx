@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import DashboardOrder from './DashboardOrder';
 import styles from './styles/dashboard.module.css';
 
 const Dashboard: React.FC = () => {
@@ -7,7 +8,10 @@ const Dashboard: React.FC = () => {
     {orderId:1,tiempo:15},
     {orderId:2,tiempo:15},
     {orderId:3,tiempo:15},
-    {orderId:4,tiempo:15},
+    {orderId:5,tiempo:15},
+    {orderId:6,tiempo:15},
+    {orderId:7,tiempo:15},
+    {orderId:8,tiempo:15},
   ])
 
   const addOrder = () => {
@@ -16,15 +20,17 @@ const Dashboard: React.FC = () => {
   }
 
   return (
+    <>
     <div className={styles.dashboardContainer}>
       <div className={styles.dashboardHeader}>
         <a className={`${styles.dashboardLink} ${styles.dashboardLinkActive}`}>Historial de pedidos</a>
         <a className={`${styles.dashboardLink}`}>Finalizados</a>
       </div>
-      <div className={styles.dashboardBody}>
+      <div className={`${styles.dashboardFilter}`}>
         <button onClick={addOrder} type='button' >Agregar pedido</button>
-        <hr />
-        <div className={styles.pedidosContainer}>
+      </div>
+      <div className={styles.dashboardBody}>
+        <div className={styles.orderContainer}>
           <ul>
             {
               orders.map( (order) => 
@@ -40,6 +46,9 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
     </div>
+
+    <DashboardOrder/>
+    </>
   );
 };
 
