@@ -1,0 +1,38 @@
+.dashboardContainer{
+  min-height: 100vh;
+  margin: 0 100px;
+  display: grid;
+  align-content: center;
+  gap: 1rem;
+  grid-template-rows: 1fr 3fr;
+}
+
+.order{
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--primary);
+  padding: 1rem 0.25rem ;
+  margin: 0.25rem 0;
+  display: flex;
+
+}
+
+.orderButton{
+  background-color: var(--highlight) !important;
+  border-bottom: 3px solid var(--borderBottom);
+}
+
+.dashboardHeader{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.dashboardLink{
+  display: flex;
+  padding: 0.25rem 1rem;
+}
+
+.dashboardLinkActive{
+  border-bottom: 3px solid var(--borderBottom);
+}
