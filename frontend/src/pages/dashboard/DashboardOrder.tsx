@@ -3,9 +3,9 @@ const DashboardOrder: React.FC = () =>{
     return(
         <div>
             <p>aca va el id</p>
-            <form id="timeSelect">
+            <form>
                 <input type="number" name="Mesa" placeholder="Numero de mesa"/>
-                <select name="time">
+                <select title="timeSelect" name="time">
                     <option>5min</option>
                     <option>10min</option>
                     <option>15min</option>
@@ -15,7 +15,7 @@ const DashboardOrder: React.FC = () =>{
                     <option>35min</option>
                     <option>40min</option>
                 </select>
-                <button>Generar orden</button>
+                <button type="button">Generar orden</button>
             </form>
         </div>
     )
