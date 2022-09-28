@@ -35,9 +35,15 @@
 
 .formContainer_input{
   margin-bottom: 3.75rem;
+
 }
 
 .formContainer_button{
+  margin-bottom: 1rem;
+}
+
+.formContainer_errorMessage{
+  color: rgb(247, 58, 58);
   margin-bottom: 1.25rem;
 }
 
