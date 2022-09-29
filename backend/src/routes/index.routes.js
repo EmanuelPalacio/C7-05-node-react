@@ -1,7 +1,7 @@
-const { createUser } = require('../controllers/orderController.controller');
+const { auth } = require('../controllers/index.controller');
 
 module.exports = (router) => {
-  router.get('/users/', createUser);
+  router.post('/users/', auth.createUser);
 
   return router;
 };

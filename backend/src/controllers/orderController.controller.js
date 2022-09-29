@@ -1,8 +1,8 @@
-const UserService = require('../services/turnService.service');
-const userService = new UserService();
+const { Turn } = require('../services/index.service');
+const turnService = new Turn();
 exports.createUser = async(req, res, next) => {
   try {
-    let orderRetrieved = await userService.createUser();
+    let orderRetrieved = await turnService.createUser();
 
     let { msg, status } = orderRetrieved;
 
