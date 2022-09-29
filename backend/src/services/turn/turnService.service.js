@@ -1,9 +1,9 @@
 const { Turn, Stat, Food, Cashier } = require('../../dao/models');
 
 module.exports = class {
-  async createUser() {
+  async createUser(user) {
     let response;
-    let turnRetrieved = await Turn.length;
+    let turnRetrieved = await Turn.create(user);
     try {
       response = {
         msg: 'Testing funcionality',

@@ -6,11 +6,10 @@ exports.createUser = async(req, res, next) => {
   try {
     let user;
     let result;
-    user = req.body;
-    if (JSON.stringify(user) === '{}') {
-      result = 'No existen datos';
-      return res.status(203).json({ success: false, status: 203, msg: result });
-    }
+    user = {
+        user_name: 'Juan',
+        user_password: '1234',
+      } //req.body;
 
     result = await cashierService.createUser(user);
     res.status(200).json({ success: true, status: 200, msg: result });
@@ -20,3 +19,13 @@ exports.createUser = async(req, res, next) => {
     console.log(error);
   }
 };
+
+exports.login = async(req, res, next) => {
+
+
+  console.log(req.body);
+  const loginCredentials = req.body;
+  result = await cashierService.findUser(loginCredentials);
+  console.log(result);
+  res.status(200).json({ success: true, status: 200, msg: result })
+}

@@ -4,10 +4,16 @@ const {
   DB_USERNAME,
   DB_PASSWORD,
   DB_HOST,
+  DB_PORT,
 } = require('../../config/globals');
 
 const db = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
+  define: {
+    freezeTableName: true,
+  },
+  logging: false,
   host: DB_HOST,
+  port: DB_PORT,
   dialect: 'postgres',
 });
 
