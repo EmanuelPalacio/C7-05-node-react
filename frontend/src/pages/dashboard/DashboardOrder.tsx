@@ -23,6 +23,10 @@ const DashboardOrder: React.FC<any> = ({activeModal, orden}) =>{
         orden(client)
         setModal(true)
     }
+
+    const toggleModal = () => {
+        activeModal()
+    }
     /* useEffect solo para comprobar consola */
     useEffect(()=>{
         console.log(client.orderId)
@@ -52,7 +56,10 @@ const DashboardOrder: React.FC<any> = ({activeModal, orden}) =>{
                 </form>
             </div>
             :
-            <QrImage qrCode={client.orderId} />
+            <div>
+                <button className={styles.modalButton} onClick={toggleModal} type='button'>X</button>
+                <QrImage qrCode={client.orderId} />
+            </div>
             }
         </div>
         </>

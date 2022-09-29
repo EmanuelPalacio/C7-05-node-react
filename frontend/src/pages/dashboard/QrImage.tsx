@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import QR from 'qrcode';
+import styles from './styles/modals.module.css'
 
 interface IProps {
   qrCode:string
@@ -7,23 +8,33 @@ interface IProps {
 
 const QrImage: React.FC<IProps> = (props: IProps) => {
 
-  const [qr] = useState(props.qrCode)  
-  const [mockQr,setMockQr] = useState<string>();
-  QR.toDataURL(window.location.origin+'/order/'+1, (err,code:string) => { // http://localhost:3000/order/1
-    if (err) return console.log('Error en el qr');
-    setMockQr(code)
+  const [qr,setQr] = useState('1') // useState(props.qrCode) 
+   
+  const [mockQr,setMockQr] = useState<string>('1');
+
+  useEffect( () => {
+    if (qr){
+      QR.toDataURL(window.location.origin+'/order/'+1, (err,code:string) => { // http://localhost:3000/order/1
+        if (err) return console.log('Error en el qr');
+        setQr(code)
+      })
+    }else{
+      QR.toDataURL(window.location.origin+'/order/'+1, (err,code:string) => { // http://localhost:3000/order/1
+        if (err) return console.log('Error en el qr');
+        setMockQr(code)
+      })
+    }
   })
 
   
 
   return(
     <>
-    { qr 
-      ? (<img src={qr} aria-label='escanear qr'/>) : 
-      (
-        <img src={mockQr} aria-label='escanear qr' />
-      )
-    }
+    <div className={styles.qrModal}>
+      <h2>Pedido creado con éxito</h2>
+      <img className={styles.qrImg} src={`${qr ? qr : mockQr}`} aria-label='escanear qr'/>
+    </div>
+      
     </>
   )
 

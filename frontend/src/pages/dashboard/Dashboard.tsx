@@ -17,7 +17,6 @@ const Dashboard: React.FC = () => {
   }
   const addOrder = (object:order) => {
     setOrders([...orders, object]);
-    setModal(false) 
   }
 
 
