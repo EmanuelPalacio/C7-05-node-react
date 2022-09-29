@@ -20,10 +20,7 @@ const Turn = db.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        /*food_id: {
-          type: DataTypes.INTEGER,
-          primaryKey: true,
-        },*/
+
     }, { timestamps: true },
 );
 
