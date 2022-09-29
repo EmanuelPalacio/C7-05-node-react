@@ -14,12 +14,12 @@ const QrImage: React.FC<IProps> = (props: IProps) => {
 
   useEffect( () => {
     if (qr){
-      QR.toDataURL(window.location.origin+'/order/'+1, (err,code:string) => { // http://localhost:3000/order/1
+      QR.toDataURL(window.location.origin+'/client/'+1, (err,code:string) => { // http://localhost:3000/order/1
         if (err) return console.log('Error en el qr');
         setQr(code)
       })
     }else{
-      QR.toDataURL(window.location.origin+'/order/'+1, (err,code:string) => { // http://localhost:3000/order/1
+      QR.toDataURL(window.location.origin+'/client/'+1, (err,code:string) => { // http://localhost:3000/order/1
         if (err) return console.log('Error en el qr');
         setMockQr(code)
       })

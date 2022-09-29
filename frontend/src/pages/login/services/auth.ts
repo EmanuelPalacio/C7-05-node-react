@@ -4,7 +4,14 @@ import { authAdapter } from '../adapter/auth.adapter';
 import axios from 'axios';
 import dataUsers from './auth.json';
 
-export const authUrl = process.env.NODE_ENV === 'production' ? process.env.AUTH_URL : 'http://localhost:3000/auth';
+// export const authUrl = process.env.NODE_ENV === 'production' ? process.env.AUTH_URL : 'http://localhost:3000/auth'; 
+
+// If you are using Vite, use import.meta.env instead, process.env is removed.
+
+// And make sure variables start with VITE_ in .env file.
+
+// VITE_SOME_KEY=123
+// more https://vitejs.dev/guide/env-and-mode.html
 
 export const authService = async (userName: string, password: string) => {
   /*   const response = await axios.post<ApiUser>(`${authUrl}`, {
