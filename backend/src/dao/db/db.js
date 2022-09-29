@@ -6,12 +6,13 @@ const {
   DB_HOST,
 } = require('../../config/globals');
 
+
 const db = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
   host: DB_HOST,
   dialect: 'postgres',
 });
 
-const getConnection = async () => {
+const getConnection = async() => {
   try {
     await db.authenticate();
     return 'Connection has been established successfully.';
