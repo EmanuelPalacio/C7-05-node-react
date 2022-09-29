@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const { DataTypes }  = require('sequelize');
+=======
+const { DataTypes } = require('sequelize');
+>>>>>>> capas
 const { db } = require('../db/db');
 
 const Cashier = db.define(

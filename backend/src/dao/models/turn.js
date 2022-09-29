@@ -20,7 +20,14 @@ const Turn = db.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
+<<<<<<< HEAD
 
+=======
+        /*food_id: {
+          type: DataTypes.INTEGER,
+          primaryKey: true,
+        },*/
+>>>>>>> capas
     }, { timestamps: true },
 );
 

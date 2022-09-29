@@ -6,7 +6,6 @@ const {
   DB_HOST,
 } = require('../../config/globals');
 
-
 const db = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
   host: DB_HOST,
   dialect: 'postgres',
