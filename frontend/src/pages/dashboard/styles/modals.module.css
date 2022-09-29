@@ -8,11 +8,20 @@
     height: 100vh;
     background-color: var(--modalTransparency);
 }
+
 .modal{
+    position: relative;
     height: 60%;
     width: 60%;
     background-color: var(--highlight);
     border-radius: 20px;
+    overflow: hidden;
+}
+.modalButton {
+    position: absolute;
+    background-color: var(--highlight);
+    top: 0;
+    right: 0;
 }
 .modalForm{
     display: flex;
