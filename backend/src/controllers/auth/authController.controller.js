@@ -1,5 +1,29 @@
-const { Cashier } = require('../../services/index.service');
-const cashierService = new Cashier();
+//const { Cashier } = require('../../services/index.service');
+const  { cashier }  = require ("../../models");
+
+exports.createUser= async (req, res) =>{
+  const { user_name, user_password } = req.body;
+  console.log(req.body)
+  try {
+    const newCashier = await cashier.create(
+      {
+        user_name,
+        user_password,    
+      },
+      {
+        fields: ["user_name", "user_password"],
+      }
+    );
+    //console.log(newUser)
+    res.json(newCashier);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }  
+}
+
+/*const cashierService = new Cashier();
 exports.createUser = async(req, res, next) => {
   console.log(req.body);
 
@@ -28,4 +52,4 @@ exports.login = async(req, res, next) => {
   result = await cashierService.findUser(loginCredentials);
   console.log(result);
   res.status(200).json({ success: true, status: 200, msg: result })
-}
+}*/

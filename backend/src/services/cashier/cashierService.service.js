@@ -1,7 +1,5 @@
-const { Turn, Stat, Food, Cashier } = require('../../dao/models');
 
-
-module.exports = class {
+/*module.exports = class {
   async createUser(user) {
 
     console.log(user);
@@ -19,4 +17,4 @@ module.exports = class {
       return false;
     }
   }
-};
+};*/

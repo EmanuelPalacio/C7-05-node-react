@@ -29,6 +29,7 @@
     "helmet": "^6.0.0",
     "passport-local": "^1.0.0",
     "pg": "^8.8.0",
-    "sequelize": "^6.23.1"
+    "sequelize": "^6.23.1",
+    "sequelize-cli": "^6.5.1"
   }
 }

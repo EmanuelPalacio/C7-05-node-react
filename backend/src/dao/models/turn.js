@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+/*const { DataTypes } = require('sequelize');
 const { db } = require('../db/db');
 
 const Turn = db.define(
@@ -20,10 +20,10 @@ const Turn = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-  }, { timestamps: true },
+  }, {timestamps: true },
 );
 
-//Food.sync({ alter: true });
-module.exports = Turn;
+Food.sync({ alter: true });
+module.exports = Turn;*/
 
 

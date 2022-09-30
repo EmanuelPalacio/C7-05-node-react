@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+/*const { DataTypes } = require('sequelize');
 const { db } = require('../db/db');
 
 const Stat = db.define(
@@ -12,4 +12,4 @@ const Stat = db.define(
 );
 
 //Stat.sync({ alter: true });
-module.exports = Stat;
+module.exports = Stat;*/

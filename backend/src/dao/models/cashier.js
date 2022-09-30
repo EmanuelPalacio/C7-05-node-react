@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+/*const { DataTypes } = require('sequelize');
 const { db } = require('../db/db');
 
 const Cashier = db.define(
@@ -20,4 +20,4 @@ const Cashier = db.define(
 );
 
 //Cashier.sync({ alter: true });
-module.exports = Cashier;
+module.exports = Cashier;*/
