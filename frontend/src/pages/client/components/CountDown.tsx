@@ -5,7 +5,7 @@ import { SVGCircle } from './SVGCircle';
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
 
-const deadline = '2022-09-29T07:00:00';
+const deadline = new Date(new Date().getTime() + 5 * MINUTE);
 
 // eslint-disable-next-line camelcase
 function mapNumber(number: number, in_min: number, in_max: number, out_min: number, out_max: number) {
@@ -14,7 +14,7 @@ function mapNumber(number: number, in_min: number, in_max: number, out_min: numb
 }
 
 export default function CountDown() {
-  const parsedDeadline = useMemo(() => Date.parse(deadline), [deadline]);
+  const parsedDeadline = useMemo(() => Date.parse(deadline.toString()), [deadline]);
   const [time, setTime] = useState(parsedDeadline - Date.now());
 
   /* console.log(new Date(time).toISOString().slice(11, 19)); */
