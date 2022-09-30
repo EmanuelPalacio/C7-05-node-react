@@ -29,7 +29,10 @@ exports.login = async (req, res, next) => {
     where: { user_name: user.user_name },
   } );
   console.log(result);
-  res.status(200).json({ success: true, status: 200, msg: result })
+  res.status(200).json({ 
+    success: true,
+    msg: result
+  })
 }
 
 /*const cashierService = new Cashier();
