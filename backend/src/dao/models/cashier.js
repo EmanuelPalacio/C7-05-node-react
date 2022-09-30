@@ -19,5 +19,5 @@ const Cashier = db.define(
   }, { timestamps: true },
 );
 
-Cashier.sync({ alter: true });
+//Cashier.sync({ alter: true });
 module.exports = Cashier;

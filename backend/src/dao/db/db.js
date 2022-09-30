@@ -1,3 +1,6 @@
+//require('../models/food');
+//require('../models/turn');
+
 const { Sequelize } = require('sequelize');
 const {
   DB_DATABASE,
@@ -11,7 +14,7 @@ const db = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
   define: {
     freezeTableName: true,
   },
-  logging: false,
+  logging: true,
   host: DB_HOST,
   port: DB_PORT,
   dialect: 'postgres',
@@ -19,12 +22,14 @@ const db = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
 
 const getConnection = async() => {
   try {
-    await db.authenticate();
-    return 'Connection has been established successfully.';
+    await db.sync({alter: true});
+    /*await db.authenticate();
+    return 'Connection has been established successfully.';*/
   } catch (error) {
     return 'Unable to connect to the database:', error;
   }
 };
+
 
 module.exports = {
   getConnection,

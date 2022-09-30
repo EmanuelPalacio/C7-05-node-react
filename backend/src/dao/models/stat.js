@@ -11,5 +11,5 @@ const Stat = db.define(
     }, { timestamps: true },
 );
 
-Stat.sync({ alter: true });
+//Stat.sync({ alter: true });
 module.exports = Stat;
