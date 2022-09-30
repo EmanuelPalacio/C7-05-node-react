@@ -1,5 +1,6 @@
 
-/*module.exports = class {
+const Cashier  = require ("../../dao/models/cashier");
+module.exports = class {
   async createUser(user) {
 
     console.log(user);
@@ -17,4 +18,4 @@
       return false;
     }
   }
-};*/
+};

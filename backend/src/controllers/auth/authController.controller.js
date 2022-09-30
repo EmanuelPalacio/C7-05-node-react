@@ -1,5 +1,4 @@
-//const { Cashier } = require('../../services/index.service');
-const  { cashier }  = require ("../../models");
+const  { cashier }  = require ("../../dao/models");
 
 exports.createUser= async (req, res) =>{
   const { user_name, user_password } = req.body;
@@ -21,6 +20,16 @@ exports.createUser= async (req, res) =>{
       message: error.message,
     });
   }  
+}
+
+exports.login = async (req, res, next) => {
+  console.log(req.body);
+  const user = req.body;
+  result = await cashier.findOne({
+    where: { user_name: user.user_name },
+  } );
+  console.log(result);
+  res.status(200).json({ success: true, status: 200, msg: result })
 }
 
 /*const cashierService = new Cashier();

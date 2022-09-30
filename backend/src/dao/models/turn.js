@@ -1,29 +1,30 @@
-/*const { DataTypes } = require('sequelize');
-const { db } = require('../db/db');
-
-const Turn = db.define(
-  'turn', {
-    turn_id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    estimated_time: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    total_time: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    turn_date: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  }, {timestamps: true },
-);
-
-Food.sync({ alter: true });
-module.exports = Turn;*/
-
-
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class turn extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      turn.belongsTo(models.food,{
+        foreignKey: 'id',
+        //targetKey: 'food_id'
+      })
+    }
+  }
+  turn.init({
+    estimated_time: DataTypes.INTEGER,
+    total_time: DataTypes.INTEGER,
+    turn_date: DataTypes.INTEGER,
+    food_id: DataTypes.INTEGER
+  }, {
+    sequelize,
+    modelName: 'turn',
+  });
+  return turn;
+};
