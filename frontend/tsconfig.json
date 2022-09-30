@@ -5,6 +5,7 @@
       "@/*": ["src/*"]
     },
     "target": "ESNext",
+    "types": ["vite/client"], // Para resolver el error en import.meta.env
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,

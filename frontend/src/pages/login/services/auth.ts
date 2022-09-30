@@ -2,28 +2,31 @@
 import { ApiUser } from '@/models/user.type';
 import { authAdapter } from '../adapter/auth.adapter';
 import axios from 'axios';
-import dataUsers from './auth.json';
 
-// export const authUrl = process.env.NODE_ENV === 'production' ? process.env.AUTH_URL : 'http://localhost:3000/auth'; 
-
-// If you are using Vite, use import.meta.env instead, process.env is removed.
-
-// And make sure variables start with VITE_ in .env file.
-
-// VITE_SOME_KEY=123
-// more https://vitejs.dev/guide/env-and-mode.html
+export const authUrl = import.meta.env.VITE_NODE_ENV === 'production' ? import.meta.env.VITE_AUTH_URL : 'http://localhost:9000/api/auth/login'; 
 
 export const authService = async (userName: string, password: string) => {
-  /*   const response = await axios.post<ApiUser>(`${authUrl}`, {
-    user_name: userName,
-    password,
-    turn_id: [],
-  }); */
-  try {
-    const response = dataUsers.find((user) => user.user_name === userName && user.user_password === password);
+  
 
-    if (response) {
-      return authAdapter(response);
+  try {
+    const response = await axios.post<ApiUser>(`${authUrl}`, {
+      user_name: userName,
+      user_password:password,
+    });
+
+
+    console.log(`La respuesta del backend es ${response.data.msg}`);
+    /*
+      response.data:{
+        "success": boolean,
+        "status": number,
+        "msg": string
+      }
+    */
+
+    if (response.data.msg) {
+      /* return authAdapter(response.data); // EL ADAPTER transforma los datos que recibe del backend en un objeto manipulable por el front */
+      return true;
     }
     return null;
   } catch (error) {

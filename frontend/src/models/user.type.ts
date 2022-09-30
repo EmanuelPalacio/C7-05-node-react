@@ -1,8 +1,13 @@
 export interface ApiUser {
+  success: boolean,
+  status: number,
+  msg: string,
+  /*
   id: number;
   user_name: string;
   turn_id: number[];
   token: string;
+  */
 }
 
 export interface User {

@@ -41,7 +41,7 @@ const Login = () => {
   return (
     <div className={styles.loginContainer}>
       <div className={styles.imgContainer}>
-        <ImageLoginSvg />
+        <ImageLoginSvg  svgProp={{width: 500, height: 500}}/>
       </div>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
         <span className={styles.formContainer_logo}>
