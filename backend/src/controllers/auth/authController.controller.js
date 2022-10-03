@@ -1,39 +1,34 @@
-const  { cashier }  = require ("../../dao/models");
+const { Cashier } = require('../../services/index.service.js');
+const cashierService = new Cashier();
+exports.createUser = async(req, res) => {
+  const user = req.body;
 
-exports.createUser= async (req, res) =>{
-  const { user_name, user_password } = req.body;
-  console.log(req.body)
   try {
-    const newCashier = await cashier.create(
-      {
-        user_name,
-        user_password,    
-      },
-      {
-        fields: ["user_name", "user_password"],
-      }
-    );
-    //console.log(newUser)
-    res.json(newCashier);
+    const userToCreate = await cashierService.createUser(user);
+    const { status } = userToCreate;
+    res.status(status).json({
+      userToCreate,
+    });
   } catch (error) {
     res.status(500).json({
       message: error.message,
     });
-  }  
-}
+  }
+};
 
-exports.login = async (req, res, next) => {
-  console.log(req.body);
+exports.login = async(req, res, next) => {
   const user = req.body;
-  result = await cashier.findOne({
-    where: { user_name: user.user_name },
-  } );
-  console.log(result);
-  res.status(200).json({ 
-    success: true,
-    msg: result
-  })
-}
+  try {
+    const userRetrieved = await cashierService.findUserById(user);
+
+    const { status } = userRetrieved;
+    res.status(status).json(userRetrieved);
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
 
 /*const cashierService = new Cashier();
 exports.createUser = async(req, res, next) => {
