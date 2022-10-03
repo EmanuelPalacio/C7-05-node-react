@@ -1,0 +1,33 @@
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.countdown_item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 10px;
+  padding: 10px 0;
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.countdown_item  p {
+  font-size: calc(16px + 2vmin);
+  margin: 0;
+}
+
+.countdown_svg {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 100px;
+  height: 100px;
+}
+
+
+

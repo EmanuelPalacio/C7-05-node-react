@@ -1,0 +1,7 @@
+:root {
+  --primary: rgb(179, 255, 253);
+  --secondary: rgb(15, 76, 117);
+  --modalTransparency: rgba(15, 76, 117, 0.7);
+  --highlight: rgb(255, 255, 255);
+  --borderBottom: rgb(100, 208, 227);
+}
