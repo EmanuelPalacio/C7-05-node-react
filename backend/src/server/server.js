@@ -11,6 +11,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(compression());
 
+//middlewares
+const passportControl = require('../middlewares/passport-control')
+app.use(passportControl.initialize())
+
 app.use('/api', routes(router));
 
 module.exports = app;
