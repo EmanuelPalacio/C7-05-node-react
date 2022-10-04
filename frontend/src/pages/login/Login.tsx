@@ -7,12 +7,15 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setCashier } from '@/redux/slices/cashierSlice';
 
+import { token } from '@/utils/config';
+
 const Login = () => {
   const [inputValue, setInputValue] = useState({ username: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  console.log(token);
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputValue({
@@ -26,13 +29,12 @@ const Login = () => {
     const { username, password } = inputValue;
     if (username === '' || password === '') return setErrorMessage('Llena todos los campos');
 
-    const user = await authService(username, password);
+    const cashier = await authService(username, password);
 
-    if (!user) return setErrorMessage('Usuario o contraseña incorrectos');
+    if (!cashier) return setErrorMessage('Usuario o contraseña incorrectos');
 
-    console.log(user);
-    localStorage.setItem('userJwt', user.userJwt);
-    dispatch(setCashier(user));
+    localStorage.setItem('cashierJwt', cashier.cashierJwt);
+    dispatch(setCashier(cashier));
     navigate('/dashboard');
     setInputValue({ username: '', password: '' });
     return setErrorMessage('');

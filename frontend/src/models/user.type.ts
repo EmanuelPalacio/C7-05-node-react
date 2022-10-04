@@ -12,13 +12,13 @@ export interface ApiCashier {
 export interface Cashier {
   id: string | number;
   userName: string;
-  userJwt: string;
+  cashierJwt: string;
   turns?: string[];
 }
 
 export const CashierEmptyState: Cashier = {
   id: '0',
   userName: '',
-  userJwt: '',
+  cashierJwt: '',
   turns: [],
 };
