@@ -17,8 +17,14 @@ const Dashboard: React.FC = () => {
   }
   const addOrder = (object:order) => {
     setOrders([...orders, object]);
+    console.log(object)
   }
-
+  const deleteOrden = (order:order)=>{
+    const searchItem = (order:order) => orders.findIndex((e) => e.orderId === order.orderId);
+    orders.splice(searchItem(order), 1 )
+    setOrders([...orders])
+    console.warn(orders)
+  }
 
   return (
     <>
@@ -41,7 +47,7 @@ const Dashboard: React.FC = () => {
                 <span>Tiempo restante: {order.mesa}</span>
                 <button className={styles.orderButton} type='button'>Entregar</button>
                 <button className={styles.orderButton} type='button'>+</button>
-                <button className={styles.orderButton} type='button'>x</button>
+                <button className={styles.orderButton} type='button' onClick={()=> deleteOrden(order)}>x</button>
               </li>)
             }
           </ul>

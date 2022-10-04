@@ -4,7 +4,7 @@ import axios from 'axios';
 import { API_URL, CONFIG_TOKEN } from '@/utils/config';
 
 export default function useVerifyAuth() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);// ponerlo en false antes de subirlo a github
 
   const { isAuth } = useAppSelector((state) => state.Cashier);
   const cashierJwt = localStorage.getItem('cashierJwt');

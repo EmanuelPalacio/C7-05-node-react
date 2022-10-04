@@ -6,20 +6,20 @@ interface IProps {
   qrCode:string
 }
 
-const QrImage: React.FC<IProps> = (props: IProps) => {
+const QrImage = ({qrCode}:IProps) => {
 
-  const [qr,setQr] = useState('1') // useState(props.qrCode) 
-   
+  const [qr,setQr] = useState('') // useState(qrCode) 
+
   const [mockQr,setMockQr] = useState<string>('1');
 
   useEffect( () => {
     if (qr){
-      QR.toDataURL(window.location.origin+'/client/'+1, (err,code:string) => { // http://localhost:3000/order/1
+      QR.toDataURL(window.location.origin+'/client/'+qrCode, (err,code:string) => { // http://localhost:3000/order/qrCode
         if (err) return console.log('Error en el qr');
         setQr(code)
       })
     }else{
-      QR.toDataURL(window.location.origin+'/client/'+1, (err,code:string) => { // http://localhost:3000/order/1
+      QR.toDataURL(window.location.origin+'/client/'+qrCode, (err,code:string) => { // http://localhost:3000/order/qrCode
         if (err) return console.log('Error en el qr');
         setMockQr(code)
       })
