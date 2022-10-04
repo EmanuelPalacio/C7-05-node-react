@@ -7,15 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setCashier } from '@/redux/slices/cashierSlice';
 
-import { token } from '@/utils/config';
-
 const Login = () => {
   const [inputValue, setInputValue] = useState({ username: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  console.log(token);
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInputValue({
