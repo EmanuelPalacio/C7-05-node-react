@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import QR from 'qrcode';
-import styles from './styles/modals.module.css'
+import styles from '../styles/modals.module.css'
 
 interface IProps {
   qrCode:string

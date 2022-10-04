@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import QrImage from './QrImage';
-import styles from './styles/modals.module.css'
+import styles from '../styles/modals.module.css'
 
 interface order {
     orderId: string,

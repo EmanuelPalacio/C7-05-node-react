@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DashboardOrder from './DashboardOrder';
+import DashboardOrder from './components/DashboardOrder';
 import styles from './styles/dashboard.module.css';
 
 interface order {
@@ -42,12 +42,16 @@ const Dashboard: React.FC = () => {
             {
               orders.map( (order) => 
               <li key={order.orderId} className={styles.order}>
-                <span>Orden número:{order.orderId} </span>
-                <span>Tiempo restante: {order.tiempo}</span>
-                <span>Tiempo restante: {order.mesa}</span>
-                <button className={styles.orderButton} type='button'>Entregar</button>
-                <button className={styles.orderButton} type='button'>+</button>
-                <button className={styles.orderButton} type='button' onClick={()=> deleteOrden(order)}>x</button>
+                <div>
+                  <span>ID {order.orderId} </span>
+                  <span>Tiempo: {order.tiempo}</span>
+                  <span>N° mesa:{order.mesa}</span>
+                </div>
+                <div>
+                  <button className={styles.orderButton} type='button'>Entregar</button>
+                  <button className={styles.orderButton} type='button'>+</button>
+                  <button className={styles.orderButton} type='button' onClick={()=> deleteOrden(order)}>x</button>
+                </div>
               </li>)
             }
           </ul>
