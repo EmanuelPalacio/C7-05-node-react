@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { ApiCashier, Cashier } from '@/models/user.type';
+import { ApiCashier, Cashier } from '@/models/cashier.type';
 
 export const authAdapter = (user: ApiCashier): Cashier => {
   const { id, user_name, token } = user.userRetrieved;
@@ -7,6 +7,6 @@ export const authAdapter = (user: ApiCashier): Cashier => {
   return {
     id: id,
     userName: user_name,
-    userJwt: token,
+    cashierJwt: token,
   };
 };
