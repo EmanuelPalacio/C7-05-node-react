@@ -1,25 +1,24 @@
-export interface ApiUser {
-  success: boolean,
-  status: number,
-  msg: string,
-  /*
-  id: number;
-  user_name: string;
-  turn_id: number[];
-  token: string;
-  */
+export interface ApiCashier {
+  success: boolean;
+  status: number;
+  msg: string;
+  userRetrieved: {
+    id: string | number;
+    user_name: string;
+    token: string;
+  };
 }
 
-export interface User {
-  id: number;
+export interface Cashier {
+  id: string | number;
   userName: string;
-  turns: number[];
   userJwt: string;
+  turns?: string[];
 }
 
-export const UserEmptyState: User = {
-  id: 0,
+export const CashierEmptyState: Cashier = {
+  id: '0',
   userName: '',
-  turns: [],
   userJwt: '',
+  turns: [],
 };

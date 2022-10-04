@@ -1,11 +1,11 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { User, UserEmptyState } from '@/models/user.type';
+import { Cashier, CashierEmptyState } from '@/models/user.type';
 
 export const counterSlice = createSlice({
   name: 'user',
-  initialState: UserEmptyState,
+  initialState: CashierEmptyState,
   reducers: {
-    setUser: (state, action: PayloadAction<User>) => {
+    setUser: (state, action: PayloadAction<Cashier>) => {
       state = action.payload;
       return state;
     },
