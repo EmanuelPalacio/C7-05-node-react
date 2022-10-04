@@ -1,12 +1,12 @@
 import { useState, useEffect, useMemo } from 'react';
 import styles from '../styles/countDown.module.css';
 import { SVGCircle } from './SVGCircle';
+import data from '../turn.json';
 
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
 
-const deadline = new Date(new Date().getTime() + 5 * MINUTE);
-
+const deadline = new Date(Date.now() + 1000 * 60 * 0.6);
 // eslint-disable-next-line camelcase
 function mapNumber(number: number, in_min: number, in_max: number, out_min: number, out_max: number) {
   // eslint-disable-next-line camelcase
@@ -14,29 +14,43 @@ function mapNumber(number: number, in_min: number, in_max: number, out_min: numb
 }
 
 export default function CountDown() {
-  const parsedDeadline = useMemo(() => Date.parse(deadline.toString()), [deadline]);
+  const parsedDeadline = useMemo(() => new Date(deadline).getTime(), [deadline]);
   const [time, setTime] = useState(parsedDeadline - Date.now());
-
-  /* console.log(new Date(time).toISOString().slice(11, 19)); */
+  const maxMinuteTime = ((parsedDeadline - Date.now()) / MINUTE) % 60;
 
   useEffect(() => {
-    const interval = setInterval(() => setTime(parsedDeadline - Date.now()), 1000);
+    const interval = setInterval(
+      () => {
+        setTime(parsedDeadline - Date.now());
+      },
+      1000,
+      [parsedDeadline],
+    );
 
     return () => clearInterval(interval);
   }, [parsedDeadline]);
 
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  const minuteTime = time >= 0 ? (time / MINUTE) % 60 : 0;
+  const secondTime = time >= 0 ? (time / SECOND) % 60 : 0;
+  const timeIsRunningOut = time <= MINUTE * 0.5;
+
   return (
     <div className={styles.timer}>
-      {Object.entries({
-        Minutos: (time / MINUTE) % 60,
-        Segundos: (time / SECOND) % 60,
-      }).map(([label, value]) => (
-        <div key={label} className={styles.countdown_item}>
-          <p>{`${Math.floor(value)}`.padStart(2, '0')}</p>
-          <span>{label}</span>
-          <SVGCircle radius={mapNumber(value, 0, 60, 0, 360)} />
-        </div>
-      ))}
+      <div className={`${styles.countdown_item} ${timeIsRunningOut && styles.timeIsRunningOut}`}>
+        <p>{`${Math.floor(minuteTime)}`.padStart(2, '0')}</p>
+        <span>Minutos</span>
+        <SVGCircle radius={mapNumber(Math.floor(minuteTime), 0, Math.ceil(maxMinuteTime), 0, 360)} />
+      </div>
+
+      <div className={`${styles.countdown_item} ${timeIsRunningOut && styles.timeIsRunningOut}`}>
+        <p>{`${Math.floor(secondTime)}`.padStart(2, '0')}</p>
+        <span>Segundos</span>
+        <SVGCircle stroke={timeIsRunningOut ? '#FF0000' : '#0F4C75'} radius={mapNumber(secondTime, 0, 60, 0, 360)} />
+      </div>
     </div>
   );
 }

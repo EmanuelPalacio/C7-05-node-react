@@ -1,8 +1,14 @@
-const { createUser } = require('../controllers/orderController.controller');
+const { auth } = require('../controllers/index.controller');
+const passport = require('passport')
+
 
 
 module.exports = (router) => {
-    router.get('/api/users/', createUser);
+  router.post('/auth/register', auth.createUser);
+  router.post('/auth/login', auth.login);
+  router.get('/auth/', passport.authenticate('jwt', {session:false}), auth.isAuth); //TODO configurar passport para que 
+  
+  
 
-    return router;
+  return router;
 };
