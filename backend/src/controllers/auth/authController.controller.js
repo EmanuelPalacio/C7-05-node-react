@@ -1,5 +1,8 @@
 const { Cashier } = require('../../services/index.service.js');
 const cashierService = new Cashier();
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET } = require('../../config/globals');
+
 exports.createUser = async(req, res) => {
   const user = req.body;
 
@@ -19,16 +22,27 @@ exports.createUser = async(req, res) => {
 exports.login = async(req, res, next) => {
   const user = req.body;
   try {
-    const userRetrieved = await cashierService.findUserById(user);
+    const userRetrieved = await cashierService.findUser(user);
+    let response = {
+      jwt: jwt.sign({id: userRetrieved.userRetrieved.id},JWT_SECRET),
+      user: {
+        user_name: userRetrieved.userRetrieved.user_name,
+        id: userRetrieved.userRetrieved.id
+      }
+    }
 
     const { status } = userRetrieved;
-    res.status(status).json(userRetrieved);
+    res.status(status).json(response);
   } catch (error) {
     res.status(500).json({
       error: error.message,
     });
   }
 };
+
+exports.isAuth = async(req, res, next) => {
+
+}
 
 /*const cashierService = new Cashier();
 exports.createUser = async(req, res, next) => {

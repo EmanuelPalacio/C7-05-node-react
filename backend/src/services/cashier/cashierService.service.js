@@ -28,7 +28,7 @@ module.exports = class {
       console.log(error);
     }
   }
-  async findUserById(user) {
+  async findUser(user) {
     try {
       let response;
       let userRetrieved = await cashier.findOne({
