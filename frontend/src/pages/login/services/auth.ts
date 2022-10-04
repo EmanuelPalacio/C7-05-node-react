@@ -2,13 +2,11 @@
 import { ApiCashier } from '@/models/user.type';
 import { authAdapter } from '../adapter/auth.adapter';
 import axios from 'axios';
-
-export const authUrl =
-  import.meta.env.VITE_NODE_ENV === 'production' ? import.meta.env.VITE_AUTH_URL : 'http://localhost:9000/api/auth/login';
+import { AUTH_URL } from '@/utils/config';
 
 export const authService = async (userName: string, password: string) => {
   try {
-    const { data } = await axios.post<ApiCashier>(`${authUrl}`, {
+    const { data } = await axios.post<ApiCashier>(`${AUTH_URL}`, {
       user_name: userName,
       user_password: password,
     });

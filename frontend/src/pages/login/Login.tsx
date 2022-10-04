@@ -5,7 +5,7 @@ import { authService } from './services/auth';
 import styles from './styles/login.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setUser } from '@/redux/slices/userSlice';
+import { setCashier } from '@/redux/slices/cashierSlice';
 
 const Login = () => {
   const [inputValue, setInputValue] = useState({ username: '', password: '' });
@@ -32,7 +32,7 @@ const Login = () => {
 
     console.log(user);
     localStorage.setItem('userJwt', user.userJwt);
-    dispatch(setUser(user));
+    dispatch(setCashier(user));
     navigate('/dashboard');
     setInputValue({ username: '', password: '' });
     return setErrorMessage('');
@@ -41,7 +41,7 @@ const Login = () => {
   return (
     <div className={styles.loginContainer}>
       <div className={styles.imgContainer}>
-        <ImageLoginSvg  svgProp={{width: 500, height: 500}}/>
+        <ImageLoginSvg svgProp={{ width: 500, height: 500 }} />
       </div>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
         <span className={styles.formContainer_logo}>
