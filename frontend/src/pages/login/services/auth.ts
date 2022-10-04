@@ -2,16 +2,16 @@
 import { ApiCashier } from '@/models/cashier.type';
 import { authAdapter } from '../adapter/auth.adapter';
 import axios from 'axios';
-import { AUTH_URL } from '@/utils/config';
+import { LOGIN_URL } from '@/utils/config';
 
 export const authService = async (userName: string, password: string) => {
   try {
-    const { data } = await axios.post<ApiCashier>(`${AUTH_URL}`, {
+    const { data, status } = await axios.post<ApiCashier>(`${LOGIN_URL}`, {
       user_name: userName,
       user_password: password,
     });
 
-    if (data.success) {
+    if (status === 200) {
       return authAdapter(data); // EL ADAPTER transforma los datos que recibe del backend en un objeto manipulable por el front */
     }
     return null;

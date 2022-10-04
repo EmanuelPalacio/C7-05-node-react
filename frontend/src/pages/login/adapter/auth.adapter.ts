@@ -1,13 +1,13 @@
 /* eslint-disable camelcase */
 import { ApiCashier, Cashier } from '@/models/cashier.type';
 
-export const authAdapter = (user: ApiCashier): Cashier => {
-  const { id, user_name, token } = user.userRetrieved;
+export const authAdapter = (cashier: ApiCashier): Cashier => {
+  const { jwt, user } = cashier;
 
   return {
-    id: id,
-    userName: user_name,
-    cashierJwt: token,
+    id: user.id,
+    userName: user.user_name,
+    cashierJwt: jwt,
     isAuth: true,
   };
 };

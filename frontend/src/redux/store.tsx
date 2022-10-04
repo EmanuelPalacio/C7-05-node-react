@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import cashierReducer from './slices/cashierSlice';
+import turnsReducer from './slices/turnsSlice';
 
 export const store = configureStore({
   reducer: {
     Cashier: cashierReducer,
+    Turns: turnsReducer,
   },
 });
 
