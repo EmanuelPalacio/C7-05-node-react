@@ -41,7 +41,9 @@ exports.login = async(req, res, next) => {
 };
 
 exports.isAuth = async(req, res, next) => {
-
+  res.status(200).json({
+    "msg": "Estás loggeado!"
+  })
 }
 
 /*const cashierService = new Cashier();

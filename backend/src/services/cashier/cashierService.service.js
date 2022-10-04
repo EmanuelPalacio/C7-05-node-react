@@ -56,4 +56,31 @@ module.exports = class {
       console.log(error);
     }
   }
+
+  async findUserById(id) {
+    try {
+      let response;
+      let userRetrieved = await cashier.findOne({
+        where: { id: id},
+      });
+      if (
+        userRetrieved
+      ) {
+        response = {
+          user: userRetrieved.dataValues,
+          success: true,
+          status: 200
+        }
+      } else {
+        response = {
+          user: userRetrieved.dataValues,
+          success: false,
+          status: 401
+        }
+      }
+      return response;
+    } catch (error) {
+      console.log (error);
+    }
+  }
 };
