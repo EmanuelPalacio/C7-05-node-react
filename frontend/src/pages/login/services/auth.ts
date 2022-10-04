@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { ApiCashier } from '@/models/user.type';
+import { ApiCashier } from '@/models/cashier.type';
 import { authAdapter } from '../adapter/auth.adapter';
 import axios from 'axios';
 import { AUTH_URL } from '@/utils/config';
