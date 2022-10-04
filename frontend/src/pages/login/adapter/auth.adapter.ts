@@ -8,5 +8,6 @@ export const authAdapter = (user: ApiCashier): Cashier => {
     id: id,
     userName: user_name,
     cashierJwt: token,
+    isAuth: true,
   };
 };

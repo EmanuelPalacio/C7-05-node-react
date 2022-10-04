@@ -33,8 +33,9 @@ const Login = () => {
     localStorage.setItem('cashierJwt', cashier.cashierJwt);
     dispatch(setCashier(cashier));
     navigate('/dashboard');
+
     setInputValue({ username: '', password: '' });
-    return setErrorMessage('');
+    setErrorMessage('');
   };
 
   return (
