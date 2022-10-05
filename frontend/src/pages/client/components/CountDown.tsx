@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import styles from '../styles/countDown.module.css';
 import { SVGCircle } from './SVGCircle';
 import data from '../turn.json';
@@ -6,7 +6,7 @@ import data from '../turn.json';
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
 
-const deadline = new Date(Date.now() + 1000 * 60 * 0.6);
+// const deadline = new Date(Date.now() + 1000 * 60 * 0.6);
 // eslint-disable-next-line camelcase
 function mapNumber(number: number, in_min: number, in_max: number, out_min: number, out_max: number) {
   // eslint-disable-next-line camelcase
@@ -14,14 +14,26 @@ function mapNumber(number: number, in_min: number, in_max: number, out_min: numb
 }
 
 export default function CountDown() {
-  const parsedDeadline = useMemo(() => new Date(deadline).getTime(), [deadline]);
+  const [parsedDeadline, setParsedDeadline] = useState<number>(0);
   const [time, setTime] = useState(parsedDeadline - Date.now());
   const maxMinuteTime = ((parsedDeadline - Date.now()) / MINUTE) % 60;
+  const timeRef = useRef(time);
+  timeRef.current = time;
+
+  useEffect(() => {
+    const parsedTime = new Date(data.time).getTime();
+    setParsedDeadline(parsedTime);
+    setTime(parsedTime - Date.now());
+  }, [data]);
 
   useEffect(() => {
     const interval = setInterval(
       () => {
-        setTime(parsedDeadline - Date.now());
+        if (timeRef.current <= 0) {
+          clearInterval(interval);
+        } else {
+          setTime(parsedDeadline - Date.now());
+        }
       },
       1000,
       [parsedDeadline],
@@ -30,9 +42,7 @@ export default function CountDown() {
     return () => clearInterval(interval);
   }, [parsedDeadline]);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  console.log(time);
 
   const minuteTime = time >= 0 ? (time / MINUTE) % 60 : 0;
   const secondTime = time >= 0 ? (time / SECOND) % 60 : 0;

@@ -1,0 +1,43 @@
+.finishedContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+h2, p{
+  margin: 5px;
+}
+
+label {
+  margin: 5px;
+}
+
+.ratingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rating{
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+}
+
+.radioContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.formButton{
+  cursor: pointer;
+  font-weight: 600;
+  padding: 11px 28px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  border: none;
+}

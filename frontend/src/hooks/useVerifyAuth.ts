@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react';
-import { useAppSelector } from '../redux/hooks';
-import axios from 'axios';
-import { API_URL, CONFIG_TOKEN } from '@/utils/config';
-import { useAppDispatch } from '../redux/hooks';
 import { setCashierJwt } from '@/redux/slices/cashierSlice';
+import { API_URL, CONFIG_TOKEN } from '@/utils/config';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 
 export default function useVerifyAuth() {
   const [isAuthenticated, setIsAuthenticated] = useState<undefined | boolean>(undefined);
-
   const dispatch = useAppDispatch();
 
   const { isAuth } = useAppSelector((state) => state.Cashier);
