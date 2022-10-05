@@ -3,27 +3,42 @@ import DashboardOrder from './components/DashboardOrder';
 import styles from './styles/dashboard.module.css';
 /* redux */
 import {useAppDispatch,useAppSelector} from '../../redux/hooks';
-import {addTurn,removeTurn} from '../../redux/slices/turnsSlice';
+import {addTurn,removeTurn, storageTurns} from '../../redux/slices/turnsSlice';
 import {Turn} from '../../models/turns.type';
 
 
 const Dashboard = () => {
+  const [storage, setStorage] = useState<Turn[]>([])
+  const [modal, setModal] = useState<boolean>(false)
+  const getStorage = JSON.parse(localStorage.getItem('TURNS') || '[]')
   const listTurns = useAppSelector((state)=> state.Turns)
   const dispatch = useAppDispatch()
-  const [modal, setModal] = useState<boolean>(false)
+  
 
   const activeModal = () => {
     modal ? setModal(false) : setModal(true);
   }
   const addOrder = (object:Turn) => {
     dispatch(addTurn(object))
+    /* Persistencia de datos */
+    setStorage([...storage, object])
+    localStorage.setItem('TURNS', JSON.stringify([...storage, object]))
   }
   const deleteOrden = (order:Turn)=>{
     dispatch(removeTurn(order))
+    /* Persistencia de datos */
+    const newList = storage.filter((turn) => turn.id !== order.id)
+    console.log(newList)
+    localStorage.setItem('TURNS', JSON.stringify(newList))
+    /* refrescar el storage del componente  */
+    setStorage(newList)
   }
-useEffect(()=>{
-  console.log(listTurns)
-},[listTurns])
+  useEffect(()=>{
+      setStorage(getStorage)
+      dispatch(storageTurns(getStorage))
+
+  },[])
+
 
   return (
     <>
