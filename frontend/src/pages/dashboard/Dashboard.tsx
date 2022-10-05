@@ -1,30 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DashboardOrder from './components/DashboardOrder';
 import styles from './styles/dashboard.module.css';
+/* redux */
+import {useAppDispatch,useAppSelector} from '../../redux/hooks';
+import {addTurn,removeTurn} from '../../redux/slices/turnsSlice';
+import {Turn} from '../../models/turns.type';
 
-interface order {
-  orderId: string,
-  tiempo: number,
-  mesa: number,
-}
 
-const Dashboard: React.FC = () => {
+const Dashboard = () => {
+  const listTurns = useAppSelector((state)=> state.Turns)
+  const dispatch = useAppDispatch()
   const [modal, setModal] = useState<boolean>(false)
-  const [orders, setOrders] = useState<order[]>([])
 
   const activeModal = () => {
     modal ? setModal(false) : setModal(true);
   }
-  const addOrder = (object:order) => {
-    setOrders([...orders, object]);
-    console.log(object)
+  const addOrder = (object:Turn) => {
+    dispatch(addTurn(object))
   }
-  const deleteOrden = (order:order)=>{
-    const searchItem = (order:order) => orders.findIndex((e) => e.orderId === order.orderId);
-    orders.splice(searchItem(order), 1 )
-    setOrders([...orders])
-    console.warn(orders)
+  const deleteOrden = (order:Turn)=>{
+    dispatch(removeTurn(order))
   }
+useEffect(()=>{
+  console.log(listTurns)
+},[listTurns])
 
   return (
     <>
@@ -40,12 +39,12 @@ const Dashboard: React.FC = () => {
         <div className={styles.orderContainer}>
           <ul>
             {
-              orders.map( (order) => 
-              <li key={order.orderId} className={styles.order}>
+              listTurns.map( (order) => 
+              <li key={order.id} className={styles.order}>
                 <div>
-                  <span>ID {order.orderId} </span>
-                  <span>Tiempo: {order.tiempo}</span>
-                  <span>N° mesa:{order.mesa}</span>
+                  <span>ID {order.id} </span>
+                  <span>Tiempo: {order.time}</span>
+                  <span>N° mesa:{order.table}</span>
                 </div>
                 <div>
                   <button className={styles.orderButton} type='button'>Entregar</button>
@@ -59,7 +58,7 @@ const Dashboard: React.FC = () => {
       </div>
     </div>
 
-    {modal && <DashboardOrder activeModal={activeModal} orden={addOrder}/>}
+    {modal && <DashboardOrder activeModal={activeModal} addTurn={addOrder}/>}
     </>
   );
 };

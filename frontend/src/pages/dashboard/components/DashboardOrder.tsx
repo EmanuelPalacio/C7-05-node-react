@@ -1,31 +1,29 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import QrImage from './QrImage';
-import styles from '../styles/modals.module.css'
+import styles from '../styles/modals.module.css';
+import {Turn} from '../../../models/turns.type';
 
-interface order {
-    orderId: string,
-    tiempo: number,
-    mesa: number,
-    }
+
 interface props {
     activeModal: () => void
-    orden: (object: order) => void
+    addTurn: (object: Turn) => void
 }
 
-const DashboardOrder = ({activeModal, orden}:props) =>{
+const DashboardOrder = ({activeModal, addTurn}:props) =>{
     const [modal, setModal] = useState<boolean>(false)
-    const [client, setClient] = useState<order>({
-        orderId: '',
-        tiempo: 0,
-        mesa: 0,
+    const [client, setClient] = useState<Turn>({
+        id: '',
+        time: 0,
+        table: 0,
         }) 
 
-    const data = (e: React.FormEvent<HTMLInputElement | HTMLSelectElement >) => { 
+    const handleChange = (e: React.FormEvent<HTMLInputElement | HTMLSelectElement >) => { 
         setClient({...client,[e.currentTarget.name]: e.currentTarget.value})
+        console.log(client)
     }
-    const qr = () =>{
-        orden(client)
+    const createQr = () =>{
+        addTurn(client)
         setModal(true)
     }
     const toggleModal = () => {
@@ -35,7 +33,7 @@ const DashboardOrder = ({activeModal, orden}:props) =>{
         const data = await axios.get('https://www.uuidtools.com/api/generate/v1')
         console.warn(data.data[0].substring(0,8))
         setClient({
-            ...client, orderId:data.data[0].substring(0,8)
+            ...client, id:data.data[0].substring(0,8)
         })
     }
     useEffect(()=>{ 
@@ -51,20 +49,20 @@ const DashboardOrder = ({activeModal, orden}:props) =>{
                 <form className={`${styles.modalForm}`}>
                     <input 
                             type="text" 
-                            name='orderId' 
+                            name='id' 
                             placeholder='ID' 
-                            onChange={data} 
+                            onChange={handleChange} 
                             readOnly 
-                            value={client.orderId}/>
+                            value={client.id}/>
                     <input 
                             type="number" 
-                            name="mesa" 
+                            name="table" 
                             placeholder="Numero de mesa"
-                            onChange={data}/>
+                            onChange={handleChange}/>
                     <select 
                             title="timeSelect" 
-                            name="tiempo"
-                            onChange={data}>
+                            name="time"
+                            onChange={handleChange}>
                         <option>5min</option>
                         <option>10min</option>
                         <option>15min</option>
@@ -74,13 +72,13 @@ const DashboardOrder = ({activeModal, orden}:props) =>{
                         <option>35min</option>
                         <option>40min</option>
                     </select>
-                    <button type="button" onClick={qr}>Generar orden</button>
+                    <button type="button" onClick={createQr}>Generar orden</button>
                 </form>
             </div>
             :
             <div>
                 <button className={styles.modalButton} onClick={toggleModal} type='button'>X</button>
-                <QrImage qrCode={client.orderId} />
+                <QrImage qrCode={client.id} />
             </div>
             }
         </div>

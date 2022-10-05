@@ -3,7 +3,7 @@ import QR from 'qrcode';
 import styles from '../styles/modals.module.css'
 
 interface IProps {
-  qrCode:string
+  qrCode:string | number
 }
 
 const QrImage = ({qrCode}:IProps) => {

@@ -9,7 +9,7 @@ export const TurnsSlice = createSlice({
       state.push(action.payload);
     },
     removeTurn: (state, action: PayloadAction<Turn>) => {
-      state = state.filter((turn) => turn.id !== action.payload.id);
+      state = (state.filter((turn) => turn.id !== action.payload.id));
     },
     updateTurn: (state, action: PayloadAction<Turn>) => {
       state = state.map((turn) => {
