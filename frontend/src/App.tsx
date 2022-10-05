@@ -9,6 +9,8 @@ import useVerifyAuth from './hooks/useVerifyAuth';
 function App() {
   const [isAuthenticated] = useVerifyAuth();
 
+
+
   return (
     <div className='App'>
       <BrowserRouter>
