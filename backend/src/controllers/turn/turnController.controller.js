@@ -1,13 +1,13 @@
 const { Turn } = require('../../services/index.service.js');
 const turnService = new Turn();
-exports.createTurn = async(req, res) => {
-  const user = req.body;
+exports.createTurn = async(req, res, next) => {
+  const turn = req.body;
 
   try {
-    const userToCreate = await cashierService.createUser(user);
-    const { status } = userToCreate;
+    const turnToCreate = await turnService.createTurn(turn);
+    const { status } = turnToCreate;
     res.status(status).json({
-      userToCreate,
+      turnToCreate,
     });
   } catch (error) {
     res.status(500).json({
@@ -16,16 +16,61 @@ exports.createTurn = async(req, res) => {
   }
 };
 
-exports.login = async(req, res, next) => {
-  const user = req.body;
+exports.updateTurn = async(req, res, next) => {
   try {
-    const userRetrieved = await cashierService.findUserById(user);
-
-    const { status } = userRetrieved;
-    res.status(status).json(userRetrieved);
+    const id = req.params.id;
+    const turnBody = req.body;
+    const turnToUpdate = await turnService.updateTurn(id, turnBody);
+    console.log(turnToUpdate);
+    const { status } = turnToUpdate;
+    res.status(status).json({
+      turnToUpdate,
+    });
   } catch (error) {
     res.status(500).json({
-      error: error.message,
+      message: error.message,
+    });
+  }
+};
+
+exports.getTurns = async(req, res, next) => {
+  try {
+    const turnsRetrieved = await turnService.getTurns();
+    const { status } = turnsRetrieved;
+    res.status(status).json({
+      turnsRetrieved,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+exports.getTurn = async(req, res, next) => {
+  const id = req.params.id;
+  try {
+    const turnRetrieved = await turnService.getTurn(id);
+    const { status } = turnRetrieved;
+    res.status(status).json({
+      turnRetrieved,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+exports.deleteTurn = async(req, res, next) => {
+  const id = req.params.id;
+  try {
+    const turnRetrieved = await turnService.deleteTurn(id);
+    const { status } = turnRetrieved;
+    res.status(status).json({
+      turnRetrieved,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
     });
   }
 };
