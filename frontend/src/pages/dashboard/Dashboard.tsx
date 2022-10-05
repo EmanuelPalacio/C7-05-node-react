@@ -1,23 +1,43 @@
-import React, { useState } from 'react';
-import DashboardOrder from './DashboardOrder';
+import React, { useEffect, useState } from 'react';
+import DashboardOrder from './components/DashboardOrder';
 import styles from './styles/dashboard.module.css';
+/* redux */
+import {useAppDispatch,useAppSelector} from '../../redux/hooks';
+import {addTurn,removeTurn, storageTurns} from '../../redux/slices/turnsSlice';
+import {Turn} from '../../models/turns.type';
 
-interface order {
-  orderId: string,
-  tiempo: number,
-  mesa: number,
-}
 
-const Dashboard: React.FC = () => {
+const Dashboard = () => {
+  const [storage, setStorage] = useState<Turn[]>([])
   const [modal, setModal] = useState<boolean>(false)
-  const [orders, setOrders] = useState<order[]>([])
+  const getStorage = JSON.parse(localStorage.getItem('TURNS') || '[]')
+  const listTurns = useAppSelector((state)=> state.Turns)
+  const dispatch = useAppDispatch()
+  
 
   const activeModal = () => {
     modal ? setModal(false) : setModal(true);
   }
-  const addOrder = (object:order) => {
-    setOrders([...orders, object]);
+  const addOrder = (object:Turn) => {
+    dispatch(addTurn(object))
+    /* Persistencia de datos */
+    setStorage([...storage, object])
+    localStorage.setItem('TURNS', JSON.stringify([...storage, object]))
   }
+  const deleteOrden = (order:Turn)=>{
+    dispatch(removeTurn(order))
+    /* Persistencia de datos */
+    const newList = storage.filter((turn) => turn.id !== order.id)
+    console.log(newList)
+    localStorage.setItem('TURNS', JSON.stringify(newList))
+    /* refrescar el storage del componente  */
+    setStorage(newList)
+  }
+  useEffect(()=>{
+      setStorage(getStorage)
+      dispatch(storageTurns(getStorage))
+
+  },[])
 
 
   return (
@@ -34,14 +54,18 @@ const Dashboard: React.FC = () => {
         <div className={styles.orderContainer}>
           <ul>
             {
-              orders.map( (order) => 
-              <li key={order.orderId} className={styles.order}>
-                <span>Orden número:{order.orderId} </span>
-                <span>Tiempo restante: {order.tiempo}</span>
-                <span>Tiempo restante: {order.mesa}</span>
-                <button className={styles.orderButton} type='button'>Entregar</button>
-                <button className={styles.orderButton} type='button'>+</button>
-                <button className={styles.orderButton} type='button'>x</button>
+              listTurns.map( (order) => 
+              <li key={order.id} className={styles.order}>
+                <div>
+                  <span>ID {order.id} </span>
+                  <span>Tiempo: {order.time}</span>
+                  <span>N° mesa:{order.table}</span>
+                </div>
+                <div>
+                  <button className={styles.orderButton} type='button'>Entregar</button>
+                  <button className={styles.orderButton} type='button'>+</button>
+                  <button className={styles.orderButton} type='button' onClick={()=> deleteOrden(order)}>x</button>
+                </div>
               </li>)
             }
           </ul>
@@ -49,7 +73,7 @@ const Dashboard: React.FC = () => {
       </div>
     </div>
 
-    {modal && <DashboardOrder activeModal={activeModal} orden={addOrder}/>}
+    {modal && <DashboardOrder activeModal={activeModal} addTurn={addOrder}/>}
     </>
   );
 };

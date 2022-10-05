@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useAppSelector } from '../redux/hooks';
+import { useAppSelector, useAppDispatch  } from '../redux/hooks';
 import axios from 'axios';
 import { API_URL, CONFIG_TOKEN } from '@/utils/config';
-import { useAppDispatch } from '../redux/hooks';
 import { setCashierJwt } from '@/redux/slices/cashierSlice';
 
 export default function useVerifyAuth() {

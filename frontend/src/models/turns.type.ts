@@ -1,3 +1,5 @@
+/* import { table } from 'console'; */
+
 export interface ApiTurn {
   id: string | number;
   name: string;
@@ -6,8 +8,8 @@ export interface ApiTurn {
 
 export interface Turn {
   id: string | number;
-  time: string;
-  table: string;
+  time: number;
+  table: number;
 }
 
 export const TurnEmptyState: Turn[] = [];
