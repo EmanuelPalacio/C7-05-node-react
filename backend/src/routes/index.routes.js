@@ -14,6 +14,7 @@ module.exports = (router) => {
   router.put('/turns/:id', turn.updateTurn);
   router.get('/turns/', turn.getTurns);
   router.get('/turns/:id', turn.getTurn);
+  router.post('/turn/:id', turn.registerNotificationId);
   router.delete('/turns/:id', turn.deleteTurn);
   
   router.get('/cashier', passport.authenticate('jwt', {session:false}, ))

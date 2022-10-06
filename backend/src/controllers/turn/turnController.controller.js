@@ -60,6 +60,21 @@ exports.getTurn = async(req, res, next) => {
     });
   }
 };
+exports.registerNotificationId = async(req, res, next) => {
+  const idTurn = req.params.id;
+  const idNotification = req.body.id;
+  console.log(idNotification);
+  try{
+    let turn = await turnService.getTurn(idTurn);
+    turn.notification_id = idNotification;
+    const newTurn = turnService.updateTurn(idTurn,turnBody);
+    console.log(newTurn)
+  }catch(error) {
+    res.status(500).json({
+      message:error.message,
+    })
+  }
+}
 exports.deleteTurn = async(req, res, next) => {
   const id = req.params.id;
   try {
