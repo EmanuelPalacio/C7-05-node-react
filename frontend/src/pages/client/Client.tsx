@@ -8,6 +8,7 @@ export default function Client() {
   const { turnId } = useParams();
 
   useEffect( ()=> {
+    
     OneSignal.init({
       appId: '560e5ab2-9ceb-4379-8cef-545851f0b9e9',
       allowLocalhostAsSecureOrigin: false,

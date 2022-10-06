@@ -9,5 +9,5 @@ module.exports = {
   DB_PORT: process.env.DB_PORT,
   NODE_ENV: process.env.NODE_ENV || 'development',
   JWT_SECRET: process.env.JWT_SECRET,
-  ONESIGNAL_APP_ID: process.env.ONESIGNAL_APP_ID
+  ONESIGNAL_API_KEY: process.env.ONESIGNAL_API_KEY
 };
