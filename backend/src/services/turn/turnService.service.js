@@ -88,11 +88,7 @@ module.exports = class {
           status: 404,
         };
       } else {
-        response = {
-          msg: 'Ok',
-          status: 200,
-          turnRetrieved,
-        };
+        response = turnRetrieved;
       }
 
       return response;
