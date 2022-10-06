@@ -15,18 +15,22 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  turn.init({
-    estimated_time: DataTypes.INTEGER,
-    total_time: DataTypes.INTEGER,
-    turn_date: DataTypes.INTEGER,
-    is_active: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
+  turn.init(
+    {
+      estimated_time: DataTypes.INTEGER,
+      total_time: DataTypes.INTEGER,
+      turn_date: DataTypes.INTEGER,
+      is_active: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
+      food_id: DataTypes.INTEGER,
+      notification_id: DataTypes.STRING, //eee47dab-b232-430a-8203-242191c3f344
     },
-    food_id: DataTypes.INTEGER,
-  }, {
-    sequelize,
-    modelName: 'turn',
-  }, );
+    {
+      sequelize,
+      modelName: 'turn',
+    },
+  );
   return turn;
 };
