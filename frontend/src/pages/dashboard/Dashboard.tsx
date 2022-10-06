@@ -14,7 +14,6 @@ const Dashboard = () => {
   const listTurns = useAppSelector((state)=> state.Turns)
   const dispatch = useAppDispatch()
   
-
   const activeModal = () => {
     modal ? setModal(false) : setModal(true);
   }
@@ -44,8 +43,8 @@ const Dashboard = () => {
     <>
     <div className={styles.dashboardContainer}>
       <div className={styles.dashboardHeader}>
-        <a className={`${styles.dashboardLink} ${styles.dashboardLinkActive}`}>Historial de pedidos</a>
-        <a className={`${styles.dashboardLink}`}>Finalizados</a>
+        <a href='/dashboard' className={`${styles.dashboardLink} ${styles.dashboardLinkActive}`}>Historial de pedidos</a>
+        <a href='/statistics' className={`${styles.dashboardLink}`}>Finalizados</a>
       </div>
       <div className={`${styles.dashboardFilter}`}>
         <button onClick={activeModal} type='button' >Agregar pedido</button>

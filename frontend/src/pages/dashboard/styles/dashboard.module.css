@@ -14,6 +14,9 @@
   display: flex;
   padding: 0.25rem 1rem;
 }
+.dashboardLinkActive{
+  border-bottom: 3px solid var(--borderBottom);
+}
 .dashboardFilter{
   display: flex;
   align-items: center;
@@ -73,10 +76,6 @@
   border-right: 1px solid var(--secondary);
 }
 
-
-.dashboardLinkActive{
-  border-bottom: 3px solid var(--borderBottom);
-}
 
 @media (max-width: 1300px) {
   .orderContainer{
