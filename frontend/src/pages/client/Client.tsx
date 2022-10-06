@@ -8,9 +8,12 @@ import ModalDialog from './components/ModalDialog';
 import OrderFinished from './components/OrderFinished';
 import { turnService } from './services/turn';
 import styles from './styles/client.module.css';
+import IgLogo from '@/components/svg/IgLogo';
+import TwitterLogo from '@/components/svg/TwitterLogo';
+import FbLogo from '@/components/svg/FbLogo';
 
 export default function Client() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [turnFinished, setTurnFinished] = useState<any>(false);
   const { turnId } = useParams();
   const dispatch = useAppDispatch();
@@ -49,9 +52,9 @@ export default function Client() {
   }, []);
 
   return (
-    <div className={styles.client_Container}>
+    <>
       {turn.turnId ? (
-        <>
+        <div className={styles.client_Container}>
           {turnFinished ? (
             <OrderFinished />
           ) : (
@@ -65,12 +68,26 @@ export default function Client() {
               <strong>Turno ID:</strong> {turn?.turnId}
             </p>
           </div>
-        </>
+          <footer>
+            <span>Siguenos en:</span>
+            <div className={styles.clientRRSS}>
+              <a href='https://www.instagram.com' target='_blank' rel='noreferrer'>
+                <IgLogo svgProp={{ width: 30, height: 30 }} />
+              </a>
+              <a href='https://www.twitter.com' target='_blank' rel='noreferrer'>
+                <TwitterLogo svgProp={{ width: 30, height: 30 }} />
+              </a>
+              <a href='https://www.facebook.com' target='_blank' rel='noreferrer'>
+                <FbLogo svgProp={{ width: 30, height: 30 }} />
+              </a>
+            </div>
+          </footer>
+        </div>
       ) : (
         <></>
       )}
 
       {isOpen && <ModalDialog setIsOpen={setIsOpen} />}
-    </div>
+    </>
   );
 }
