@@ -1,6 +1,6 @@
 import { store } from '@/redux/store';
 
-const baseUrl = 'https://efficacious-oranges-production.up.railway.app';
+const baseUrl = 'http://localhost:9000';
 
 const API_URL = import.meta.env.VITE_NODE_ENV === 'production' ? import.meta.env.VITE_API_URL : baseUrl + '/api';
 const LOGIN_URL =

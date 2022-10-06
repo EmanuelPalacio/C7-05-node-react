@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-
 export interface ApiTurn {
   turnRetrieved: {
     msg: string;

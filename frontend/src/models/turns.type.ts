@@ -1,15 +1,49 @@
 /* import { table } from 'console'; */
 
+interface ApiTurnRetrieved {
+  id: number | string;
+  estimated_time: number;
+  total_time: number;
+  turn_date: number;
+  food_id: number | string | null;
+  createdAt: Date;
+  updatedAt: Date;
+  isActive: boolean;
+}
+
 export interface ApiTurn {
-  id: string | number;
-  name: string;
-  description: string;
+  turnRetrieved: {
+    msg: string;
+    status: number;
+    turnRetrieved: ApiTurnRetrieved;
+  };
+}
+
+export interface ApiCreatedTurn {
+  turnToCreate: {
+    msg: string;
+    status: number;
+    turnCreated: ApiTurnRetrieved;
+  };
+}
+
+export interface ApiTurns {
+  turnRetrieved: {
+    msg: string;
+    status: number;
+    turnRetrieved: [ApiTurnRetrieved];
+  };
 }
 
 export interface Turn {
-  id: string | number;
-  time: number;
-  table: number;
+  turnId: number | string;
+  estimatedTime: number;
+  totalTime: number;
+  turnDate: number;
+  foodId: number | string | null;
+  isActive: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export const TurnEmptyState: Turn[] = [];
