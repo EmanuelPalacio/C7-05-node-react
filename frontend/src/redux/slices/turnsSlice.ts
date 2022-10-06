@@ -4,6 +4,9 @@ export const TurnsSlice = createSlice({
   name: 'turns',
   initialState: TurnEmptyState,
   reducers: {
+    setTurns: (state, action: PayloadAction<Turn[]>) => {
+      state = action.payload;
+    },
     addTurn: (state, action: PayloadAction<Turn>) => {
       state.push(action.payload);
     },
