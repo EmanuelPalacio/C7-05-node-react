@@ -1,12 +1,12 @@
 import styles from '../styles/countDown.module.css';
 
 // eslint-disable-next-line react/prop-types, @typescript-eslint/no-explicit-any
-export const SVGCircle = ({ radius, isRed }: any) => {
+export const SVGCircle = ({ radius, stroke }: any) => {
   const d = describeArc(50, 50, 48, 0, radius);
 
   return (
     <svg className={styles.countdown_svg}>
-      <path fill='none' stroke={'#0F4C75'} strokeWidth='4' d={d} />
+      <path fill='none' stroke={stroke} strokeWidth='4' d={d} />
     </svg>
   );
 };
