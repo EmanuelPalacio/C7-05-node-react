@@ -57,9 +57,9 @@ module.exports = class {
     try {
       let response;
       const turnsRetrieved = await turn.findAll();
-      if (turnsRetrieved === null) {
+      if (turnsRetrieved.length === 0 || turnsRetrieved === null) {
         response = {
-          msg: ' No turns founded',
+          msg: 'No turns founded',
           status: 404,
         };
       } else {

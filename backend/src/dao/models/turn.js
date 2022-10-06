@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     estimated_time: DataTypes.INTEGER,
     total_time: DataTypes.INTEGER,
     turn_date: DataTypes.INTEGER,
-    isActive: {
+    is_active: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     },
