@@ -18,7 +18,7 @@
 
 .modal {
   width: 300px;
-  height: 230px;
+  height: auto;
   background: white;
   color: white;
   z-index: 10;
@@ -44,18 +44,12 @@
 }
 
 .modalContent {
-  height: auto;
+  height: 100%;
   font-size: 14px;
   color: #2c3e50;
   text-align: center;
 }
 
-.modalActions {
-  position: absolute;
-  bottom: 2px;
-  margin-bottom: 10px;
-  width: 100%;
-}
 
 .actionsContainer {
   display: flex;
@@ -96,6 +90,7 @@
   font-size: 0.8rem;
   border: none;
   transition: all 0.25s ease;
+  margin: 10px;
 }
 
 .confirmBtn:hover {

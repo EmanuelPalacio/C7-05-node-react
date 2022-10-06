@@ -41,3 +41,11 @@ label {
   font-size: 0.9rem;
   border: none;
 }
+
+.formText{
+  outline: none;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin: 10px;
+}

@@ -16,16 +16,12 @@ const ModalDialog = ({ setIsOpen }: IProps) => {
           <button className={styles.closeBtn} onClick={() => setIsOpen(false)}>
             X
           </button>
-          <div className={styles.modalContent}>
-            Ha ocurrido unos imprevistos, su pedido demorara x tiempo más, pedimos disculpas. sadasdsadas aasdasdsa
-            adadasdadasasdadasdadasasdas
-          </div>
-          <div className={styles.modalActions}>
-            <div className={styles.actionsContainer}>
-              <button className={styles.confirmBtn} onClick={() => setIsOpen(false)}>
-                Ok
-              </button>
-            </div>
+          <div className={styles.modalContent}>Ha ocurrido unos imprevistos, su pedido demorara x tiempo más, pedimos disculpas.</div>
+
+          <div className={styles.actionsContainer}>
+            <button className={styles.confirmBtn} onClick={() => setIsOpen(false)}>
+              Continuar
+            </button>
           </div>
         </div>
       </div>

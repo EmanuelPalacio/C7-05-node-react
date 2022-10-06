@@ -1,7 +1,8 @@
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from '../styles/countDown.module.css';
+import { useAppSelector } from '@/redux/hooks';
+
 import { SVGCircle } from './SVGCircle';
-import data from '../turn.json';
 
 const SECOND = 1000;
 const MINUTE = SECOND * 60;
@@ -19,12 +20,12 @@ export default function CountDown() {
   const maxMinuteTime = ((parsedDeadline - Date.now()) / MINUTE) % 60;
   const timeRef = useRef(time);
   timeRef.current = time;
+  const { turnDate } = useAppSelector((state) => state.ClientTurn);
 
   useEffect(() => {
-    const parsedTime = new Date(data.time).getTime();
-    setParsedDeadline(parsedTime);
-    setTime(parsedTime - Date.now());
-  }, [data]);
+    setParsedDeadline(turnDate);
+    setTime(turnDate - Date.now());
+  }, [turnDate]);
 
   useEffect(() => {
     const interval = setInterval(
@@ -41,8 +42,6 @@ export default function CountDown() {
 
     return () => clearInterval(interval);
   }, [parsedDeadline]);
-
-  console.log(time);
 
   const minuteTime = time >= 0 ? (time / MINUTE) % 60 : 0;
   const secondTime = time >= 0 ? (time / SECOND) % 60 : 0;
