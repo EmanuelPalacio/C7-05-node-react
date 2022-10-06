@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setTurn } from '@/redux/slices/clientTurnSlice';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import OneSignal from 'react-onesignal';
+import runOneSignal from './services/onesignal';
 import CountDown from './components/CountDown';
 import ModalDialog from './components/ModalDialog';
 import OrderFinished from './components/OrderFinished';
@@ -13,7 +13,7 @@ import TwitterLogo from '@/components/svg/TwitterLogo';
 import FbLogo from '@/components/svg/FbLogo';
 
 export default function Client() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [turnFinished, setTurnFinished] = useState<any>(false);
   const { turnId } = useParams();
   const dispatch = useAppDispatch();
@@ -40,14 +40,8 @@ export default function Client() {
   }, []);
 
   useEffect(() => {
-    OneSignal.init({
-      appId: '560e5ab2-9ceb-4379-8cef-545851f0b9e9',
-      allowLocalhostAsSecureOrigin: false,
-      // eslint-disable-next-line camelcase
-      safari_web_id: 'web.onesignal.auto.2473987d-7114-4e84-8494-f768208d432f',
-      notifyButton: {
-        enable: true,
-      },
+    runOneSignal().then((id)=>{
+      console.log(id)
     });
   }, []);
 
