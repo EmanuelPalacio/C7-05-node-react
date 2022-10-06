@@ -1,18 +1,47 @@
 /* eslint-disable camelcase */
-import { ApiCashier } from '@/models/cashier.type';
+import { ApiCreatedTurn } from '@/models/turns.type';
 import { turnAdapter } from '../adapter/turns.adapter';
 import axios from 'axios';
-import { LOGIN_URL } from '@/utils/config';
+import { API_URL } from '@/utils/config';
 
-export const turnsService = async (userName: string, password: string) => {
+interface IProps {
+  turnId: number | string;
+  turnDate: number;
+  estimatedTime: number;
+  totalTime: number;
+}
+
+export const turnCreateService = async ({ totalTime, estimatedTime, turnDate }: IProps) => {
   try {
-    const { data, status } = await axios.post<ApiCashier>(`${LOGIN_URL}`, {
-      user_name: userName,
-      user_password: password,
+    const { data, status } = await axios.post<ApiCreatedTurn>(`${API_URL}/api/turns`, {
+      total_time: totalTime,
+      turn_date: turnDate,
+      estimated_time: estimatedTime,
     });
 
     if (status === 200) {
-      // return turnAdapter(data); // EL ADAPTER transforma los datos que recibe del backend en un objeto manipulable por el front */
+      return turnAdapter(data.turnToCreate.turnCreated); // EL ADAPTER transforma los datos que recibe del backend en un objeto manipulable por el front */
+    }
+    return null;
+  } catch (error) {
+    if (typeof error === 'string') {
+      error.toUpperCase(); // works, e narrowed to string
+    } else if (error instanceof Error) {
+      error.message; // works, e narrowed to Error
+    }
+  }
+};
+
+export const turnUpdateService = async ({ turnId, totalTime, estimatedTime, turnDate }: IProps) => {
+  try {
+    const { data, status } = await axios.put<ApiCreatedTurn>(`${API_URL}/api/turns/${turnId}`, {
+      total_time: totalTime,
+      turn_date: turnDate,
+      estimated_time: estimatedTime,
+    });
+
+    if (status === 200) {
+      return turnAdapter(data.turnToCreate.turnCreated); // EL ADAPTER transforma los datos que recibe del backend en un objeto manipulable por el front */
     }
     return null;
   } catch (error) {

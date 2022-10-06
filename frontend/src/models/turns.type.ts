@@ -1,6 +1,6 @@
 /* import { table } from 'console'; */
 
-interface ApiTurnRetrieved {
+export interface ApiTurnRetrieved {
   id: number | string;
   estimated_time: number;
   total_time: number;
@@ -8,7 +8,7 @@ interface ApiTurnRetrieved {
   food_id: number | string | null;
   createdAt: Date;
   updatedAt: Date;
-  isActive: boolean;
+  is_active: boolean;
 }
 
 export interface ApiTurn {
