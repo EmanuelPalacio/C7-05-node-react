@@ -1,5 +1,7 @@
 const { Turn } = require('../../services/index.service.js');
 const turnService = new Turn();
+const onesignal = require('../../middlewares/one-signal')
+
 exports.createTurn = async (req, res, next) => {
   const turn = req.body;
   try {
@@ -62,23 +64,40 @@ exports.getTurn = async (req, res, next) => {
 exports.registerNotificationId = async (req, res, next) => {
   const idTurn = req.params.id;
   const idNotification = req.body.id;
+
   try {
-    let turnBody = await turnService.getTurn(idTurn);
-    turnBody.notification_id = idNotification;
-    const newTurn = await turnService.updateTurn(idTurn, turnBody).turnBody;
-    console.log(newTurn)
+    let turnBody = await turnService.getTurn(idTurn); //Obtengo el turno de la base de datos
+    if (turnBody.notification_id !== idNotification){ //Me fijo si ya está vinculada la id de la notificación
+      turnBody.notification_id = idNotification;
+      let newTurn = await turnService.updateTurn(idTurn, turnBody);
+      newTurn = newTurn.turnBody.dataValues;
+      let timeout = new Date(newTurn.turn_date);
+  
+      //Timer que envía una notificación TODO
+      const intervalId = setInterval(async () => {
+        let turn = await turnService.getTurn(idTurn);
+        turn = turn.dataValues;
+        if (turn.turn_date !== turnBody.turn_date){
+          console.log("El tiempo restante cambió!");
+          timeout = new Date(turn.turn_date)
+        }
+        let timeleft = Math.ceil(((timeout - new Date()) / 1000)); //TODO cambiar resta de objetos DATE a milisegundos
+        console.log(`Faltan ${timeleft} segundos`);
+        if (timeleft < 5){
+          onesignal.crearNotificacion(idNotification);
+          clearInterval(intervalId);
+        }
+      }, 1000 * 30);
+      //
+      res.status(200).json(
+        newTurn.turnBody,
+      );
+    }else{
+      res.status(200);
+    }
 
-    //Timer que envía una notificación TODO
-      // const intervalId = setInterval(() => {
-      //   console.log(`Faltan ${newTurn.asd} segundos para mandar la notificaicón`);
-      //   if ()
-      // }, 1000);
-    //
-
-    res.status(200).json(
-      newTurn.turnBody,
-    );
   } catch (error) {
+    console.log(error.message)
     res.status(500).json({
       message: error.message,
     });

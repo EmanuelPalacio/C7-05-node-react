@@ -17,7 +17,6 @@ const passportControl = require('../middlewares/passport-control')
 app.use(passportControl.initialize())
 
 const oneSignalResponse = require('../middlewares/one-signal');
-// oneSignalResponse.crearNotificacion('560e5ab2-9ceb-4379-8cef-545851f0b9e9'); testing
 //
 
 app.use('/api', routes(router));
