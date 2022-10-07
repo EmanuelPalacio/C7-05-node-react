@@ -20,12 +20,12 @@ export default function CountDown() {
   const maxMinuteTime = ((parsedDeadline - Date.now()) / MINUTE) % 60;
   const timeRef = useRef(time);
   timeRef.current = time;
-  const { turnDate } = useAppSelector((state) => state.ClientTurn);
+  const { totalTime } = useAppSelector((state) => state.ClientTurn);
 
   useEffect(() => {
-    setParsedDeadline(turnDate);
-    setTime(turnDate - Date.now());
-  }, [turnDate]);
+    setParsedDeadline(totalTime);
+    setTime(totalTime - Date.now());
+  }, [totalTime]);
 
   useEffect(() => {
     const interval = setInterval(

@@ -62,3 +62,7 @@
     width: 80vw;
     max-height: 80vh;
 }
+
+.errorMessage{
+    color: rgb(247, 58, 58);
+}

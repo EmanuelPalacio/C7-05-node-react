@@ -1,48 +1,54 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import QrImage from './QrImage';
+import { useAppDispatch } from '@/redux/hooks';
+import { addTurn } from '@/redux/slices/turnsSlice';
+import React, { useState } from 'react';
+import { turnCreateService } from '../services/turns';
 import styles from '../styles/modals.module.css';
-import { Turn } from '../../../models/turns.type';
+import { AddMinutestoDate } from '../utils/date.utils';
+import QrImage from './QrImage';
 
 interface props {
   activeModal: () => void;
-  addTurn: (object: Turn) => void;
 }
 
-const DashboardOrder = ({ activeModal, addTurn }: props) => {
+const DashboardOrder = ({ activeModal }: props) => {
   const [modal, setModal] = useState<boolean>(false);
+  const [idQR, setIdQR] = useState<string | number>('');
   const [errorMessage, setErrorMessage] = useState<string>();
   const [client, setClient] = useState({
     time: '5',
     table: 0,
   });
+  const dispatch = useAppDispatch();
 
   const handleChange = (e: React.FormEvent<HTMLInputElement | HTMLSelectElement>) => {
     setClient({ ...client, [e.currentTarget.name]: e.currentTarget.value });
-    console.log(client);
   };
-  const onSubmitCreateTurn = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitCreateTurn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (client.table === 0) return setErrorMessage('Ingresa una mesa');
+    const currentDate = new Date();
 
-    // addTurn(client);
-    console.log(client);
-    // setModal(true);
+    const dateWithMins = AddMinutestoDate(currentDate, parseInt(client.time));
+
+    const createData = {
+      totalTime: dateWithMins.getTime(),
+      estimatedTime: client.time + ' min',
+      turnDate: dateWithMins.toISOString(),
+    };
+
+    const newTurn = await turnCreateService(createData);
+
+    if (newTurn) {
+      dispatch(addTurn(newTurn));
+      setIdQR(newTurn.turnId);
+      setModal(true);
+      setErrorMessage('');
+    }
   };
   const toggleModal = () => {
     activeModal();
   };
-  /*     const getID =async () => {
-        const data = await axios.get('https://www.uuidtools.com/api/generate/v1')
-        console.warn(data.data[0].substring(0,8))
-        setClient({
-            ...client, id:data.data[0].substring(0,8)
-        })
-    }
-    useEffect(()=>{ 
-            getID()
-    },[]) */
 
   return (
     <>
@@ -65,15 +71,15 @@ const DashboardOrder = ({ activeModal, addTurn }: props) => {
                 <option value={40}>40 min</option>
               </select>
               <button type='submit'>Generar orden</button>
+              <span className={styles.errorMessage}>{errorMessage}</span>
             </form>
-            <span>{errorMessage}</span>
           </div>
         ) : (
           <div>
             <button className={styles.modalButton} onClick={toggleModal} type='button'>
               X
             </button>
-            <QrImage qrCode={client.id} />
+            <QrImage qrCode={idQR} />
           </div>
         )}
       </div>

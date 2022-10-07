@@ -11,21 +11,21 @@ export const TurnsSlice = createSlice({
       state.push(action.payload);
     },
     removeTurn: (state, action: PayloadAction<Turn>) => {
-      state = (state.filter((turn) => turn.id !== action.payload.id));
-      return state
+      state = state.filter((turn) => turn.turnId !== action.payload.turnId);
+      return state;
     },
     updateTurn: (state, action: PayloadAction<Turn>) => {
       state = state.map((turn) => {
-        if (turn.id === action.payload.id) {
+        if (turn.turnId === action.payload.turnId) {
           return action.payload;
         }
         return turn;
       });
-      return state
+      return state;
     },
     storageTurns: (state, action: PayloadAction<Turn[]>) => {
-      state = action.payload
-      return state
+      state = action.payload;
+      return state;
     },
   },
 });

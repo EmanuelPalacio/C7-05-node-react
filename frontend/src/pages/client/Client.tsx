@@ -13,7 +13,7 @@ import TwitterLogo from '@/components/svg/TwitterLogo';
 import FbLogo from '@/components/svg/FbLogo';
 
 export default function Client() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [turnFinished, setTurnFinished] = useState<any>(false);
   const { turnId } = useParams();
   const dispatch = useAppDispatch();
