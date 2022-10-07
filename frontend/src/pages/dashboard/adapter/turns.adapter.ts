@@ -8,5 +8,6 @@ export const turnAdapter = (turn: ApiTurnRetrieved): Turn => {
     turnDate: turn.turn_date,
     foodId: turn.food_id,
     isActive: turn.is_active,
+    notificationId: turn.notification_id,
   };
 };

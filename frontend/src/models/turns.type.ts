@@ -9,14 +9,19 @@ export interface ApiTurnRetrieved {
   createdAt: Date;
   updatedAt: Date;
   is_active: boolean;
+  notification_id: string | null;
 }
 
 export interface ApiTurn {
-  turnRetrieved: {
-    msg: string;
-    status: number;
-    turnRetrieved: ApiTurnRetrieved;
-  };
+  id: number | string;
+  estimated_time: number;
+  total_time: number;
+  turn_date: number;
+  food_id: number | string | null;
+  notification_id: string | null;
+  is_active: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface ApiCreatedTurn {
@@ -28,10 +33,10 @@ export interface ApiCreatedTurn {
 }
 
 export interface ApiTurns {
-  turnRetrieved: {
+  turnsRetrieved: {
     msg: string;
     status: number;
-    turnRetrieved: [ApiTurnRetrieved];
+    turnsRetrieved: [ApiTurnRetrieved];
   };
 }
 
@@ -41,9 +46,10 @@ export interface Turn {
   totalTime: number;
   turnDate: number;
   foodId: number | string | null;
-  isActive: boolean;
   createdAt?: Date;
   updatedAt?: Date;
+  isActive: boolean;
+  notificationId: string | null;
 }
 
 export const TurnEmptyState: Turn[] = [];

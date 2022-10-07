@@ -1,31 +1,9 @@
-/* eslint-disable camelcase */
-export interface ApiTurn {
-  id: number | string;
-  estimated_time: number;
-  total_time: number;
-  turn_date: number;
-  food_id: number | string | null;
-  notification_id: string | null;
-  is_active: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-}
+import { ApiTurn, Turn } from '@/models/turns.type';
 
-export interface Turn {
-  turnId: number | string;
-  estimatedTime: number;
-  totalTime: number;
-  turnDate: number;
-  foodId: number | string | null;
-  createdAt?: Date;
-  updatedAt?: Date;
-  isActive: boolean;
-  notificationId: string | null;
-}
+/* eslint-disable camelcase */
 
 export const turnAdapter = (turn: ApiTurn): Turn => {
-  const  turnRetrieved  = turn;
-  console.log(turn)
+  const turnRetrieved = turn;
   return {
     turnId: turnRetrieved.id,
     estimatedTime: turnRetrieved.estimated_time,

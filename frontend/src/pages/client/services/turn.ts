@@ -1,7 +1,8 @@
 /* eslint-disable camelcase */
+import { ApiTurn } from '@/models/turns.type';
 import { API_URL, CONFIG_TOKEN } from '@/utils/config';
 import axios from 'axios';
-import { ApiTurn, turnAdapter } from '../adapter/turn.adapter';
+import { turnAdapter } from '../adapter/turn.adapter';
 
 export const turnService = async (turnId: string | number) => {
   try {

@@ -35,14 +35,13 @@ export default function Client() {
   useEffect(() => {
     turnId &&
       turnService(turnId).then((turn) => {
-        turn && 
-          dispatch(setTurn(turn));
+        turn && dispatch(setTurn(turn));
       });
   }, []);
 
   useEffect(() => {
-    onesignal.runOneSignal().then((id)=>{
-      (id && turnId) && onesignal.registerNotificationId(turnId,id);
+    onesignal.runOneSignal().then((id) => {
+      id && turnId && onesignal.registerNotificationId(turnId, id);
     });
   }, []);
 
@@ -79,7 +78,7 @@ export default function Client() {
           </footer>
         </div>
       ) : (
-        <>Turno no encontrado</>
+        <></>
       )}
 
       {isOpen && <ModalDialog setIsOpen={setIsOpen} />}

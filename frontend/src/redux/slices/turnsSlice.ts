@@ -6,6 +6,7 @@ export const TurnsSlice = createSlice({
   reducers: {
     setTurns: (state, action: PayloadAction<Turn[]>) => {
       state = action.payload;
+      return state;
     },
     addTurn: (state, action: PayloadAction<Turn>) => {
       state.push(action.payload);
@@ -23,14 +24,10 @@ export const TurnsSlice = createSlice({
       });
       return state;
     },
-    storageTurns: (state, action: PayloadAction<Turn[]>) => {
-      state = action.payload;
-      return state;
-    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addTurn, removeTurn, updateTurn, storageTurns } = TurnsSlice.actions;
+export const { addTurn, removeTurn, updateTurn, setTurns } = TurnsSlice.actions;
 
 export default TurnsSlice.reducer;

@@ -4,12 +4,15 @@ import styles from './styles/dashboard.module.css';
 /* redux */
 import { Turn } from '../../models/turns.type';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { removeTurn, storageTurns } from '../../redux/slices/turnsSlice';
+import { removeTurn, setTurns } from '../../redux/slices/turnsSlice';
+import { activesTurnsService, deleteTurnService } from './services/turns';
+import FormUpdateOrder from './components/FormUpdateOrder';
 
 const Dashboard = () => {
-  const [storage, setStorage] = useState<Turn[]>([]);
+  // const [storage, setStorage] = useState<Turn[]>([]);
+  // const getStorage = JSON.parse(localStorage.getItem('TURNS') || '[]');
   const [modal, setModal] = useState<boolean>(false);
-  const getStorage = JSON.parse(localStorage.getItem('TURNS') || '[]');
+  const [isUpdate, setIsUpdate] = useState({ isUpdate: false, order: {} as Turn });
   const listTurns = useAppSelector((state) => state.Turns);
   const dispatch = useAppDispatch();
 
@@ -18,17 +21,22 @@ const Dashboard = () => {
   };
 
   const deleteOrden = (order: Turn) => {
-    dispatch(removeTurn(order));
+    deleteTurnService(order.turnId).then((res) => {
+      res && dispatch(removeTurn(order));
+    });
+
     /* Persistencia de datos */
-    const newList = storage.filter((turn) => turn.turnId !== order.turnId);
+    /*     const newList = storage.filter((turn) => turn.turnId !== order.turnId);
     console.log(newList);
-    localStorage.setItem('TURNS', JSON.stringify(newList));
+    localStorage.setItem('TURNS', JSON.stringify(newList)); */
     /* refrescar el storage del componente  */
-    setStorage(newList);
+    // setStorage(newList);
   };
+
   useEffect(() => {
-    setStorage(getStorage);
-    dispatch(storageTurns(getStorage));
+    activesTurnsService().then((turns) => {
+      turns && dispatch(setTurns(turns));
+    });
   }, []);
 
   return (
@@ -61,7 +69,13 @@ const Dashboard = () => {
                     <button className={styles.orderButton} type='button'>
                       Entregar
                     </button>
-                    <button className={styles.orderButton} type='button'>
+                    <button
+                      onClick={() => {
+                        setIsUpdate({ isUpdate: true, order });
+                      }}
+                      className={styles.orderButton}
+                      type='button'
+                    >
                       +
                     </button>
                     <button className={styles.orderButton} type='button' onClick={() => deleteOrden(order)}>
@@ -75,6 +89,14 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {isUpdate.isUpdate && (
+        <FormUpdateOrder
+          activeModal={() => {
+            setIsUpdate({ isUpdate: false, order: {} as Turn });
+          }}
+          order={isUpdate.order}
+        />
+      )}
       {modal && <DashboardOrder activeModal={activeModal} />}
     </>
   );
