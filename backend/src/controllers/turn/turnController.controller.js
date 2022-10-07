@@ -1,8 +1,7 @@
 const { Turn } = require('../../services/index.service.js');
 const turnService = new Turn();
-exports.createTurn = async(req, res, next) => {
+exports.createTurn = async (req, res, next) => {
   const turn = req.body;
-
   try {
     const turnToCreate = await turnService.createTurn(turn);
     const { status } = turnToCreate;
@@ -16,7 +15,7 @@ exports.createTurn = async(req, res, next) => {
   }
 };
 
-exports.updateTurn = async(req, res, next) => {
+exports.updateTurn = async (req, res, next) => {
   try {
     const id = req.params.id;
     const turnBody = req.body;
@@ -33,7 +32,7 @@ exports.updateTurn = async(req, res, next) => {
   }
 };
 
-exports.getTurns = async(req, res, next) => {
+exports.getTurns = async (req, res, next) => {
   try {
     const turnsRetrieved = await turnService.getTurns();
     const { status } = turnsRetrieved;
@@ -46,7 +45,7 @@ exports.getTurns = async(req, res, next) => {
     });
   }
 };
-exports.getTurn = async(req, res, next) => {
+exports.getTurn = async (req, res, next) => {
   const id = req.params.id;
   try {
     const turnRetrieved = await turnService.getTurn(id);
@@ -60,22 +59,22 @@ exports.getTurn = async(req, res, next) => {
     });
   }
 };
-exports.registerNotificationId = async(req, res, next) => {
+exports.registerNotificationId = async (req, res, next) => {
   const idTurn = req.params.id;
   const idNotification = req.body.id;
   console.log(idNotification);
-  try{
+  try {
     let turn = await turnService.getTurn(idTurn);
     turn.notification_id = idNotification;
-    const newTurn = turnService.updateTurn(idTurn,turnBody);
-    console.log(newTurn)
-  }catch(error) {
+    const newTurn = turnService.updateTurn(idTurn, turnBody);
+    console.log(newTurn);
+  } catch (error) {
     res.status(500).json({
-      message:error.message,
-    })
+      message: error.message,
+    });
   }
-}
-exports.deleteTurn = async(req, res, next) => {
+};
+exports.deleteTurn = async (req, res, next) => {
   const id = req.params.id;
   try {
     const turnRetrieved = await turnService.deleteTurn(id);

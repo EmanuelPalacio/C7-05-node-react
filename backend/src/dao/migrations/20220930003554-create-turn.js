@@ -10,13 +10,13 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       estimated_time: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       total_time: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
       },
       turn_date: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       is_active: {
         type: Sequelize.BOOLEAN,
