@@ -22,7 +22,6 @@ const client = new OneSignal.DefaultApi(configuration);
 const notification = new OneSignal.Notification();
 notification.template_id = 'b1c836f8-bef5-4615-88c6-7f525cb57265';
 notification.priority = 1;
-notification.include_player_ids = ['eee47dab-b232-430a-8203-242191c3f344'];
 // notification.included_segments = ['Subscribed Users']; 
 notification.app_id = ONESIGNAL_APP_ID;
 notification.contents = {
@@ -31,12 +30,12 @@ notification.contents = {
 }
 
 
-const crearNotificacion =  async (AppId) => {
-
+const crearNotificacion =  async (userId) => {
+  notification.include_player_ids = [userId];
   const {id} = await client.createNotification(notification);
  
   
-  const response = await client.getNotification(AppId || ONESIGNAL_APP_ID,id);
+  const response = await client.getNotification(ONESIGNAL_APP_ID,id);
   response && console.log("Notificación enviada")
   return response;
 
