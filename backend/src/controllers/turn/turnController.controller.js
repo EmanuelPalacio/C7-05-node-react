@@ -75,14 +75,12 @@ exports.registerNotificationId = async (req, res, next) => {
   
       //Timer que envía una notificación TODO
       const intervalId = setInterval(async () => {
-        let turn = await turnService.getTurn(idTurn);
+        let turn = await turnService.getTurn(idTurn); //Reviso el backend a ver si el objeto cambió
         turn = turn.dataValues;
-        if (turn.turn_date !== turnBody.turn_date){
-          console.log("El tiempo restante cambió!");
-          timeout = new Date(turn.turn_date)
+        if (turn.turn_date !== turnBody.turn_date){ //Comparo mi fecha actual con la que obtuve del backend
+          timeout = new Date(turn.turn_date) //Actualizo la fecha del timeout a la nueva.
         }
         let timeleft = Math.ceil(((timeout - new Date()) / 1000)); //TODO cambiar resta de objetos DATE a milisegundos
-        console.log(`Faltan ${timeleft} segundos`);
         if (timeleft < 5){
           onesignal.crearNotificacion(idNotification);
           clearInterval(intervalId);
