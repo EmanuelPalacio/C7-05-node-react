@@ -49,11 +49,11 @@ exports.getTurn = async (req, res, next) => {
   const id = req.params.id;
   try {
     const turnRetrieved = await turnService.getTurn(id);
-    const { status } = turnRetrieved;
-    res.status(status).json({
-      turnRetrieved,
-    });
+    res.status(200).json(
+      turnRetrieved.dataValues // Ya adapté el adaptador
+    );
   } catch (error) {
+    console.log(error.message)
     res.status(500).json({
       message: error.message,
     });
@@ -65,10 +65,19 @@ exports.registerNotificationId = async (req, res, next) => {
   try {
     let turnBody = await turnService.getTurn(idTurn);
     turnBody.notification_id = idNotification;
-    const newTurn = await turnService.updateTurn(idTurn, turnBody);
-    res.status(200).json({
-      newTurn,
-    });
+    const newTurn = await turnService.updateTurn(idTurn, turnBody).turnBody;
+    console.log(newTurn)
+
+    //Timer que envía una notificación TODO
+      // const intervalId = setInterval(() => {
+      //   console.log(`Faltan ${newTurn.asd} segundos para mandar la notificaicón`);
+      //   if ()
+      // }, 1000);
+    //
+
+    res.status(200).json(
+      newTurn.turnBody,
+    );
   } catch (error) {
     res.status(500).json({
       message: error.message,

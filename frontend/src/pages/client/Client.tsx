@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setTurn } from '@/redux/slices/clientTurnSlice';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import runOneSignal from './services/onesignal';
+import * as onesignal from './services/onesignal';
 import CountDown from './components/CountDown';
 import ModalDialog from './components/ModalDialog';
 import OrderFinished from './components/OrderFinished';
@@ -35,13 +35,14 @@ export default function Client() {
   useEffect(() => {
     turnId &&
       turnService(turnId).then((turn) => {
-        turn && dispatch(setTurn(turn));
+        turn && 
+          dispatch(setTurn(turn));
       });
   }, []);
 
   useEffect(() => {
-    runOneSignal().then((id)=>{
-      console.log(id)
+    onesignal.runOneSignal().then((id)=>{
+      (id && turnId) && onesignal.registerNotificationId(turnId,id);
     });
   }, []);
 
@@ -78,7 +79,7 @@ export default function Client() {
           </footer>
         </div>
       ) : (
-        <></>
+        <>Turno no encontrado</>
       )}
 
       {isOpen && <ModalDialog setIsOpen={setIsOpen} />}

@@ -5,7 +5,8 @@
     "database": "railway",
     "host": "containers-us-west-90.railway.app",
     "dialect": "postgres",
-    "port": 6094
+    "port": 6094,
+    "logging": false
   },
   "test": {
     "username": "postgres",
@@ -13,7 +14,8 @@
     "database": "railway",
     "host": "containers-us-west-90.railway.app",
     "dialect": "postgres",
-    "port": 6094
+    "port": 6094,
+    "logging": false
   },
   "production": {
     "username": "postgres",
@@ -21,6 +23,7 @@
     "database": "railway",
     "host": "containers-us-west-16.railway.app",
     "dialect": "postgres",
-    "port": 5709
+    "port": 5709,
+    "logging": false
   }
 }
