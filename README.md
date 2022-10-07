@@ -77,7 +77,14 @@ Sintaxis to execute the program.
    
 
 <h2>Integrantes</h2>
-  Frontend: Isaac Celi, Emanual Palacio.
-  FullStack: Hugo Iturrieta.
-  Backend: Maximiliano Miño, Valeria Mancilla.
-  Q/A Tester: Pamela Suarez.
+
+  <strong>Q/A Tester: </strong>
+  <li>Pamela Suarez</li>
+  <strong>Frontend: </strong>
+  <li>Isaac Celi</li>
+  <li>Emanual Palacio</li>
+  <strong>FullStack:</strong>
+  <li>Hugo Iturrieta</li>
+  <strong>Backend: </strong>
+  <li>Maximiliano Miño</li>
+  <li>Valeria Mancilla</li>
