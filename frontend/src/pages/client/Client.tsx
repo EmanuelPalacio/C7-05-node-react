@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setTurn } from '@/redux/slices/clientTurnSlice';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import OneSignal from 'react-onesignal';
+import runOneSignal from './services/onesignal';
 import CountDown from './components/CountDown';
 import ModalDialog from './components/ModalDialog';
 import OrderFinished from './components/OrderFinished';
@@ -40,14 +40,8 @@ export default function Client() {
   }, []);
 
   useEffect(() => {
-    OneSignal.init({
-      appId: '560e5ab2-9ceb-4379-8cef-545851f0b9e9',
-      allowLocalhostAsSecureOrigin: false,
-      // eslint-disable-next-line camelcase
-      safari_web_id: 'web.onesignal.auto.2473987d-7114-4e84-8494-f768208d432f',
-      notifyButton: {
-        enable: true,
-      },
+    runOneSignal().then((id)=>{
+      console.log(id)
     });
   }, []);
 
