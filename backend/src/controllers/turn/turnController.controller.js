@@ -50,9 +50,11 @@ exports.getTurns = async (req, res, next) => {
 exports.getTurn = async (req, res, next) => {
   const id = req.params.id;
   try {
-    const turnRetrieved = await turnService.getTurn(id);
-    res.status(200).json(
-      turnRetrieved.dataValues // Ya adapté el adaptador
+    const turn = await turnService.getTurn(id);
+    const {status, turnRetrieved} = turn;
+    console.log(turnRetrieved)
+    res.status(status).json(
+      turnRetrieved // Ya adapté el adaptador
     );
   } catch (error) {
     console.log(error.message)
@@ -67,6 +69,7 @@ exports.registerNotificationId = async (req, res, next) => {
 
   try {
     let turnBody = await turnService.getTurn(idTurn); //Obtengo el turno de la base de datos
+    turnBody = turnBody.turnRetrieved;
     if (turnBody.notification_id !== idNotification){ //Me fijo si ya está vinculada la id de la notificación
       turnBody.notification_id = idNotification;
       let newTurn = await turnService.updateTurn(idTurn, turnBody);
@@ -76,7 +79,7 @@ exports.registerNotificationId = async (req, res, next) => {
       //Timer que envía una notificación TODO
       const intervalId = setInterval(async () => {
         let turn = await turnService.getTurn(idTurn); //Reviso el backend a ver si el objeto cambió
-        turn = turn.dataValues;
+        turn = turn.turnRetrieved;
         if (turn.turn_date !== turnBody.turn_date){ //Comparo mi fecha actual con la que obtuve del backend
           timeout = new Date(turn.turn_date) //Actualizo la fecha del timeout a la nueva.
         }
