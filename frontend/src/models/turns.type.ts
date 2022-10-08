@@ -2,7 +2,7 @@
 
 export interface ApiTurnRetrieved {
   id: number | string;
-  estimated_time: number;
+  estimated_time: string;
   total_time: number;
   turn_date: number;
   food_id: number | string | null;
@@ -14,7 +14,7 @@ export interface ApiTurnRetrieved {
 
 export interface ApiTurn {
   id: number | string;
-  estimated_time: number;
+  estimated_time: string;
   total_time: number;
   turn_date: number;
   food_id: number | string | null;
@@ -32,6 +32,14 @@ export interface ApiCreatedTurn {
   };
 }
 
+export interface ApiUpdateTurn {
+  turnToUpdate: {
+    msg: string;
+    status: number;
+    turnBody: ApiTurnRetrieved;
+  };
+}
+
 export interface ApiTurns {
   turnsRetrieved: {
     msg: string;
@@ -42,7 +50,7 @@ export interface ApiTurns {
 
 export interface Turn {
   turnId: number | string;
-  estimatedTime: number;
+  estimatedTime: string;
   totalTime: number;
   turnDate: number;
   foodId: number | string | null;

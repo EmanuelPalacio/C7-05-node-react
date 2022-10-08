@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { useEffect, useState } from 'react';
 import DashboardOrder from './components/DashboardOrder';
 import styles from './styles/dashboard.module.css';
@@ -5,7 +6,7 @@ import styles from './styles/dashboard.module.css';
 import { Turn } from '../../models/turns.type';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { removeTurn, setTurns } from '../../redux/slices/turnsSlice';
-import { activesTurnsService, deleteTurnService } from './services/turns';
+import { activesTurnsService, deleteTurnService, turnUpdateService } from './services/turns';
 import FormUpdateOrder from './components/FormUpdateOrder';
 
 const Dashboard = () => {
@@ -24,13 +25,17 @@ const Dashboard = () => {
     deleteTurnService(order.turnId).then((res) => {
       res && dispatch(removeTurn(order));
     });
+  };
 
-    /* Persistencia de datos */
-    /*     const newList = storage.filter((turn) => turn.turnId !== order.turnId);
-    console.log(newList);
-    localStorage.setItem('TURNS', JSON.stringify(newList)); */
-    /* refrescar el storage del componente  */
-    // setStorage(newList);
+  const handleFinishTurn = (order: Turn) => {
+    const dataUpdate = {
+      is_active: false,
+      turn_date: new Date(order.turnDate).toISOString(),
+    };
+
+    turnUpdateService(order.turnId, dataUpdate).then((res) => {
+      res && dispatch(removeTurn(order));
+    });
   };
 
   useEffect(() => {
@@ -66,7 +71,7 @@ const Dashboard = () => {
                     <span>N° mesa:{order.isActive}</span>
                   </div>
                   <div>
-                    <button className={styles.orderButton} type='button'>
+                    <button onClick={() => handleFinishTurn(order)} className={styles.orderButton} type='button'>
                       Entregar
                     </button>
                     <button

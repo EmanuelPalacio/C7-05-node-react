@@ -1,8 +1,9 @@
+/* eslint-disable camelcase */
 import { Turn } from '@/models/turns.type';
 import { useAppDispatch } from '@/redux/hooks';
-import { addTurn } from '@/redux/slices/turnsSlice';
+import { updateTurn } from '@/redux/slices/turnsSlice';
 import React, { useEffect, useState } from 'react';
-import { turnCreateService } from '../services/turns';
+import { turnUpdateService } from '../services/turns';
 import styles from '../styles/formUpdate.module.css';
 import { AddMinutestoDate } from '../utils/date.utils';
 
@@ -14,38 +15,38 @@ interface props {
 const FormUpdateOrder = ({ activeModal, order }: props) => {
   const [date, setDate] = useState<string>('');
   const [modal, setModal] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>();
   const [client, setClient] = useState({
     time: '5',
     table: 0,
   });
   const dispatch = useAppDispatch();
-  console.log(order);
   const handleChange = (e: React.FormEvent<HTMLInputElement | HTMLSelectElement>) => {
     setClient({ ...client, [e.currentTarget.name]: e.currentTarget.value });
   };
-  const onSubmitCreateTurn = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitUpdateTurn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const { time } = client;
+    const dateUpdate = AddMinutestoDate(new Date(order.turnDate), parseInt(time));
 
-    if (client.table === 0) return setErrorMessage('Ingresa una mesa');
-    const currentDate = new Date();
+    const [minNumber] = order.estimatedTime.split(' ');
+    const updateEstimatedTime = parseInt(minNumber) + parseInt(time);
 
-    const dateWithMins = AddMinutestoDate(currentDate, parseInt(client.time));
-
-    const createData = {
-      totalTime: dateWithMins.getTime(),
-      estimatedTime: client.time + ' min',
-      turnDate: dateWithMins.toISOString(),
+    const updateData = {
+      total_time: dateUpdate.getTime(),
+      estimated_time: updateEstimatedTime + ' min',
+      turn_date: dateUpdate.toISOString(),
     };
 
-    const newTurn = await turnCreateService(createData);
-
-    if (newTurn) {
-      dispatch(addTurn(newTurn));
-      setModal(true);
-      setErrorMessage('');
-    }
+    turnUpdateService(order.turnId, updateData).then((res) => {
+      if (res) {
+        const formatData = { ...order, totalTime: res.totalTime, estimatedTime: res.estimatedTime, turnDate: res.turnDate };
+        dispatch(updateTurn(formatData));
+        activeModal();
+        setModal(true);
+      }
+    });
   };
+
   const toggleModal = () => {
     activeModal();
   };
@@ -62,7 +63,7 @@ const FormUpdateOrder = ({ activeModal, order }: props) => {
             <button className={`${styles.modalButton}`} onClick={() => activeModal()}>
               X
             </button>
-            <form onSubmit={onSubmitCreateTurn} className={`${styles.modalForm}`}>
+            <form onSubmit={onSubmitUpdateTurn} className={`${styles.modalForm}`}>
               <input type='number' name='table' placeholder='Numero de mesa' onChange={handleChange} />
               <p>Tiempo estimado: {order.estimatedTime}</p>
               <p>Termina a las: {date}</p>
@@ -78,7 +79,6 @@ const FormUpdateOrder = ({ activeModal, order }: props) => {
                 <option value={40}>40 min</option>
               </select>
               <button type='submit'>Actualizar orden</button>
-              <span className={styles.errorMessage}>{errorMessage}</span>
             </form>
           </div>
         ) : (

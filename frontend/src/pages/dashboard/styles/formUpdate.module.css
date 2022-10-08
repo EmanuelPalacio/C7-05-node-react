@@ -13,7 +13,8 @@
     position: relative;
     background-color: var(--highlight);
     border-radius: 20px;
-    width: 90%;
+
+    width: 60%;
     overflow: hidden;
     padding-top: 3.75rem;
 }
@@ -30,6 +31,7 @@
     align-items: center;
     gap: 10px;
     height: 100%;
+    margin-bottom: 15px;
 }
 .modalForm > input {
     text-align: center;
@@ -73,3 +75,10 @@ p {
   padding: 0 20px;
   text-align: center;
 }
+
+@media screen and (max-width: 768px){
+  .modal{
+      width: 80%;
+  }
+}
+  

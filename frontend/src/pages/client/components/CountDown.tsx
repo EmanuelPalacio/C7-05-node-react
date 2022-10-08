@@ -52,7 +52,10 @@ export default function CountDown() {
       <div className={`${styles.countdown_item} ${timeIsRunningOut && styles.timeIsRunningOut}`}>
         <p>{`${Math.floor(minuteTime)}`.padStart(2, '0')}</p>
         <span>Minutos</span>
-        <SVGCircle radius={mapNumber(Math.floor(minuteTime), 0, Math.ceil(maxMinuteTime), 0, 360)} />
+        <SVGCircle
+          stroke={timeIsRunningOut ? '#FF0000' : '#0F4C75'}
+          radius={mapNumber(Math.floor(minuteTime), 0, Math.ceil(maxMinuteTime), 0, 360)}
+        />
       </div>
 
       <div className={`${styles.countdown_item} ${timeIsRunningOut && styles.timeIsRunningOut}`}>

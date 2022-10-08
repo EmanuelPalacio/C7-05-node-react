@@ -11,11 +11,11 @@
 
 .modal{
     position: relative;
-    height: 60%;
     width: 60%;
     background-color: var(--highlight);
     border-radius: 20px;
     overflow: hidden;
+    padding-top: 3.75rem;
 }
 .modalButton {
     position: absolute;
@@ -30,6 +30,7 @@
     align-items: center;
     gap: 30px;
     height: 100%;
+
 }
 .modalForm > input {
     text-align: center;
@@ -66,3 +67,10 @@
 .errorMessage{
     color: rgb(247, 58, 58);
 }
+
+@media screen and (max-width: 700px){
+    .modal{
+        width: 80%;
+    }
+}
+    

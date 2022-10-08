@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { ApiCreatedTurn, ApiTurns } from '@/models/turns.type';
+import { ApiCreatedTurn, ApiTurns, ApiUpdateTurn } from '@/models/turns.type';
 import { turnAdapter } from '../adapter/turns.adapter';
 import axios from 'axios';
 import { API_URL, CONFIG_TOKEN } from '@/utils/config';
@@ -11,10 +11,10 @@ interface createProps {
 }
 
 interface updateProps {
-  turnId?: number | string;
-  turnDate: string;
-  estimatedTime: string;
-  totalTime: number;
+  turn_date?: string;
+  estimated_time?: string;
+  total_time?: number;
+  is_active?: boolean;
 }
 
 export const turnCreateService = async ({ totalTime, estimatedTime, turnDate }: createProps) => {
@@ -76,16 +76,12 @@ export const deleteTurnService = async (turnId: number | string) => {
   }
 };
 
-export const turnUpdateService = async ({ turnId, totalTime, estimatedTime, turnDate }: updateProps) => {
+export const turnUpdateService = async (turnId: string | number, dataUpdate: updateProps) => {
   try {
-    const { data, status } = await axios.put<ApiCreatedTurn>(`${API_URL}/turns${turnId}`, {
-      total_time: totalTime,
-      turn_date: turnDate,
-      estimated_time: estimatedTime,
-    });
+    const { data, status } = await axios.put<ApiUpdateTurn>(`${API_URL}/turns/${turnId}`, dataUpdate);
 
     if (status === 200) {
-      return turnAdapter(data.turnToCreate.turnCreated); // EL ADAPTER transforma los datos que recibe del backend en un objeto manipulable por el front */
+      return turnAdapter(data.turnToUpdate.turnBody); // EL ADAPTER transforma los datos que recibe del backend en un objeto manipulable por el front */
     }
     return null;
   } catch (error) {

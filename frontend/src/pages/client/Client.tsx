@@ -47,7 +47,7 @@ export default function Client() {
 
   return (
     <>
-      {turn.turnId ? (
+      {turn.isActive ? (
         <div className={styles.client_Container}>
           {turnFinished ? (
             <OrderFinished />
@@ -60,6 +60,9 @@ export default function Client() {
           <div className={styles.client_turnInfo}>
             <p>
               <strong>Turno ID:</strong> {turn?.turnId}
+            </p>
+            <p>
+              <strong>Hora estimada:</strong> {new Date(turn.turnDate).toLocaleTimeString()}
             </p>
           </div>
           <footer>
