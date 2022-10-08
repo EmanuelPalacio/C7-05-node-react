@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './slices/userSlice';
+import cashierReducer from './slices/cashierSlice';
+import turnsReducer from './slices/turnsSlice';
+import clientTurnReducer from './slices/clientTurnSlice';
 
 export const store = configureStore({
   reducer: {
-    user: userReducer,
+    Cashier: cashierReducer,
+    Turns: turnsReducer,
+    ClientTurn: clientTurnReducer,
   },
 });
 

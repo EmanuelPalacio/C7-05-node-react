@@ -1,29 +1,18 @@
 /* eslint-disable camelcase */
-import { ApiUser } from '@/models/user.type';
+import { ApiCashier } from '@/models/cashier.type';
 import { authAdapter } from '../adapter/auth.adapter';
 import axios from 'axios';
-import dataUsers from './auth.json';
-
-// export const authUrl = process.env.NODE_ENV === 'production' ? process.env.AUTH_URL : 'http://localhost:3000/auth'; 
-
-// If you are using Vite, use import.meta.env instead, process.env is removed.
-
-// And make sure variables start with VITE_ in .env file.
-
-// VITE_SOME_KEY=123
-// more https://vitejs.dev/guide/env-and-mode.html
+import { LOGIN_URL } from '@/utils/config';
 
 export const authService = async (userName: string, password: string) => {
-  /*   const response = await axios.post<ApiUser>(`${authUrl}`, {
-    user_name: userName,
-    password,
-    turn_id: [],
-  }); */
   try {
-    const response = dataUsers.find((user) => user.user_name === userName && user.user_password === password);
+    const { data, status } = await axios.post<ApiCashier>(`${LOGIN_URL}`, {
+      user_name: userName,
+      user_password: password,
+    });
 
-    if (response) {
-      return authAdapter(response);
+    if (status === 200) {
+      return authAdapter(data); // EL ADAPTER transforma los datos que recibe del backend en un objeto manipulable por el front */
     }
     return null;
   } catch (error) {
@@ -33,6 +22,4 @@ export const authService = async (userName: string, password: string) => {
       error.message; // works, e narrowed to Error
     }
   }
-
-  /* return authAdapter(response.data) */
 };

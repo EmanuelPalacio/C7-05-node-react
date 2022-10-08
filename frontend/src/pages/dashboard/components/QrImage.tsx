@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import QR from 'qrcode';
-import styles from './styles/modals.module.css'
+import styles from '../styles/modals.module.css'
 
 interface IProps {
-  qrCode:string
+  qrCode:string | number
 }
 
-const QrImage: React.FC<IProps> = (props: IProps) => {
+const QrImage = ({qrCode}:IProps) => {
 
-  const [qr,setQr] = useState('1') // useState(props.qrCode) 
-   
+  const [qr,setQr] = useState('') // useState(qrCode) 
+
   const [mockQr,setMockQr] = useState<string>('1');
 
   useEffect( () => {
     if (qr){
-      QR.toDataURL(window.location.origin+'/client/'+1, (err,code:string) => { // http://localhost:3000/order/1
+      QR.toDataURL(window.location.origin+'/client/'+qrCode, (err,code:string) => { // http://localhost:3000/order/qrCode
         if (err) return console.log('Error en el qr');
         setQr(code)
       })
     }else{
-      QR.toDataURL(window.location.origin+'/client/'+1, (err,code:string) => { // http://localhost:3000/order/1
+      QR.toDataURL(window.location.origin+'/client/'+qrCode, (err,code:string) => { // http://localhost:3000/order/qrCode
         if (err) return console.log('Error en el qr');
         setMockQr(code)
       })

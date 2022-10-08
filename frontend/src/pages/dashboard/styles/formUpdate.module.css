@@ -1,0 +1,84 @@
+.window{
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--modalTransparency);
+}
+
+.modal{
+    position: relative;
+    background-color: var(--highlight);
+    border-radius: 20px;
+
+    width: 60%;
+    overflow: hidden;
+    padding-top: 3.75rem;
+}
+.modalButton {
+    position: absolute;
+    background-color: var(--highlight);
+    top: 0;
+    right: 0;
+}
+.modalForm, .qrModal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+    margin-bottom: 15px;
+}
+.modalForm > input {
+    text-align: center;
+}
+.modalForm > input:nth-child(1){
+    background-color: var(--primary);
+    border: none;
+}
+.modalForm > select {
+    color: var(--secondary);
+    border: none;
+    outline: none;
+    border-bottom: 3px solid var(--borderBottom);
+    padding: 0.2em 0.5em;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.8125rem;
+    font-family: inherit;
+    background-color: var(--highlight);
+}
+
+
+.qrModal{
+    background-color: var(--highlight);
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+.qrImg{
+    object-fit: contain;
+    width: 80vw;
+    max-height: 80vh;
+}
+
+.errorMessage{
+    color: rgb(247, 58, 58);
+}
+
+
+p {
+  padding: 0;
+  padding: 0 20px;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px){
+  .modal{
+      width: 80%;
+  }
+}
+  

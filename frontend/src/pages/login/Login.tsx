@@ -5,7 +5,7 @@ import { authService } from './services/auth';
 import styles from './styles/login.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setUser } from '@/redux/slices/userSlice';
+import { setCashier } from '@/redux/slices/cashierSlice';
 
 const Login = () => {
   const [inputValue, setInputValue] = useState({ username: '', password: '' });
@@ -26,22 +26,22 @@ const Login = () => {
     const { username, password } = inputValue;
     if (username === '' || password === '') return setErrorMessage('Llena todos los campos');
 
-    const user = await authService(username, password);
+    const cashier = await authService(username, password);
 
-    if (!user) return setErrorMessage('Usuario o contraseña incorrectos');
+    if (!cashier) return setErrorMessage('Usuario o contraseña incorrectos');
 
-    console.log(user);
-    localStorage.setItem('userJwt', user.userJwt);
-    dispatch(setUser(user));
+    localStorage.setItem('cashierJwt', cashier.cashierJwt);
+    dispatch(setCashier(cashier));
     navigate('/dashboard');
+
     setInputValue({ username: '', password: '' });
-    return setErrorMessage('');
+    setErrorMessage('');
   };
 
   return (
     <div className={styles.loginContainer}>
       <div className={styles.imgContainer}>
-        <ImageLoginSvg />
+        <ImageLoginSvg svgProp={{ width: 500, height: 500 }} />
       </div>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
         <span className={styles.formContainer_logo}>

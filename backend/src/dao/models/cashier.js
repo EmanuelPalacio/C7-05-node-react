@@ -1,23 +1,24 @@
-const { DataTypes } = require('sequelize');
-const { db } = require('../db/db');
-
-const Cashier = db.define(
-    'Cashier', {
-        cashier_id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-        },
-        user_name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        user_password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-    }, { timestamps: true },
-);
-
-Cashier.sync({ alter: true });
-module.exports = Cashier;
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class cashier extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
+  cashier.init({
+    user_name: DataTypes.STRING,
+    user_password: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'cashier',
+  });
+  return cashier;
+};
