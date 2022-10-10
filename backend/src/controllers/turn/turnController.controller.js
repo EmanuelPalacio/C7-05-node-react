@@ -66,32 +66,33 @@ exports.getTurn = async (req, res, next) => {
 exports.registerNotificationId = async (req, res, next) => {
   const idTurn = req.params.id;
   const idNotification = req.body.id;
-
+  
   try {
     let turnBody = await turnService.getTurn(idTurn); //Obtengo el turno de la base de datos
-    turnBody = turnBody.turnRetrieved;
+    turnBody = turnBody;
     if (turnBody.notification_id !== idNotification){ //Me fijo si ya está vinculada la id de la notificación
       turnBody.notification_id = idNotification;
       let newTurn = await turnService.updateTurn(idTurn, turnBody);
-      newTurn = newTurn.turnBody.dataValues;
+      newTurn = newTurn;
       let timeout = new Date(newTurn.turn_date);
   
       //Timer que envía una notificación TODO
       const intervalId = setInterval(async () => {
         let turn = await turnService.getTurn(idTurn); //Reviso el backend a ver si el objeto cambió
         turn = turn.turnRetrieved;
+        timeout = new Date(turn.turn_date)
         if (turn.turn_date !== turnBody.turn_date){ //Comparo mi fecha actual con la que obtuve del backend
           timeout = new Date(turn.turn_date) //Actualizo la fecha del timeout a la nueva.
         }
         let timeleft = Math.ceil(((timeout - new Date()) / 1000)); //TODO cambiar resta de objetos DATE a milisegundos
-        if (timeleft < 5){
+        if (timeleft < 5 || !turn.is_active){
           onesignal.crearNotificacion(idNotification);
           clearInterval(intervalId);
         }
-      }, 1000 * 30);
+      }, 1000 * 1);
       //
       res.status(200).json(
-        newTurn.turnBody,
+        newTurn,
       );
     }else{
       res.status(200);
