@@ -48,14 +48,28 @@ exports.getTurns = async (req, res, next) => {
   }
 };
 exports.getTurn = async (req, res, next) => {
+  
+
   const id = req.params.id;
   try {
     const turn = await turnService.getTurn(id);
     const {status, turnRetrieved} = turn;
-    console.log(turnRetrieved)
-    res.status(status).json(
-      turnRetrieved // Ya adapté el adaptador
-    );
+    console.log(turnRetrieved);
+    res.writeHead(200, {
+      Connection: 'keep-alive',
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+    });
+    let interval = setInterval(async () => {
+      newTurn = await turnService.getTurn(id);
+      if (newTurn.turn_date !== turn.turn_date){
+        res.write(
+          'data:' + JSON.stringify(
+            newTurn // Ya adapté el adaptador
+          )
+        );
+      }
+    }, 1000);
   } catch (error) {
     console.log(error.message)
     res.status(500).json({
