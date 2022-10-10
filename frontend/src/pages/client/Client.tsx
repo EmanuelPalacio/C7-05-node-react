@@ -41,7 +41,11 @@ export default function Client() {
 
   useEffect(() => {
     onesignal.runOneSignal().then((id) => {
-      id && turnId && onesignal.registerNotificationId(turnId, id);
+      onesignal.showPrompt();
+      onesignal.showCategories();
+      if (id && turnId) {
+        onesignal.registerNotificationId(turnId, id);
+      };
     });
   }, []);
 

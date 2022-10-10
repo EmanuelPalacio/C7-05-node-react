@@ -3,12 +3,12 @@ import { Turn } from '@/models/turns.type';
 
 const ClientTurnEmptyState: Turn = {
   turnId: '',
+  isActive: false,
+  notificationId: '',
   estimatedTime: '',
   totalTime: 0,
   turnDate: 0,
   foodId: null,
-  isActive: false,
-  notificationId: '',
 };
 
 export const ClientTurnSlice = createSlice({
