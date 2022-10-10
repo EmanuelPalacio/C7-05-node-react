@@ -10,13 +10,76 @@ export async function runOneSignal() {
     serviceWorkerPath: 'OneSignalSDKWorker.js',
     // eslint-disable-next-line camelcase
     safari_web_id: 'web.onesignal.auto.2473987d-7114-4e84-8494-f768208d432f',
-    notifyButton: {
-      enable: true,
-    }
+    
+    promptOptions:{
+      slidedown: {
+        prompts: [
+          {
+            type: 'push', // current types are "push" & "category"
+            autoPrompt: true,
+            text: {
+              actionMessage: 'Necesitamos que actives las notificaciones para avisarte cuando el pedido está listo.',
+              acceptButton: 'Activar',
+              cancelButton: 'No',
+            },
+            delay: {
+              pageViews: 0,
+              timeDelay: 1
+            }
+          },
+          {
+            type: 'category',
+            autoPrompt: true,
+            text: {
+              actionMessage: 'Necesitamos que actives las notificaciones para avisarte cuando el pedido está listo.',
+              acceptButton: 'Activar',
+              cancelButton: 'No',
+
+              negativeUpdateButton:'Cancelar',
+              positiveUpdateButton:'Guardar',
+              updateMessage:'¿Te gustaría recibir promociones de este negocio?',
+            },
+            delay:{
+              pageViews:0,
+              timeDelay: 0,
+            },
+            categories: [
+              {
+                tag: 'promociones',
+                label: 'Promociones'
+              }
+            ]
+          }
+        ]
+      }
+    },
   });
-  OneSignal.showSlidedownPrompt();
   return OneSignal.getUserId();
 }
+
+export async function showPrompt() {
+  await OneSignal.showSlidedownPrompt({force:true});
+}
+
+export function showCategories() {
+  let permission;
+  OneSignal.isPushNotificationsEnabled((isEnabled) => {
+    if (isEnabled){
+      permission = isEnabled;
+      OneSignal.showCategorySlidedown({force:true})
+    }else{
+      OneSignal.on('notificationPermissionChange', (permissionChange) =>{
+        permission = permissionChange.to;
+        console.log(permission)
+        if (permission === 'granted'){
+          OneSignal.showCategorySlidedown({force:true});
+        }
+      })
+    }
+  })
+  
+}
+
 
 export async function registerNotificationId (idTurn:string,idNotif:string) {
   await axios.post(`${API_URL}/turns/${idTurn}`,{id:idNotif}, CONFIG_TOKEN)
