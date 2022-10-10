@@ -1,12 +1,14 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { Turn } from '@/pages/client/adapter/turn.adapter';
+import { Turn } from '@/models/turns.type';
 
 const ClientTurnEmptyState: Turn = {
   turnId: '',
-  estimatedTime: 0,
+  estimatedTime: '',
   totalTime: 0,
   turnDate: 0,
   foodId: null,
+  isActive: false,
+  notificationId: '',
 };
 
 export const ClientTurnSlice = createSlice({

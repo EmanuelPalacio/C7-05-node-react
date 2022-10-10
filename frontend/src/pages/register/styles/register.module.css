@@ -9,17 +9,20 @@
   grid-template-areas: "left right";
 }
 
+h2 {
+  margin: 0;
+  margin-bottom: 30px;
+}
+
 .imgContainer{
-  grid-area: left;
+  grid-area: right;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  background-size: contain;
 }
 
 .formContainer {
-  grid-area: right;
+  grid-area: left;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -38,7 +41,7 @@
 
 .formContainer_input{
   margin-bottom: 3.75rem;
-
+  width: 50%;
 }
 
 .formContainer_button{
@@ -58,7 +61,16 @@
     justify-content: center;
     gap: 40px;
     grid-template-columns: 1fr;
-    grid-template-areas:  "right"
-                          "left";
+    grid-template-areas:  "left"
+                          "right";
+  }
+
+}
+
+@media (max-width: 600px) {
+  .formContainer_input{
+    margin-bottom: 30px;
+    font-size: 16px;
+    width: 60%;
   }
 }

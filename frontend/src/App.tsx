@@ -6,11 +6,10 @@ import Statistics from './pages/statistics/Statistics';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import useVerifyAuth from './hooks/useVerifyAuth';
+import Register from './pages/register/Register';
 
 function App() {
   const [isAuthenticated] = useVerifyAuth();
-
-
 
   return (
     <div className='App'>
@@ -18,11 +17,10 @@ function App() {
         <Routes>
           <Route element={<PublicRoute isAuth={isAuthenticated} redirectTo='/dashboard' />}>
             <Route path='/' element={<Login />} />
+            <Route path='/register' element={<Register />} />
           </Route>
           <Route element={<PrivateRoute isAuth={isAuthenticated} redirectTo='/' />}>
             <Route path='/dashboard' element={<Dashboard />} />
-          </Route>
-          <Route element={<PrivateRoute isAuth={isAuthenticated} redirectTo='/' />}>
             <Route path='/statistics' element={<Statistics />} />
           </Route>
           <Route path='/client/:turnId' element={<Client />} />

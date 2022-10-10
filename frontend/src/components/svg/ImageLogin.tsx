@@ -8,7 +8,7 @@ function ImageLoginSvg(props: IProps) {
   const { svgProp } = props;
 
   return (
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 864 657' fill='none' {...svgProp}>
+    <svg className='svgContent_image' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 864 657' fill='none' {...svgProp}>
       <path
         d='M805.928 234.322c1.634-4.29 0-9.398-3.677-12.053-3.678-2.656-9.193-2.452-12.666.408 2.86-6.741 0-15.526-6.333-19.203-6.333-3.677-15.322-1.839-19.817 3.881-5.72-15.321-23.697-24.923-39.632-21.042-15.935 3.882-27.579 20.43-25.945 36.773-4.086-5.516-12.87-7.15-18.591-3.269-5.72 3.882-7.558 12.462-4.085 18.386l-18.387 4.903h161.39l-12.257-8.784z'
         fill='#B3FFFD'
