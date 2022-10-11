@@ -45,8 +45,28 @@ export default function Client() {
       onesignal.showCategories();
       if (id && turnId) {
         onesignal.registerNotificationId(turnId, id);
-      };
+      }
     });
+  }, []);
+
+  useEffect(() => {
+    const source = new EventSource(`http://localhost:9000/api/turns/${turnId}`);
+
+    source.onopen = () => {
+      console.log('SSE opened!');
+    };
+
+    source.onmessage = (event) => {
+      console.log(event.data);
+    };
+
+    source.onerror = (e) => {
+      console.log(e);
+    };
+
+    return () => {
+      source.close();
+    };
   }, []);
 
   return (
