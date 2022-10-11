@@ -16,10 +16,12 @@ module.exports = (router) => {
   router.get('/turns/:id', turn.getTurn);
   router.post('/turns/:id', turn.registerNotificationId);
   router.delete('/turns/:id', turn.deleteTurn);
-  
-  router.get('/cashier', passport.authenticate('jwt', {session:false}, auth.login))
-  router.get('/cashier/register', auth.createUser)
 
+  router.get(
+    '/cashier',
+    passport.authenticate('jwt', { session: false }, auth.login),
+  );
+  router.get('/cashier/register', auth.createUser);
 
   router.post('/food', food.createFood);
   router.get('/food', food.listFood);
