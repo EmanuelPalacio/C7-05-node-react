@@ -2,8 +2,8 @@ const { Turn } = require('../../services/index.service.js');
 const turnService = new Turn();
 const onesignal = require('../../middlewares/one-signal');
 const { json } = require('sequelize');
-const clients = [];
-const facts = [];
+let clients = [];
+let facts = [];
 
 exports.createTurn = async (req, res, next) => {
   const turn = req.body;
@@ -31,7 +31,7 @@ exports.updateTurn = async (req, res, next) => {
       turnToUpdate,
     });
 
-    return sendEventsToAll(json(turnToUpdate));
+    return sendEvent(json(turnToUpdate).conditions.turnBody, id);
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -56,12 +56,11 @@ exports.getTurns = async (req, res, next) => {
 exports.getTurn = async (req, res, next) => {
   const id = req.params.id;
   if (req.headers.accept === 'text/event-stream') {
-    sendEvent(req, res);
+    subscribeToEvent(req, res);
   } else {
     try {
       const turn = await turnService.getTurn(id);
       const { status, turnRetrieved } = turn;
-      console.log(turnRetrieved);
       res.status(status).json(
         turnRetrieved, // Ya adapté el adaptador
       );
@@ -124,6 +123,7 @@ exports.deleteTurn = async (req, res, next) => {
     res.status(status).json({
       turnRetrieved,
     });
+    return sendEvent(json({ delete: true }).conditions, id);
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -136,7 +136,7 @@ const writeEvent = (res, sseId, data) => {
   res.write(`data: ${data}\n\n`);
 };
 
-const sendEvent = (_req, res) => {
+const subscribeToEvent = (req, res) => {
   res.writeHead(200, {
     Connection: 'keep-alive',
     'Content-Type': 'text/event-stream',
@@ -144,10 +144,9 @@ const sendEvent = (_req, res) => {
   });
   res.flushHeaders();
 
-  const sseId = new Date().toDateString();
+  const sseId = req.params.id;
 
-  res.write(`id: ${sseId}\n`);
-  res.write('\n\n');
+  res.write(`data: ${JSON.stringify({ id: sseId })}\n\n`);
   res.flush();
 
   const newClient = {
@@ -156,10 +155,26 @@ const sendEvent = (_req, res) => {
   };
 
   clients.push(newClient);
+
+  req.on('close', () => {
+    clients = clients.filter((client) => client.id !== sseId);
+  });
+};
+
+const sendEvent = (newTurn, id) => {
+  console.log(newTurn);
+  clients.length > 0 &&
+    clients.forEach((client) => {
+      if (client.id === id) {
+        client.response.write(`data: ${JSON.stringify(newTurn)}\n\n`);
+        client.response.flush();
+      }
+    });
 };
 
 function sendEventsToAll(newFact) {
-  clients.forEach((client) =>
-    client.response.write(`data: ${JSON.stringify(newFact)}\n\n`),
-  );
+  clients.forEach((client) => {
+    client.response.write(`data: ${JSON.stringify(newFact)}\n\n`);
+    client.response.flush();
+  });
 }
