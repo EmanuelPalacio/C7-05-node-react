@@ -50,10 +50,9 @@ const Login = () => {
         <input
           onChange={handleChangeInput}
           className={styles.formContainer_input}
-          type='text'
+          type='email'
           name='username'
           placeholder='usuario'
-          maxLength={15}
           value={inputValue.username}
         />
         <input
@@ -62,7 +61,6 @@ const Login = () => {
           type='password'
           name='password'
           placeholder='contraseña'
-          maxLength={15}
           autoComplete='current-password'
           value={inputValue.password}
           id='current-password'

@@ -3,48 +3,73 @@ const cashierService = new Cashier();
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../../config/globals');
 
-exports.createUser = async(req, res) => {
-  const user = req.body;
+exports.createUser = async (req, res) => {
+  const userBody = req.body;
 
   try {
-    const userToCreate = await cashierService.createUser(user);
-    const { status } = userToCreate;
+    const userRetrieved = await cashierService.findUser(userBody);
+    console.log(userRetrieved);
+    if (userRetrieved.status !== 404) throw (new Error().code = 409);
+    const userToCreate = await cashierService.createUser(userBody);
+    const { status, user } = userToCreate;
+    const { id, user_name } = user;
     res.status(status).json({
-      userToCreate,
+      user: {
+        id,
+        user_name,
+      },
     });
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    if (error === 409) {
+      res.status(error).json({
+        message: 'Ya existe ese usuario',
+      });
+    } else {
+      res.status(500).json({
+        message: error.message,
+      });
+    }
   }
 };
 
-exports.login = async(req, res, next) => {
+exports.login = async (req, res, next) => {
   const user = req.body;
   try {
     const userRetrieved = await cashierService.findUser(user);
+    if (userRetrieved.status === 404)
+      throw (new Error('Usuario o contraseña incorrectos').code = 401);
     let response = {
-      jwt: jwt.sign({id: userRetrieved.userRetrieved.id},JWT_SECRET),
+      jwt: jwt.sign({ id: userRetrieved.userRetrieved.id }, JWT_SECRET, {
+        expiresIn: '20h',
+      }),
       user: {
         user_name: userRetrieved.userRetrieved.user_name,
-        id: userRetrieved.userRetrieved.id
-      }
-    }
+        id: userRetrieved.userRetrieved.id,
+      },
+    };
 
     const { status } = userRetrieved;
     res.status(status).json(response);
   } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
+    console.log(error);
+    if (error === 401) {
+      res.status(error).json({
+        error: error.message,
+      });
+    } else {
+      console.log(error);
+      res.status(500).json({
+        error: error.message,
+      });
+    }
   }
 };
 
-exports.isAuth = async(req, res, next) => {
+exports.isAuth = async (req, res, next) => {
   res.status(200).json({
-    "msg": "Estás loggeado!"
-  })
-}
+    msg: 'Estás loggeado!',
+  });
+};
 
 /*const cashierService = new Cashier();
 exports.createUser = async(req, res, next) => {
