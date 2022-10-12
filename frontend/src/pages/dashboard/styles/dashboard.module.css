@@ -78,9 +78,7 @@
 }
 @media (max-width: 1000px) {
   .dashboardBody{
-
     position: relative;
-    height: 85%;
     overflow-y: scroll;
     border-bottom: 3px solid var(--secondary);
   }

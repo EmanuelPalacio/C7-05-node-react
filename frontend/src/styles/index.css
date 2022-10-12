@@ -43,7 +43,7 @@ button {
   border: 1px solid transparent;
   color: var(--secondary);
   padding: 0.5em 1.2em;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-family: inherit;
   background-color: var(--primary);  ;
   cursor: pointer;
@@ -59,7 +59,7 @@ input {
   outline: none;
   border-bottom: 3px solid var(--borderBottom);
   padding: 0.2em 0.5em;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.8125rem;
   font-family: inherit;
