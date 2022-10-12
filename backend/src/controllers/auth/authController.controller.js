@@ -39,7 +39,9 @@ exports.login = async (req, res, next) => {
     if (userRetrieved.status === 404)
       throw (new Error('Usuario o contraseña incorrectos').code = 401);
     let response = {
-      jwt: jwt.sign({ id: userRetrieved.userRetrieved.id }, JWT_SECRET),
+      jwt: jwt.sign({ id: userRetrieved.userRetrieved.id }, JWT_SECRET, {
+        expiresIn: '20h',
+      }),
       user: {
         user_name: userRetrieved.userRetrieved.user_name,
         id: userRetrieved.userRetrieved.id,

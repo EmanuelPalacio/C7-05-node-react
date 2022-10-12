@@ -1,14 +1,18 @@
-
-.layoutHeader{
+.layoutHeader {
   display: flex;
   margin: 20px 0;
   justify-content: center;
   align-items: flex-start;
 }
-.headerLink{
+.headerLink {
   display: flex;
   padding: 0.25rem 1rem;
 }
-.isLinkActive{
+.isLinkActive {
   border-bottom: 3px solid var(--borderBottom);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
 }
