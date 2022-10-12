@@ -47,14 +47,6 @@ const Dashboard = () => {
   return (
     <>
       <div className={styles.dashboardContainer}>
-        <div className={styles.dashboardHeader}>
-          <a href='/dashboard' className={`${styles.dashboardLink} ${styles.dashboardLinkActive}`}>
-            Historial de pedidos
-          </a>
-          <a href='/statistics' className={`${styles.dashboardLink}`}>
-            Finalizados
-          </a>
-        </div>
         <div className={`${styles.dashboardFilter}`}>
           <button onClick={activeModal} type='button'>
             Agregar pedido
@@ -63,7 +55,7 @@ const Dashboard = () => {
         <div className={styles.dashboardBody}>
           <div className={styles.orderContainer}>
             <ul>
-              {listTurns.map((order) => (
+              {listTurns.map((order: Turn) => (
                 <li key={order.turnId} className={styles.order}>
                   <div>
                     <span>ID {order.turnId} </span>

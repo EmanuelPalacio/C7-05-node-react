@@ -1,5 +1,4 @@
 .dashboardContainer{
-  min-height: 100vh;
   margin: 0 100px;
   display: grid;
   align-content: center;
@@ -10,22 +9,15 @@
   justify-content: center;
   align-items: flex-start;
 }
-.dashboardLink{
-  display: flex;
-  padding: 0.25rem 1rem;
-}
-.dashboardLinkActive{
-  border-bottom: 3px solid var(--borderBottom);
-}
+
 .dashboardFilter{
   display: flex;
   align-items: center;
   border-bottom: 2px solid var(--secondary);
 }
 .dashboardBody{
-
   position: relative;
-  height: 85%;
+  height: 75vh;
   overflow-y: scroll;
   border-bottom: 3px solid var(--secondary);
 }

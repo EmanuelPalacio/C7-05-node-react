@@ -1,0 +1,14 @@
+
+.layoutHeader{
+  display: flex;
+  margin: 20px 0;
+  justify-content: center;
+  align-items: flex-start;
+}
+.headerLink{
+  display: flex;
+  padding: 0.25rem 1rem;
+}
+.isLinkActive{
+  border-bottom: 3px solid var(--borderBottom);
+}
