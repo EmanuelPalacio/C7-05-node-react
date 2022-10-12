@@ -95,7 +95,6 @@
 }
 @media (max-width: 600px) {
   .dashboardContainer{
-    min-height: 100vh;
     margin: 0 30px;
     display: grid;
     align-content: center;
