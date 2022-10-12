@@ -2,7 +2,7 @@
   margin: 0 100px;
   display: grid;
   align-content: center;
-  grid-template-rows: 100px 60px 1fr;
+  grid-template-rows: 60px 1fr;
 }
 .dashboardHeader{
   display: flex;
@@ -80,7 +80,6 @@
   .dashboardBody{
 
     position: relative;
-    height: 85%;
     overflow-y: scroll;
     border-bottom: 3px solid var(--secondary);
   }
@@ -97,7 +96,6 @@
 }
 @media (max-width: 600px) {
   .dashboardContainer{
-    min-height: 100vh;
     margin: 0 30px;
     display: grid;
     align-content: center;

@@ -1,0 +1,48 @@
+.statisticsContainer{
+    margin: 0 100px;
+}
+
+.statistics{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 2px solid var(--secondary);
+    border-bottom: 2px solid var(--secondary);
+    height: 80vh;
+}
+.containerChart{
+    width: 55%;
+    height: 100%;
+    margin: 0 0 0 5%;
+}
+.CompletedOrders{
+    width: 40%;
+    height: 90%;
+}
+.CompletedOrders > ul {
+    padding: 0;
+    margin: 0;
+    overflow-y: scroll;
+    height: 100%;
+}
+.CompletedOrders > ul::-webkit-scrollbar {
+    width: 20px;               /* width of the entire scrollbar */
+}
+
+.CompletedOrders > ul::-webkit-scrollbar-track {
+    background: white;        /* color of the tracking area */
+}
+.CompletedOrders > ul::-webkit-scrollbar-thumb {
+    background-color: var(--primary);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid white;  /* creates padding around scroll thumb */
+}
+.CompletedOrders > ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    border-bottom: 3px solid white;
+    background-color: var(--primary);
+    
+}
