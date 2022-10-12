@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { foodCreateService } from '../services/foods';
+import { foodCreateService, foodUpdateService } from '../services/foods';
 import styles from '../styles/formFoods.module.css';
 import { useAppDispatch } from '@/redux/hooks';
-import { addFood } from '@/redux/slices/foodsSlice';
+import { addFood, updateFood } from '@/redux/slices/foodsSlice';
 import { Food } from '@/models/foods.type';
 
 interface IProps {
@@ -56,9 +56,14 @@ export default function FormFoods({ updateForm, setUpdateForm }: IProps) {
       estimatedTime: foodForm.time,
     };
 
-    console.log(foodData);
-    setFoodForm({ foodName: '', time: 5 });
-    setErrorMessage('');
+    foodUpdateService(foodData).then((foodUpdated) => {
+      if (foodUpdated) {
+        dispatch(updateFood({ ...foodUpdated, foodId: updateForm.foodId }));
+        setFoodForm({ foodName: '', time: 5 });
+        setErrorMessage('');
+        setUpdateForm({ foodId: '', optionName: '', estimatedTime: 0 });
+      }
+    });
   };
 
   return (

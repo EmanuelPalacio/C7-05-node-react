@@ -3,6 +3,9 @@ import { useState } from 'react';
 import styles from '../styles/itemFood.module.css';
 import TrashIcon from '@/components/svg/TrashIcon';
 import { Food } from '@/models/foods.type';
+import { foodDeleteService } from '../services/foods';
+import { useAppDispatch } from '@/redux/hooks';
+import { removeFood } from '@/redux/slices/foodsSlice';
 
 interface IProps {
   foodData: Food;
@@ -11,7 +14,7 @@ interface IProps {
 
 export default function ItemFood({ foodData, handleClickUpdate }: IProps) {
   const [isHovered, setIsHovered] = useState({ edit: false, delete: false });
-
+  const dispatch = useAppDispatch();
   const { optionName, estimatedTime } = foodData;
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
@@ -20,6 +23,12 @@ export default function ItemFood({ foodData, handleClickUpdate }: IProps) {
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLElement>) => {
     setIsHovered({ ...isHovered, [e.currentTarget.id]: false });
+  };
+
+  const handleClickDelete = async () => {
+    const response = await foodDeleteService(foodData.foodId);
+
+    if (response) dispatch(removeFood(foodData));
   };
 
   return (
@@ -32,13 +41,21 @@ export default function ItemFood({ foodData, handleClickUpdate }: IProps) {
         <div
           onClick={() => handleClickUpdate(foodData)}
           id='edit'
+          title='Editar'
           className={styles.iconContainer}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
           <EditIcon stroke={isHovered.edit ? 'blue' : ''} svgProp={{ width: 30, height: 25 }} />
         </div>
-        <div id='delete' className={styles.iconContainer} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <div
+          onClick={handleClickDelete}
+          id='delete'
+          title='Eliminar'
+          className={styles.iconContainer}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <TrashIcon stroke={isHovered.delete ? 'red' : ''} svgProp={{ width: 30, height: 25 }} />
         </div>
       </section>

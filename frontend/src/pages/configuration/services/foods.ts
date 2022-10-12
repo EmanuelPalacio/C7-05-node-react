@@ -40,3 +40,40 @@ export const foodsService = async () => {
     }
   }
 };
+
+export const foodDeleteService = async (foodId: number | string) => {
+  try {
+    const { status } = await axios.delete(`${API_URL}/food/${foodId}`, CONFIG_TOKEN);
+
+    if (status === 200) {
+      return true;
+    }
+  } catch (error) {
+    if (typeof error === 'string') {
+      error.toUpperCase(); // works, e narrowed to string
+    } else if (error instanceof Error) {
+      error.message; // works, e narrowed to Error
+    }
+  }
+};
+
+export const foodUpdateService = async (food: Food) => {
+  const foodData = {
+    option_name: food.optionName,
+    estimated_time: food.estimatedTime,
+  };
+
+  try {
+    const { data, status } = await axios.put(`${API_URL}/food/${food.foodId}`, foodData, CONFIG_TOKEN);
+
+    if (status === 200) {
+      return foodAdapter(data.foodToUpdate.foodBody);
+    }
+  } catch (error) {
+    if (typeof error === 'string') {
+      error.toUpperCase(); // works, e narrowed to string
+    } else if (error instanceof Error) {
+      error.message; // works, e narrowed to Error
+    }
+  }
+};
