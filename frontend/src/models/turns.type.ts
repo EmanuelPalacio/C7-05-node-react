@@ -4,7 +4,7 @@ export interface ApiTurnRetrieved {
   id: number | string;
   estimated_time: string;
   total_time: number;
-  turn_date: string;
+  turn_date: number;
   food_id: number | string | null;
   createdAt: Date;
   updatedAt: Date;
@@ -16,7 +16,7 @@ export interface ApiTurn {
   id: number | string;
   estimated_time: string;
   total_time: number;
-  turn_date: number;
+  turn_date: string;
   food_id: number | string | null;
   notification_id: string | null;
   is_active: boolean;

@@ -29,7 +29,7 @@ export default function Register() {
         navigate('/');
       }
     } catch (error) {
-      setErrorMessage(error.toString());
+      if (error instanceof Error) setErrorMessage(error.toString());
     }
   };
 
