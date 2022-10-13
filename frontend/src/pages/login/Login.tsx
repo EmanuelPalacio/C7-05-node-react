@@ -52,7 +52,7 @@ const Login = () => {
           className={styles.formContainer_input}
           type='email'
           name='username'
-          placeholder='usuario'
+          placeholder='Correo electrónico'
           value={inputValue.username}
         />
         <input
