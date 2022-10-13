@@ -32,7 +32,7 @@ const DashboardOrder = ({ activeModal }: props) => {
   useEffect(() => {
     const food = foods.find((food) => food.foodId === Number(client.categorie));
     if (food) {
-      setFinalEstimatedTime(Number(client.time) + food.estimatedTime);
+      setFinalEstimatedTime(Number(client.time) + Number(food.estimatedTime));
     }
   }, [client]);
 
