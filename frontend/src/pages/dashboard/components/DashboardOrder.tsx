@@ -23,16 +23,20 @@ const DashboardOrder = ({ activeModal }: props) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setClient({
-      time: '5',
-      categorie: foods[0].foodId.toString(),
-    });
+    if (foods.length > 0) {
+      setClient({
+        time: '5',
+        categorie: foods[0].foodId.toString(),
+      });
+    }
   }, [foods]);
 
   useEffect(() => {
     const food = foods.find((food) => food.foodId === Number(client.categorie));
     if (food) {
       setFinalEstimatedTime(Number(client.time) + Number(food.estimatedTime));
+    } else {
+      setFinalEstimatedTime(Number(client.time));
     }
   }, [client]);
 
@@ -90,13 +94,17 @@ const DashboardOrder = ({ activeModal }: props) => {
               </div>
               <div className={styles.divSelectContainer}>
                 <strong>Categoria comida</strong>
-                <select title='categorie' name='categorie' onChange={handleChange}>
-                  {foods.map((food) => (
-                    <option key={food.foodId} value={food.foodId}>
-                      {food.optionName}
-                    </option>
-                  ))}
-                </select>
+                {foods.length > 0 ? (
+                  <select title='categorie' name='categorie' onChange={handleChange}>
+                    {foods.map((food) => (
+                      <option key={food.foodId} value={food.foodId}>
+                        {food.optionName}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <p>Sin categorias creadas</p>
+                )}
               </div>
               <span>
                 <strong>Tiempo estimado:</strong> {finalEstimatedTime} min
