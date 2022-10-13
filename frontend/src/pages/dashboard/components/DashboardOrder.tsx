@@ -26,7 +26,7 @@ const DashboardOrder = ({ activeModal }: props) => {
   const onSubmitCreateTurn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (client.table === 0) return setErrorMessage('Ingresa una mesa');
+    /* if (client.table === 0) return setErrorMessage('Ingresa una mesa'); */
     const currentDate = new Date();
 
     const dateWithMins = AddMinutestoDate(currentDate, parseInt(client.time));
@@ -59,7 +59,7 @@ const DashboardOrder = ({ activeModal }: props) => {
               X
             </button>
             <form onSubmit={onSubmitCreateTurn} className={`${styles.modalForm}`}>
-              <input type='number' name='table' placeholder='Numero de mesa' onChange={handleChange} />
+              <input type='text' name='table' placeholder='Generar Orden' readOnly/>
               <select title='timeSelect' name='time' onChange={handleChange}>
                 <option value={5}> 5 min</option>
                 <option value={10}>10 min</option>

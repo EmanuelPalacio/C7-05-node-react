@@ -7,7 +7,7 @@ const ClientTurnEmptyState: Turn = {
   notificationId: '',
   estimatedTime: '',
   totalTime: 0,
-  turnDate: 0,
+  turnDate: '',
   foodId: null,
 };
 
