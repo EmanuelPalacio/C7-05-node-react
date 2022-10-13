@@ -1,21 +1,30 @@
 const { cashier } = require('../../dao/models');
+const bcrypt = require('bcryptjs');
 module.exports = class {
   async createUser(user) {
-    const { user_name, user_password } = user;
+    let { user_name, user_password } = user;
+
+    // Se le agrega sal al hash para dificultar la desencriptación
+    const salt = 10;
+    user_password = await bcrypt.hash(user_password, salt);
+
     try {
       let response;
-      const userCreated = await cashier.create({
-        user_name,
-        user_password,
-      }, {
-        fields: ['user_name', 'user_password'],
-      }, );
+      const userCreated = await cashier.create(
+        {
+          user_name,
+          user_password,
+        },
+        {
+          fields: ['user_name', 'user_password'],
+        },
+      );
 
       if (userCreated) {
         response = {
           msg: 'User created with success',
           status: 200,
-          userCreated,
+          user: userCreated,
         };
       } else {
         response = {
@@ -28,6 +37,7 @@ module.exports = class {
       console.log(error);
     }
   }
+
   async findUser(user) {
     try {
       let response;
@@ -36,7 +46,10 @@ module.exports = class {
       });
       if (
         userRetrieved &&
-        user.user_password === userRetrieved.dataValues.user_password
+        (await bcrypt.compare(
+          user.user_password,
+          userRetrieved.dataValues.user_password,
+        ))
       ) {
         response = {
           msg: 'User exist',
@@ -61,26 +74,24 @@ module.exports = class {
     try {
       let response;
       let userRetrieved = await cashier.findOne({
-        where: { id: id},
+        where: { id: id },
       });
-      if (
-        userRetrieved
-      ) {
+      if (userRetrieved) {
         response = {
           user: userRetrieved.dataValues,
           success: true,
-          status: 200
-        }
+          status: 200,
+        };
       } else {
         response = {
           user: userRetrieved.dataValues,
           success: false,
-          status: 401
-        }
+          status: 401,
+        };
       }
       return response;
     } catch (error) {
-      console.log (error);
+      console.log(error);
     }
   }
 };

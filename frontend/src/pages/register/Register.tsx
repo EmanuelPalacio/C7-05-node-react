@@ -1,15 +1,15 @@
 import ImageLoginSvg from '@/components/svg/ImageLogin';
 import LogoSvg from '@/components/svg/Logo';
+import { Cashier } from '@/models/cashier.type';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { registerService } from './services/register.service';
 import styles from './styles/register.module.css';
 
 export default function Register() {
-  const [inputValue, setInputValue] = useState({ email: '', username: '', password: '', repeatPassword: '' });
+  const [inputValue, setInputValue] = useState({ email: '', password: '', repeatPassword: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -22,6 +22,15 @@ export default function Register() {
   const handleRegisterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(inputValue);
+    try {
+      const newUser: Cashier = await registerService(inputValue.email, inputValue.password);
+      if (newUser) {
+        alert('¡Usuario creado con éxito!');
+        navigate('/');
+      }
+    } catch (error) {
+      if (error instanceof Error) setErrorMessage(error.toString());
+    }
   };
 
   return (
@@ -41,17 +50,6 @@ export default function Register() {
           name='email'
           placeholder='email'
           value={inputValue.email}
-        />
-        <input
-          onChange={handleChangeInput}
-          className={styles.formContainer_input}
-          type='text'
-          name='username'
-          placeholder='usuario'
-          maxLength={15}
-          value={inputValue.username}
-          autoComplete='current-password'
-          id='current-password'
         />
         <input
           onChange={handleChangeInput}

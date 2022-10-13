@@ -2,7 +2,7 @@
   margin: 0 100px;
   display: grid;
   align-content: center;
-  grid-template-rows: 100px 60px 1fr;
+  grid-template-rows: 60px 1fr;
 }
 .dashboardHeader{
   display: flex;

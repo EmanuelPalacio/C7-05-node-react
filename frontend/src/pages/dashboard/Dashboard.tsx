@@ -60,7 +60,7 @@ const Dashboard = () => {
                   <div>
                     <span>ID {order.turnId} </span>
                     <span>Tiempo: {order.estimatedTime}</span>
-                    <span>N° mesa:{order.isActive}</span>
+                    <span></span>
                   </div>
                   <div>
                     <button onClick={() => handleFinishTurn(order)} className={styles.orderButton} type='button'>
