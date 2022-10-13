@@ -78,9 +78,6 @@ export function showCategories() {
       OneSignal.on('notificationPermissionChange', (permissionChange) => {
         permission = permissionChange.to;
         console.log(permission);
-        if (permission === 'granted') {
-          OneSignal.showCategorySlidedown({ force: true });
-        }
       });
     }
   });
