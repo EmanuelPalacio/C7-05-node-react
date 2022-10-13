@@ -10,8 +10,8 @@ export async function runOneSignal() {
     serviceWorkerPath: 'OneSignalSDKWorker.js',
     // eslint-disable-next-line camelcase
     safari_web_id: 'web.onesignal.auto.2473987d-7114-4e84-8494-f768208d432f',
-    
-    promptOptions:{
+
+    promptOptions: {
       slidedown: {
         prompts: [
           {
@@ -24,8 +24,8 @@ export async function runOneSignal() {
             },
             delay: {
               pageViews: 0,
-              timeDelay: 1
-            }
+              timeDelay: 1,
+            },
           },
           {
             type: 'category',
@@ -35,52 +35,54 @@ export async function runOneSignal() {
               acceptButton: 'Activar',
               cancelButton: 'No',
 
-              negativeUpdateButton:'Cancelar',
-              positiveUpdateButton:'Guardar',
-              updateMessage:'¿Te gustaría recibir promociones de este negocio?',
+              negativeUpdateButton: 'Cancelar',
+              positiveUpdateButton: 'Guardar',
+              updateMessage: '¿Te gustaría recibir promociones de este negocio?',
             },
-            delay:{
-              pageViews:0,
+            delay: {
+              pageViews: 0,
               timeDelay: 0,
             },
             categories: [
               {
                 tag: 'promociones',
-                label: 'Promociones'
-              }
-            ]
-          }
-        ]
-      }
+                label: 'Promociones',
+              },
+            ],
+          },
+        ],
+      },
     },
   });
   return OneSignal.getUserId();
 }
 
-export async function showPrompt() {
-  await OneSignal.showSlidedownPrompt({force:true});
+export async function showPrompt(idTurn: string) {
+  await OneSignal.showSlidedownPrompt({ force: true });
+  OneSignal.on('subscriptionChange', async () => {
+    const id = await OneSignal.getUserId();
+    if (id) {
+      console.log(`Registrando notificacion con id ${id}`);
+      registerNotificationId(idTurn, id);
+    }
+  });
 }
 
 export function showCategories() {
   let permission;
   OneSignal.isPushNotificationsEnabled((isEnabled) => {
-    if (isEnabled){
+    if (isEnabled) {
       permission = isEnabled;
-      OneSignal.showCategorySlidedown({force:true})
-    }else{
-      OneSignal.on('notificationPermissionChange', (permissionChange) =>{
+      OneSignal.showCategorySlidedown({ force: true });
+    } else {
+      OneSignal.on('notificationPermissionChange', (permissionChange) => {
         permission = permissionChange.to;
-        console.log(permission)
-        if (permission === 'granted'){
-          OneSignal.showCategorySlidedown({force:true});
-        }
-      })
+        console.log(permission);
+      });
     }
-  })
-  
+  });
 }
 
-
-export async function registerNotificationId (idTurn:string,idNotif:string) {
-  await axios.post(`${API_URL}/turns/${idTurn}`,{id:idNotif}, CONFIG_TOKEN)
+export async function registerNotificationId(idTurn: string, idNotif: string) {
+  await axios.post(`${API_URL}/turns/${idTurn}`, { id: idNotif }, CONFIG_TOKEN);
 }

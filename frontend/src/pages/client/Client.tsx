@@ -67,8 +67,8 @@ export default function Client() {
   }, [message]);
 
   useEffect(() => {
-    onesignal.runOneSignal().then((id) => {
-      onesignal.showPrompt();
+    onesignal.runOneSignal().then(async (id) => {
+      if (turnId) await onesignal.showPrompt(turnId);
       onesignal.showCategories();
       if (id && turnId) {
         onesignal.registerNotificationId(turnId, id);
