@@ -8,6 +8,7 @@ interface createProps {
   turnDate: string;
   estimatedTime: string;
   totalTime: number;
+  foodId: number | string;
 }
 
 interface updateProps {
@@ -17,11 +18,12 @@ interface updateProps {
   is_active?: boolean;
 }
 
-export const turnCreateService = async ({ totalTime, estimatedTime, turnDate }: createProps) => {
+export const turnCreateService = async ({ totalTime, estimatedTime, turnDate, foodId }: createProps) => {
   const postData = {
     total_time: totalTime,
     turn_date: turnDate,
     estimated_time: estimatedTime,
+    food_id: foodId,
   };
 
   try {

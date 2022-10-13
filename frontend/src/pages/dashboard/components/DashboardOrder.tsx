@@ -1,6 +1,6 @@
-import { useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { addTurn } from '@/redux/slices/turnsSlice';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { turnCreateService } from '../services/turns';
 import styles from '../styles/modals.module.css';
 import { AddMinutestoDate } from '../utils/date.utils';
@@ -13,12 +13,28 @@ interface props {
 const DashboardOrder = ({ activeModal }: props) => {
   const [modal, setModal] = useState<boolean>(false);
   const [idQR, setIdQR] = useState<string | number>('');
+  const [finalEstimatedTime, setFinalEstimatedTime] = useState<number>(0);
   const [errorMessage, setErrorMessage] = useState<string>();
-  const [client, setClient] = useState({
+  const [client, setClient] = useState<{ time: string; categorie: number | string }>({
     time: '5',
-    table: 0,
+    categorie: '',
   });
+  const foods = useAppSelector((state) => state.Foods);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    setClient({
+      time: '5',
+      categorie: foods[0].foodId.toString(),
+    });
+  }, [foods]);
+
+  useEffect(() => {
+    const food = foods.find((food) => food.foodId === Number(client.categorie));
+    if (food) {
+      setFinalEstimatedTime(Number(client.time) + food.estimatedTime);
+    }
+  }, [client]);
 
   const handleChange = (e: React.FormEvent<HTMLInputElement | HTMLSelectElement>) => {
     setClient({ ...client, [e.currentTarget.name]: e.currentTarget.value });
@@ -26,15 +42,14 @@ const DashboardOrder = ({ activeModal }: props) => {
   const onSubmitCreateTurn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    /* if (client.table === 0) return setErrorMessage('Ingresa una mesa'); */
     const currentDate = new Date();
-
-    const dateWithMins = AddMinutestoDate(currentDate, parseInt(client.time));
+    const dateWithMins = AddMinutestoDate(currentDate, Number(finalEstimatedTime));
 
     const createData = {
       totalTime: dateWithMins.getTime(),
-      estimatedTime: client.time + ' min',
+      estimatedTime: finalEstimatedTime + ' min',
       turnDate: dateWithMins.toISOString(),
+      foodId: client.categorie,
     };
 
     const newTurn = await turnCreateService(createData);
@@ -59,17 +74,33 @@ const DashboardOrder = ({ activeModal }: props) => {
               X
             </button>
             <form onSubmit={onSubmitCreateTurn} className={`${styles.modalForm}`}>
-              <input type='text' name='table' placeholder='Generar Orden' readOnly/>
-              <select title='timeSelect' name='time' onChange={handleChange}>
-                <option value={5}> 5 min</option>
-                <option value={10}>10 min</option>
-                <option value={15}>15 min</option>
-                <option value={20}>20 min</option>
-                <option value={25}>25 min</option>
-                <option value={30}>30 min</option>
-                <option value={35}>35 min</option>
-                <option value={40}>40 min</option>
-              </select>
+              <input type='text' name='table' placeholder='Generar Orden' readOnly />
+              <div className={styles.divSelectContainer}>
+                <strong>Agregar tiempo</strong>
+                <select title='timeSelect' name='time' onChange={handleChange}>
+                  <option value={5}> 5 min</option>
+                  <option value={10}>10 min</option>
+                  <option value={15}>15 min</option>
+                  <option value={20}>20 min</option>
+                  <option value={25}>25 min</option>
+                  <option value={30}>30 min</option>
+                  <option value={35}>35 min</option>
+                  <option value={40}>40 min</option>
+                </select>
+              </div>
+              <div className={styles.divSelectContainer}>
+                <strong>Categoria comida</strong>
+                <select title='categorie' name='categorie' onChange={handleChange}>
+                  {foods.map((food) => (
+                    <option key={food.foodId} value={food.foodId}>
+                      {food.optionName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <span>
+                <strong>Tiempo estimado:</strong> {finalEstimatedTime} min
+              </span>
               <button type='submit'>Generar orden</button>
               <span className={styles.errorMessage}>{errorMessage}</span>
             </form>

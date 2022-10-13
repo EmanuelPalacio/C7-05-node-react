@@ -39,7 +39,8 @@
     background-color: var(--primary);
     border: none;
 }
-.modalForm > select {
+
+select {
     color: var(--secondary);
     border: none;
     outline: none;
@@ -50,6 +51,14 @@
     line-height: 1.8125rem;
     font-family: inherit;
     background-color: var(--highlight);
+}
+
+.divSelectContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px
 }
 
 
