@@ -8,6 +8,9 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { removeTurn, setTurns } from '../../redux/slices/turnsSlice';
 import { activesTurnsService, deleteTurnService, turnUpdateService } from './services/turns';
 import FormUpdateOrder from './components/FormUpdateOrder';
+import EditIcon from '@/components/svg/EditIcon';
+import TrashIcon from '@/components/svg/TrashIcon';
+import NotifyIcon from '@/components/svg/NotifyIcon';
 
 const Dashboard = () => {
   // const [storage, setStorage] = useState<Turn[]>([]);
@@ -62,22 +65,21 @@ const Dashboard = () => {
                     <span>Tiempo: {order.estimatedTime}</span>
                     <span></span>
                   </div>
-                  <div>
-                    <button onClick={() => handleFinishTurn(order)} className={styles.orderButton} type='button'>
-                      Entregar
-                    </button>
-                    <button
+                  <div className={styles.orderButtonContainer}>
+                    <div onClick={() => handleFinishTurn(order)} title='Entregar'>
+                      <NotifyIcon svgProp={{ width: 25, height: 25 }} />
+                    </div>
+                    <div
                       onClick={() => {
                         setIsUpdate({ isUpdate: true, order });
                       }}
-                      className={styles.orderButton}
-                      type='button'
+                      title='Editar'
                     >
-                      +
-                    </button>
-                    <button className={styles.orderButton} type='button' onClick={() => deleteOrden(order)}>
-                      x
-                    </button>
+                      <EditIcon svgProp={{ width: 25, height: 25 }} />
+                    </div>
+                    <div onClick={() => deleteOrden(order)} title='Eliminar'>
+                      <TrashIcon svgProp={{ width: 25, height: 25 }} />
+                    </div>
                   </div>
                 </li>
               ))}

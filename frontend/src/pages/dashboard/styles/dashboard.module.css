@@ -60,13 +60,17 @@
   font-size: 1.2rem;
 }
 
-.orderButton{
-  background-color: var(--highlight);
+.orderButtonContainer{
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
 }
-.orderButton:nth-child(2){
-  border-left: 1px solid var(--secondary);
-  border-right: 1px solid var(--secondary);
-}
+
+
+
+
+
 
 
 @media (max-width: 1300px) {
