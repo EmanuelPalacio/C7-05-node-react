@@ -28,8 +28,7 @@ module.exports = class {
       console.log(error);
     }
   }
-    
-      
+  
   async getOptionFood() {
     try {
       let response;
