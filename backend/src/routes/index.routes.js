@@ -17,3 +17,36 @@ module.exports = (router) => {
 
   return router;
 };
+
+/**
+ * @swagger
+ * /api/auth/login:
+ *  post:
+ *    tags: [auth]
+ *    summary: Login de usuario.
+ *    description: Login de usuario.
+ *    requestBody:
+ *      description: Email y contraseña de usuario a loguearse
+ *      required: true
+ *      content:
+ *        application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 description: Email de usuario a loguearse.
+ *                 type: email
+ *                 example: admin@localhost
+ *               password:
+ *                 description: Contraseña de usuario a loguearse
+ *                 type: string
+ *                 example: 1234
+ *             required:
+ *               - password
+ *               - email
+ *    responses:
+ *      '200':
+ *       description: Login de usuario satisfactorio.
+ *      '404':
+ *       description: Usuario no encontrado (email y/o contraseña incorrecta)
+ */
