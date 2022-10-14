@@ -1,8 +1,13 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .layoutHeader {
   display: flex;
   margin-bottom: 10px;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 .headerLink {
   display: flex;
@@ -12,7 +17,41 @@
   border-bottom: 3px solid var(--borderBottom);
 }
 
-.header {
+
+.logoutContainer{
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1rem;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.logoutContainer:hover{
+  color: var(--borderBottom);
+}
+
+@media (max-width: 1020px) {
+  .textLogoutNone{
+    display: none;
+  }
+
+
+  a{
+    margin: 0;
+  }
+
+  .layoutHeader{
+    margin: 0;
+  }
+
+  .logoutContainer{
+    margin: 0;
+  }
+
+  .header {
+    overflow-x: auto;
+  }
+
+  
 }
