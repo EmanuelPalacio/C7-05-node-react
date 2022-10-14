@@ -66,10 +66,11 @@ const Dashboard = () => {
                     <span></span>
                   </div>
                   <div className={styles.orderButtonContainer}>
-                    <div onClick={() => handleFinishTurn(order)} title='Entregar'>
+                    <div className={styles.orderButton} onClick={() => handleFinishTurn(order)} title='Entregar'>
                       <NotifyIcon svgProp={{ width: 25, height: 25 }} />
                     </div>
                     <div
+                      className={styles.orderButton}
                       onClick={() => {
                         setIsUpdate({ isUpdate: true, order });
                       }}
@@ -77,7 +78,7 @@ const Dashboard = () => {
                     >
                       <EditIcon svgProp={{ width: 25, height: 25 }} />
                     </div>
-                    <div onClick={() => deleteOrden(order)} title='Eliminar'>
+                    <div className={styles.orderButton} onClick={() => deleteOrden(order)} title='Eliminar'>
                       <TrashIcon svgProp={{ width: 25, height: 25 }} />
                     </div>
                   </div>
