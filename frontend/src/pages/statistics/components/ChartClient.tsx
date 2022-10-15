@@ -10,7 +10,6 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -20,9 +19,23 @@ ChartJS.register(
     Tooltip,
     Legend
 );
-
+/* redux */
+import { useAppSelector } from '@/redux/hooks';
+interface months {
+    x: string;
+    y: number;
+}
 
 const ChartClient = ()=>{
+    const listTurns = useAppSelector((state) => state.Turns);
+    const month = (e:string) => new Intl.DateTimeFormat('es-ES', { month: 'long'}).format(new Date(e));
+    const newList = listTurns.map(e => month(e.turnDate))
+    const months:string[] = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+    const datasets:Array<months> = []
+    for (let i = 0; i <months.length; i++){
+        datasets.push({x:months[i], y: (newList.filter(e => e === months[i]).length)})
+    }
+    console.log(datasets)
     const options = {
         /* Establezca el estilo de la etiqueta del lienzo en un ancho y alto del 100%. Esto asegurará que siempre se ajuste al 100% del ancho y la altura de sus contenedores.
         Para el conjunto de valores de opciones responsive: true & maintenanceAspectRatio: false. Esto asegurará que el gráfico responda a las actualizaciones de tamaño mientras ignora la relación de aspecto.
@@ -38,22 +51,14 @@ const ChartClient = ()=>{
         },
     }
     
-    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
 const data = {
-    labels,
     datasets: [
         {
         label: 'Personas x Mes',
-        data: [20,30,0,50,60,70,80],
+        data:  datasets,
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        },
-        {
-        label: 'Encuestas',
-        data: [20,40,40,90,60,70,0],
-        borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
         },
     ],
 };

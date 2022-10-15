@@ -1,0 +1,57 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.layoutHeader {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.headerLink {
+  display: flex;
+  padding: 0.25rem 1rem;
+}
+.isLinkActive {
+  border-bottom: 3px solid var(--borderBottom);
+}
+
+
+.logoutContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1rem;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.logoutContainer:hover{
+  color: var(--borderBottom);
+}
+
+@media (max-width: 1020px) {
+  .textLogoutNone{
+    display: none;
+  }
+
+
+  a{
+    margin: 0;
+  }
+
+  .layoutHeader{
+    margin: 0;
+  }
+
+  .logoutContainer{
+    margin: 0;
+  }
+
+  .header {
+    overflow-x: auto;
+  }
+
+  
+}

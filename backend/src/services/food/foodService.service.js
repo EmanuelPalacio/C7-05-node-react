@@ -1,21 +1,25 @@
-const {food}   = require('../../dao/models');
+const { food } = require('../../dao/models');
 
 module.exports = class {
   async createFood(newFood) {
     const { option_name, estimated_time } = newFood;
     try {
       let response;
-      const foodCreated = await food.create({
-        option_name,
-        estimated_time,
-      }, {
-        fields: ['option_name', 'estimated_time'],
-      }, );
+      const foodCreated = await food.create(
+        {
+          option_name,
+          estimated_time,
+        },
+        {
+          fields: ['option_name', 'estimated_time'],
+        },
+      );
 
       if (foodCreated) {
         response = {
           msg: 'Food created with success',
           status: 200,
+          foodCreated,
         };
       } else {
         response = {
@@ -28,13 +32,12 @@ module.exports = class {
       console.log(error);
     }
   }
-    
-      
+
   async getOptionFood() {
     try {
       let response;
       const foodsRetrieved = await food.findAll();
-      if (!foodsRetrieved ) {
+      if (!foodsRetrieved) {
         response = {
           msg: ' No foods founded',
           status: 404,
@@ -62,7 +65,7 @@ module.exports = class {
       condition = { where: { id: id } };
       options = { multi: true };
 
-      if (!condition ) {
+      if (!condition) {
         response = {
           msg: `Cannot find food `,
           status: 404,
@@ -105,5 +108,4 @@ module.exports = class {
       return response;
     } catch (error) {}
   }
-
 };

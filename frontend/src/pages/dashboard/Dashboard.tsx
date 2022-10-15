@@ -8,6 +8,9 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { removeTurn, setTurns } from '../../redux/slices/turnsSlice';
 import { activesTurnsService, deleteTurnService, turnUpdateService } from './services/turns';
 import FormUpdateOrder from './components/FormUpdateOrder';
+import EditIcon from '@/components/svg/EditIcon';
+import TrashIcon from '@/components/svg/TrashIcon';
+import NotifyIcon from '@/components/svg/NotifyIcon';
 
 const Dashboard = () => {
   // const [storage, setStorage] = useState<Turn[]>([]);
@@ -47,14 +50,6 @@ const Dashboard = () => {
   return (
     <>
       <div className={styles.dashboardContainer}>
-        <div className={styles.dashboardHeader}>
-          <a href='/dashboard' className={`${styles.dashboardLink} ${styles.dashboardLinkActive}`}>
-            Historial de pedidos
-          </a>
-          <a href='/statistics' className={`${styles.dashboardLink}`}>
-            Finalizados
-          </a>
-        </div>
         <div className={`${styles.dashboardFilter}`}>
           <button onClick={activeModal} type='button'>
             Agregar pedido
@@ -63,29 +58,29 @@ const Dashboard = () => {
         <div className={styles.dashboardBody}>
           <div className={styles.orderContainer}>
             <ul>
-              {listTurns.map((order) => (
+              {listTurns.map((order: Turn) => (
                 <li key={order.turnId} className={styles.order}>
                   <div>
                     <span>ID {order.turnId} </span>
                     <span>Tiempo: {order.estimatedTime}</span>
-                    <span>N° mesa:{order.isActive}</span>
+                    <span></span>
                   </div>
-                  <div>
-                    <button onClick={() => handleFinishTurn(order)} className={styles.orderButton} type='button'>
-                      Entregar
-                    </button>
-                    <button
+                  <div className={styles.orderButtonContainer}>
+                    <div className={styles.orderButton} onClick={() => handleFinishTurn(order)} title='Entregar'>
+                      <NotifyIcon svgProp={{ width: 25, height: 25 }} />
+                    </div>
+                    <div
+                      className={styles.orderButton}
                       onClick={() => {
                         setIsUpdate({ isUpdate: true, order });
                       }}
-                      className={styles.orderButton}
-                      type='button'
+                      title='Editar'
                     >
-                      +
-                    </button>
-                    <button className={styles.orderButton} type='button' onClick={() => deleteOrden(order)}>
-                      x
-                    </button>
+                      <EditIcon svgProp={{ width: 25, height: 25 }} />
+                    </div>
+                    <div className={styles.orderButton} onClick={() => deleteOrden(order)} title='Eliminar'>
+                      <TrashIcon svgProp={{ width: 25, height: 25 }} />
+                    </div>
                   </div>
                 </li>
               ))}

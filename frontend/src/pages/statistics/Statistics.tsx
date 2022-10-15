@@ -1,15 +1,16 @@
 import ChartClient from './components/ChartClient'
-import styles from './styles/statitistics.module.css'
+import CompleteOrders from './components/CompletedOrders'
+import styles from './styles/statistics.module.css'
 
 const Statistics = () =>{
     return(
         <div className={styles.statisticsContainer}>
-            <div className={styles.header}>
-                <a href='/dashboard' className={`${styles.headerLink} `}>Historial de pedidos</a>
-                <a href='/statistics' className={`${styles.headerLink} ${styles.linkActive}`}>Finalizados</a>
-            </div>
             <div className={`${styles.statistics}`} >
-                <ChartClient/>
+                <CompleteOrders/>
+                <div className={`${styles.containerChart}`}>
+                    {/* chartCliente tiene que tener un contenedor padre y no compartirlo con ningun otro compnente para que funcione correctamente */}
+                    <ChartClient/>
+                </div>
             </div>
         </div>
     )

@@ -64,7 +64,7 @@ const FormUpdateOrder = ({ activeModal, order }: props) => {
               X
             </button>
             <form onSubmit={onSubmitUpdateTurn} className={`${styles.modalForm}`}>
-              <input type='number' name='table' placeholder='Numero de mesa' onChange={handleChange} />
+              <input type='number' name='table' placeholder='Agregar tiempo' readOnly />
               <p>Tiempo estimado: {order.estimatedTime}</p>
               <p>Termina a las: {date}</p>
               <p>Seleccione los minutos que desea sumar a la orden</p>

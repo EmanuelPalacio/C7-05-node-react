@@ -3,7 +3,7 @@ import LogoSvg from '@/components/svg/Logo';
 import React, { useState } from 'react';
 import { authService } from './services/auth';
 import styles from './styles/login.module.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setCashier } from '@/redux/slices/cashierSlice';
 
@@ -41,7 +41,7 @@ const Login = () => {
   return (
     <div className={styles.loginContainer}>
       <div className={styles.imgContainer}>
-        <ImageLoginSvg svgProp={{ width: 500, height: 500 }} />
+        <ImageLoginSvg />
       </div>
       <form onSubmit={handleSubmit} className={styles.formContainer}>
         <span className={styles.formContainer_logo}>
@@ -50,13 +50,10 @@ const Login = () => {
         <input
           onChange={handleChangeInput}
           className={styles.formContainer_input}
-          type='text'
+          type='email'
           name='username'
-          placeholder='usuario'
-          maxLength={15}
+          placeholder='Correo electrónico'
           value={inputValue.username}
-          autoComplete='current-password'
-          id='current-password'
         />
         <input
           onChange={handleChangeInput}
@@ -64,19 +61,21 @@ const Login = () => {
           type='password'
           name='password'
           placeholder='contraseña'
-          maxLength={15}
+          autoComplete='current-password'
           value={inputValue.password}
+          id='current-password'
         />
         <button type='submit' className={styles.formContainer_button}>
           Iniciar sesión
         </button>
         <span className={styles.formContainer_errorMessage}>{errorMessage}</span>
-        <a>¿Olvidaste tu contraseña?</a>
+        <a href='#'>¿Olvidaste tu contraseña?</a>
+        <span>
+          ¿No tienes una cuenta? <Link to='/register'>Registrate aquí</Link>
+        </span>
       </form>
     </div>
   );
 };
-
-<style></style>;
 
 export default Login;

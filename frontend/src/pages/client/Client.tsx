@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setTurn } from '@/redux/slices/clientTurnSlice';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import * as onesignal from './services/onesignal';
 import CountDown from './components/CountDown';
 import ModalDialog from './components/ModalDialog';
@@ -11,13 +11,18 @@ import styles from './styles/client.module.css';
 import IgLogo from '@/components/svg/IgLogo';
 import TwitterLogo from '@/components/svg/TwitterLogo';
 import FbLogo from '@/components/svg/FbLogo';
+import useSuscribeToEvent from '@/hooks/useSuscribeToEvent';
+import { API_URL } from '@/utils/config';
+import { turnAdapter } from './adapter/turn.adapter';
 
 export default function Client() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [turnFinished, setTurnFinished] = useState<any>(false);
+  const [isOpen2, setisOpen2] = useState(false);
+  const [turnFinished, setTurnFinished] = useState<boolean>(false);
   const { turnId } = useParams();
   const dispatch = useAppDispatch();
   const turn = useAppSelector((state) => state.ClientTurn);
+  const location = useLocation();
+  const [message] = useSuscribeToEvent(`${API_URL}/turns/${turnId}`);
 
   useEffect(() => {
     const handleTabClose = (event: BeforeUnloadEvent) => {
@@ -40,8 +45,34 @@ export default function Client() {
   }, []);
 
   useEffect(() => {
-    onesignal.runOneSignal().then((id) => {
-      id && turnId && onesignal.registerNotificationId(turnId, id);
+    if (message) {
+      if (message.delete) {
+        dispatch(setTurn({ ...turn, isActive: false }));
+      }
+
+      const normalizedMessage = turnAdapter(message);
+      if (normalizedMessage.totalTime) {
+        const newTurn = {
+          ...turn,
+          totalTime: normalizedMessage.totalTime,
+          turnDate: normalizedMessage.turnDate,
+          estimatedTime: normalizedMessage.estimatedTime,
+        };
+
+        dispatch(setTurn(newTurn));
+      }
+
+      if (normalizedMessage.isActive === false) setTurnFinished(true);
+    }
+  }, [message]);
+
+  useEffect(() => {
+    onesignal.runOneSignal().then(async (id) => {
+      if (turnId) await onesignal.showPrompt(turnId);
+      onesignal.showCategories();
+      if (id && turnId) {
+        onesignal.registerNotificationId(turnId, id);
+      }
     });
   }, []);
 
@@ -68,13 +99,13 @@ export default function Client() {
           <footer>
             <span>Siguenos en:</span>
             <div className={styles.clientRRSS}>
-              <a href='https://www.instagram.com' target='_blank' rel='noreferrer'>
+              <a href='https://www.instagram.com' title='Instagram link' target='_blank' rel='noreferrer noopener'>
                 <IgLogo svgProp={{ width: 30, height: 30 }} />
               </a>
-              <a href='https://www.twitter.com' target='_blank' rel='noreferrer'>
+              <a href='https://www.twitter.com' title='Twitter link' target='_blank' rel='noreferrer noopener'>
                 <TwitterLogo svgProp={{ width: 30, height: 30 }} />
               </a>
-              <a href='https://www.facebook.com' target='_blank' rel='noreferrer'>
+              <a href='https://www.facebook.com' title='Facebook link' target='_blank' rel='noreferrer noopener'>
                 <FbLogo svgProp={{ width: 30, height: 30 }} />
               </a>
             </div>
@@ -84,7 +115,7 @@ export default function Client() {
         <></>
       )}
 
-      {isOpen && <ModalDialog setIsOpen={setIsOpen} />}
+      {isOpen2 && <ModalDialog setIsOpen={setisOpen2} />}
     </>
   );
 }
