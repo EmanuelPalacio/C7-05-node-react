@@ -17,7 +17,7 @@ import { turnAdapter } from './adapter/turn.adapter';
 
 export default function Client() {
   const [isOpen2, setisOpen2] = useState(false);
-  const [turnFinished, setTurnFinished] = useState<boolean>(false);
+  const [turnFinished, setTurnFinished] = useState<boolean>(true);
   const { turnId } = useParams();
   const dispatch = useAppDispatch();
   const turn = useAppSelector((state) => state.ClientTurn);

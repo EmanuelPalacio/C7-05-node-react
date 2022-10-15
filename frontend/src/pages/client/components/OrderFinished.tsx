@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styles from '../styles/orderFinished.module.css';
 
 export default function OrderFinished() {
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const [qualification, setQualification] = useState({ rate: 0, comment: '' });
 
   const handleChangeQualification = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -11,10 +12,10 @@ export default function OrderFinished() {
   const onSubmitQualification = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (qualification.rate > 0 && qualification.comment.length > 0) {
-      console.log(qualification);
-      console.log('enviado');
-    }
+    if (qualification.rate <= 0 || qualification.comment.length === 0) return setErrorMessage('Debe calificar y comentar el servicio');
+    console.log(qualification);
+    setErrorMessage('');
+    console.log('enviado');
   };
 
   return (
@@ -66,6 +67,7 @@ export default function OrderFinished() {
         <button type='submit' className={styles.formButton}>
           Enviar Calificación
         </button>
+        <span style={{ color: 'red', marginTop: '10px' }}>{errorMessage}</span>
       </form>
     </div>
   );
