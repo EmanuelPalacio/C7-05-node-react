@@ -1,21 +1,29 @@
 import { useState } from 'react';
+import { ratingPostService } from '../services/rating';
 import styles from '../styles/orderFinished.module.css';
+import { useAppSelector } from '@/redux/hooks';
 
 export default function OrderFinished() {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [qualification, setQualification] = useState({ rate: 0, comment: '' });
+  const turn = useAppSelector((state) => state.ClientTurn);
 
   const handleChangeQualification = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setQualification({ ...qualification, [e.target.name]: e.target.value });
   };
 
-  const onSubmitQualification = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitQualification = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (qualification.rate <= 0 || qualification.comment.length === 0) return setErrorMessage('Debe calificar y comentar el servicio');
-    console.log(qualification);
     setErrorMessage('');
-    console.log('enviado');
+    const postRating = {
+      rate: qualification.rate,
+      comment: qualification.comment,
+      turnId: turn.turnId,
+    };
+    const response = await ratingPostService(postRating);
+    console.log(response);
   };
 
   return (
