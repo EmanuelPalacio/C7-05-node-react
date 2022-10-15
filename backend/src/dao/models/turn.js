@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'id',
         //targetKey: 'food_id'
       });
+      turn.hasOne(models.rating, {
+        foreignKey: 'id',
+        targetKey: 'rating_id',
+      });
     }
   }
   turn.init(

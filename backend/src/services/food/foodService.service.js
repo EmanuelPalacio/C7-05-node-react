@@ -67,7 +67,7 @@ module.exports = class {
 
       if (!condition) {
         response = {
-          msg: `Cannot find food `,
+          msg: 'Cannot find food ',
           status: 404,
         };
       } else {
@@ -106,6 +106,8 @@ module.exports = class {
       }
 
       return response;
-    } catch (error) {}
+    } catch (error) {
+      return error;
+    }
   }
 };
