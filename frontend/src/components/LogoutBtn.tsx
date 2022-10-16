@@ -14,7 +14,7 @@ export default function LogoutBtn() {
   };
 
   return (
-    <button type='button' onClick={logout}>
+    <button type='button' onClick={logout} className={`${styles.logoutBtn}`} >
       Cerrar sesión
     </button>
   );

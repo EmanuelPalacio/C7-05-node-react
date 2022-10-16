@@ -1,8 +1,16 @@
-.layoutHeader {
+.header{
   display: flex;
-  margin: 20px 0;
+  align-items: center;
+  width: 100vw;
+  min-height: 10vh;
+}
+.layoutHeader {
+  display: inherit;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  width: 80%;
+  height: 100%;
+  margin-left: 10%;
 }
 .headerLink {
   display: flex;
@@ -11,8 +19,39 @@
 .isLinkActive {
   border-bottom: 3px solid var(--borderBottom);
 }
-
-.header {
-  display: flex;
-  justify-content: space-between;
+.user{
+  margin: auto;
+  width: 10%;
+  height: 100%;
+  z-index: 99;
 }
+.user:hover{
+  transform: scale(1.1);
+  color: var(--primary);
+}
+.user ul {
+  display:none;
+  margin: 0;
+  padding: 0;
+}
+.user ul a {
+  margin: 0;
+  padding: 0;
+}
+.user:hover ul {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  padding-top: 20px;
+  left: -80px;
+}
+.logoutBtn{
+  font-size: 1rem;
+}
+.logoutBtn:hover{
+  color: var(--primary);
+}
+

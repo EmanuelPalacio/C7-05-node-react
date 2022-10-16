@@ -18,9 +18,13 @@
 .dashboardBody{
   position: relative;
   height: 75vh;
-  overflow-y: scroll;
+  overflow: hidden;
   border-bottom: 3px solid var(--primary);
 }
+.dashboardBody:hover{
+  overflow-y: scroll;
+}
+
 .dashboardBody::-webkit-scrollbar {
   width: 20px;               /* width of the entire scrollbar */
 }
@@ -55,15 +59,15 @@
   background: linear-gradient(90.01deg, var(--primary) -5.74%, rgba(72, 202, 228, 0.7) 49.63%, var(--primary) 104.99%);
   height: 80px;
   border-radius: 80px;
-
 }
 .order div:nth-child(1){
-  display: inherit;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
   width: 50%;
   gap: 15px;
   font-size: 1.2rem;
+}
+.order div:nth-child(1) span:nth-child(2){
+  margin-left: 15px;
 }
 .order div:nth-child(2){
   display: inherit;
@@ -118,22 +122,21 @@
   }
   
 }
-@media (max-width: 1000px) {
-  .dashboardBody{
-
-    position: relative;
-    overflow-y: scroll;
-    border-bottom: 3px solid var(--secondary);
-  }
+@media (max-width: 950px) {
   .orderContainer{
-
     margin: 0;
     width: 100%;
   }
   .order{
     position: relative;
     flex-direction: column;
-    gap: 30px;
+    justify-content: center;
+    height: 100px;
+    border-radius: 100px;
+    gap: 5px;
+  }
+  .order div:nth-child(1){
+    width: 100%;
   }
 }
 @media (max-width: 600px) {
