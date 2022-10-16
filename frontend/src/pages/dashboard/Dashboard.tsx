@@ -8,6 +8,9 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { removeTurn, setTurns } from '../../redux/slices/turnsSlice';
 import { activesTurnsService, deleteTurnService, turnUpdateService } from './services/turns';
 import FormUpdateOrder from './components/FormUpdateOrder';
+/* icons */
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash,faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = () => {
   // const [storage, setStorage] = useState<Turn[]>([]);
@@ -58,25 +61,21 @@ const Dashboard = () => {
               {listTurns.map((order: Turn) => (
                 <li key={order.turnId} className={styles.order}>
                   <div>
-                    <span>ID {order.turnId} </span>
-                    <span>Tiempo: {order.estimatedTime}</span>
-                    <span></span>
+                    <span>Turno:{order.turnId} </span>
+                    <span>Tiempo restante: {order.estimatedTime}</span>
                   </div>
                   <div>
                     <button onClick={() => handleFinishTurn(order)} className={styles.orderButton} type='button'>
-                      Entregar
+                      <FontAwesomeIcon icon={faCheck} /><span>Entregar</span>
                     </button>
-                    <button
-                      onClick={() => {
-                        setIsUpdate({ isUpdate: true, order });
-                      }}
+                    <button onClick={() => {setIsUpdate({ isUpdate: true, order });}}
                       className={styles.orderButton}
                       type='button'
                     >
-                      +
+                      <FontAwesomeIcon icon={faPlus} /><span>sumar</span>
                     </button>
                     <button className={styles.orderButton} type='button' onClick={() => deleteOrden(order)}>
-                      x
+                      <FontAwesomeIcon icon={faTrash} /><span>eliminar</span>
                     </button>
                   </div>
                 </li>

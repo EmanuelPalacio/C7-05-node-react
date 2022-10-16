@@ -13,13 +13,13 @@
 .dashboardFilter{
   display: flex;
   align-items: center;
-  border-bottom: 2px solid var(--secondary);
+  border-bottom: 3px solid var(--primary);
 }
 .dashboardBody{
   position: relative;
   height: 75vh;
   overflow-y: scroll;
-  border-bottom: 3px solid var(--secondary);
+  border-bottom: 3px solid var(--primary);
 }
 .dashboardBody::-webkit-scrollbar {
   width: 20px;               /* width of the entire scrollbar */
@@ -41,7 +41,10 @@
   width: 70%;
 }
 .orderContainer > ul{
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 10px 0;
   padding: 0;
 }
 
@@ -49,24 +52,63 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--primary);
-  padding: 1rem 0.5rem ;
-  margin: 0.25rem 0;
+  background: linear-gradient(90.01deg, var(--primary) -5.74%, rgba(72, 202, 228, 0.7) 49.63%, var(--primary) 104.99%);
+  height: 80px;
+  border-radius: 80px;
 
 }
 .order div:nth-child(1){
   display: inherit;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
   gap: 15px;
   font-size: 1.2rem;
 }
+.order div:nth-child(2){
+  display: inherit;
+  margin-right: 20px;
+  min-width: 30%;
+  gap: 15px;
+  font-size: 1.2rem;
+  
+}
 
 .orderButton{
-  background-color: var(--highlight);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 20px;
+  border-radius: 50%;
+  color: var(--secondary);
+  transition: all 2s linear;
+  background: var(--highlight);
+  transition: border-radius 0s;
+  transition: width 1s;
 }
-.orderButton:nth-child(2){
-  border-left: 1px solid var(--secondary);
-  border-right: 1px solid var(--secondary);
+.orderButton span {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  width: 0;
+  transition: opacity 2s linear;
 }
+.orderButton:hover{
+  justify-content: start;
+  width: 200px;
+  border-radius: 50px;
+  color: rgb(0, 211, 35);
+}
+.orderButton:hover:nth-child(3){
+  color: rgb(238, 2, 2);
+}
+.orderButton:hover > span {
+  width: 200px;
+  visibility: visible;
+  opacity: 1;
+}
+
 
 
 @media (max-width: 1300px) {
