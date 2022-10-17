@@ -29,6 +29,7 @@ module.exports = (router) => {
   router.delete('/food/:id', food.deleteFood);
 
   router.post('/rating', rating.postRating);
+  router.get('/ratings', rating.getRatings);
 
   return router;
 };

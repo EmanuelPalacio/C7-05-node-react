@@ -1,4 +1,4 @@
-const {rating}   = require('../../dao/models');
+const { rating } = require('../../dao/models');
 
 module.exports = class {
   async postRating(newRating) {
@@ -8,11 +8,10 @@ module.exports = class {
       const ratingCreated = await rating.create({
         rate,
         comment,
-        turn:{
-          turn_date
-        }
-      }
-       );
+        turn: {
+          turn_date,
+        },
+      });
 
       if (ratingCreated) {
         response = {
@@ -31,6 +30,12 @@ module.exports = class {
     }
   }
 
-
-
-}
+  async getRatings() {
+    try {
+      const allRatings = rating.findAll();
+      return allRatings;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
