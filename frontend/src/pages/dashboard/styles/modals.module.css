@@ -11,7 +11,8 @@
 
 .modal{
     position: relative;
-    width: 60%;
+    height: 40%;
+    width: 40%;
     background-color: var(--highlight);
     border-radius: 20px;
     overflow: hidden;
@@ -19,9 +20,14 @@
 }
 .modalButton {
     position: absolute;
-    background-color: var(--highlight);
+    color: var(--secondary);
+    background: var(--highlight);
     top: 0;
     right: 0;
+}
+.modalButton:hover {
+    transform: scale(1.2);
+    color: var(--primary);
 }
 .modalForm, .qrModal{
     display: flex;
