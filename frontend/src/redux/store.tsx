@@ -3,6 +3,7 @@ import cashierReducer from './slices/cashierSlice';
 import turnsReducer from './slices/turnsSlice';
 import clientTurnReducer from './slices/clientTurnSlice';
 import foodsReducer from './slices/foodsSlice';
+import completedShiftsReducer from './slices/completedShifts';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     Turns: turnsReducer,
     ClientTurn: clientTurnReducer,
     Foods: foodsReducer,
+    completedShifts: completedShiftsReducer
   },
 });
 
