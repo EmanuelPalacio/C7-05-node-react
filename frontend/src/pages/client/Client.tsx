@@ -21,7 +21,6 @@ export default function Client() {
   const { turnId } = useParams();
   const dispatch = useAppDispatch();
   const turn = useAppSelector((state) => state.ClientTurn);
-  const location = useLocation();
   const [message] = useSuscribeToEvent(`${API_URL}/turns/${turnId}`);
 
   useEffect(() => {
