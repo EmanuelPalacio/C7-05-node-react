@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import { useEffect, useState } from 'react';
 import DashboardOrder from './components/DashboardOrder';
+import OrderInfo from './components/OrderInfo';
 import styles from './styles/dashboard.module.css';
 /* redux */
 import { Turn } from '../../models/turns.type';
@@ -9,8 +10,6 @@ import { removeTurn, setTurns } from '../../redux/slices/turnsSlice';
 import { activesTurnsService, deleteTurnService, turnUpdateService } from './services/turns';
 import FormUpdateOrder from './components/FormUpdateOrder';
 /* icons */
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = () => {
   // const [storage, setStorage] = useState<Turn[]>([]);
@@ -41,6 +40,10 @@ const Dashboard = () => {
     });
   };
 
+  const handleSetUpdate = (order: Turn) => {
+    setIsUpdate({ isUpdate: true, order });
+  };
+
   useEffect(() => {
     activesTurnsService().then((turns) => {
       turns && dispatch(setTurns(turns));
@@ -60,30 +63,7 @@ const Dashboard = () => {
             <ul>
               {listTurns.map((order: Turn) => (
                 <li key={order.turnId} className={styles.order}>
-                  <div>
-                    <span>Turno:{order.turnId} </span>
-                    <span>Tiempo restante: {order.estimatedTime}</span>
-                  </div>
-                  <div>
-                    <button onClick={() => handleFinishTurn(order)} className={styles.orderButton} type='button'>
-                      <FontAwesomeIcon icon={faCheck} />
-                      <span>Entregar</span>
-                    </button>
-                    <button
-                      onClick={() => {
-                        setIsUpdate({ isUpdate: true, order });
-                      }}
-                      className={styles.orderButton}
-                      type='button'
-                    >
-                      <FontAwesomeIcon icon={faPlus} />
-                      <span>Agregar tiempo</span>
-                    </button>
-                    <button className={styles.orderButton} type='button' onClick={() => deleteOrden(order)}>
-                      <FontAwesomeIcon icon={faTrash} />
-                      <span>Eliminar</span>
-                    </button>
-                  </div>
+                  <OrderInfo order={order} handleFinishTurn={handleFinishTurn} setIsUpdate={handleSetUpdate} deleteOrder={deleteOrden} />
                 </li>
               ))}
             </ul>
