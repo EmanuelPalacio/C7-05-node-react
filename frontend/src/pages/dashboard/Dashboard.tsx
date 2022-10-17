@@ -10,7 +10,7 @@ import { activesTurnsService, deleteTurnService, turnUpdateService } from './ser
 import FormUpdateOrder from './components/FormUpdateOrder';
 /* icons */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash,faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = () => {
   // const [storage, setStorage] = useState<Turn[]>([]);
@@ -66,16 +66,22 @@ const Dashboard = () => {
                   </div>
                   <div>
                     <button onClick={() => handleFinishTurn(order)} className={styles.orderButton} type='button'>
-                      <FontAwesomeIcon icon={faCheck} /><span>Entregar</span>
+                      <FontAwesomeIcon icon={faCheck} />
+                      <span>Entregar</span>
                     </button>
-                    <button onClick={() => {setIsUpdate({ isUpdate: true, order });}}
+                    <button
+                      onClick={() => {
+                        setIsUpdate({ isUpdate: true, order });
+                      }}
                       className={styles.orderButton}
                       type='button'
                     >
-                      <FontAwesomeIcon icon={faPlus} /><span>sumar</span>
+                      <FontAwesomeIcon icon={faPlus} />
+                      <span>Agregar tiempo</span>
                     </button>
                     <button className={styles.orderButton} type='button' onClick={() => deleteOrden(order)}>
-                      <FontAwesomeIcon icon={faTrash} /><span>eliminar</span>
+                      <FontAwesomeIcon icon={faTrash} />
+                      <span>Eliminar</span>
                     </button>
                   </div>
                 </li>

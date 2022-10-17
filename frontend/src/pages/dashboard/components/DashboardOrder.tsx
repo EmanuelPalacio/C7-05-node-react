@@ -78,7 +78,7 @@ const DashboardOrder = ({ activeModal }: props) => {
               X
             </button>
             <form onSubmit={onSubmitCreateTurn} className={`${styles.modalForm}`}>
-              <input type='text' name='table' placeholder='Generar Orden' readOnly />
+              <input type='text' name='table' placeholder='Generar Pedido' readOnly />
               <div className={styles.divSelectContainer}>
                 <strong>Agregar tiempo</strong>
                 <select title='timeSelect' name='time' onChange={handleChange}>
@@ -109,7 +109,7 @@ const DashboardOrder = ({ activeModal }: props) => {
               <span>
                 <strong>Tiempo estimado:</strong> {finalEstimatedTime} min
               </span>
-              <button type='submit'>Generar orden</button>
+              <button type='submit'>Generar pedido</button>
               <span className={styles.errorMessage}>{errorMessage}</span>
             </form>
           </div>
