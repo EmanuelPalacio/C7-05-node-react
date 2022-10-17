@@ -13,6 +13,6 @@
   "rules": {
     "comma-dangle": "off",
     "quotes": ["error", "single"],
-    "no-unused-vars": "off",
+    "no-unused-vars": "off"
   }
 }

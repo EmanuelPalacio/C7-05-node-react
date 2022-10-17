@@ -1,4 +1,4 @@
-.header{
+.header {
   display: flex;
   align-items: center;
   width: 100vw;
@@ -19,18 +19,18 @@
 .isLinkActive {
   border-bottom: 3px solid var(--borderBottom);
 }
-.user{
+.user {
   margin: auto;
   width: 10%;
   height: 100%;
   z-index: 99;
 }
-.user:hover{
+.user:hover {
   transform: scale(1.1);
   color: var(--primary);
 }
 .user ul {
-  display:none;
+  display: none;
   margin: 0;
   padding: 0;
 }
@@ -39,7 +39,7 @@
   padding: 0;
 }
 .user:hover ul {
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -48,10 +48,35 @@
   padding-top: 20px;
   left: -80px;
 }
-.logoutBtn{
+.logoutBtn {
   font-size: 1rem;
 }
-.logoutBtn:hover{
+.logoutBtn:hover {
   color: var(--primary);
 }
 
+.logoutContainer:hover {
+  color: var(--borderBottom);
+}
+
+@media (max-width: 766px) {
+  .textLogoutNone {
+    display: none;
+  }
+
+  a {
+    margin: 0;
+  }
+
+  .layoutHeader {
+    margin: 0;
+  }
+
+  .logoutContainer {
+    margin: 0;
+  }
+
+  .header {
+    overflow-x: auto;
+  }
+}

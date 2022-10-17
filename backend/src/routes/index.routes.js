@@ -1,5 +1,5 @@
-const { auth, turn, food } = require('../controllers/index.controller');
 const passport = require('passport');
+const { auth, turn, food, rating } = require('../controllers/index.controller');
 
 module.exports = (router) => {
   router.post('/auth/register', auth.createUser);
@@ -27,6 +27,9 @@ module.exports = (router) => {
   router.get('/food', food.listFood);
   router.put('/food/:id', food.updateFood);
   router.delete('/food/:id', food.deleteFood);
+
+  router.post('/rating', rating.postRating);
+  router.get('/ratings', rating.getRatings);
 
   return router;
 };

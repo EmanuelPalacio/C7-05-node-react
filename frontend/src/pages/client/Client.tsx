@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setTurn } from '@/redux/slices/clientTurnSlice';
 import { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import * as onesignal from './services/onesignal';
 import CountDown from './components/CountDown';
 import ModalDialog from './components/ModalDialog';
@@ -21,7 +21,6 @@ export default function Client() {
   const { turnId } = useParams();
   const dispatch = useAppDispatch();
   const turn = useAppSelector((state) => state.ClientTurn);
-  const location = useLocation();
   const [message] = useSuscribeToEvent(`${API_URL}/turns/${turnId}`);
 
   useEffect(() => {
