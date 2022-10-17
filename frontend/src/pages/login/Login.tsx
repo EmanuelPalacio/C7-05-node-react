@@ -24,7 +24,7 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { username, password } = inputValue;
-    if (username === '' || password === '') return setErrorMessage('Llena todos los campos');
+    if (username === '' || password === '') return setErrorMessage('Por favor, completa todos los campos');
 
     const cashier = await authService(username, password);
 
@@ -60,7 +60,7 @@ const Login = () => {
           className={styles.formContainer_input}
           type='password'
           name='password'
-          placeholder='contraseña'
+          placeholder='Contraseña'
           autoComplete='current-password'
           value={inputValue.password}
           id='current-password'
@@ -71,7 +71,10 @@ const Login = () => {
         <span className={styles.formContainer_errorMessage}>{errorMessage}</span>
         <a href='#'>¿Olvidaste tu contraseña?</a>
         <span>
-          ¿No tienes una cuenta? <Link to='/register'>Registrate aquí</Link>
+          ¿No tienes una cuenta?{' '}
+          <Link to='/register'>
+            <u>Crear cuenta aquí</u>
+          </Link>
         </span>
       </form>
     </div>
