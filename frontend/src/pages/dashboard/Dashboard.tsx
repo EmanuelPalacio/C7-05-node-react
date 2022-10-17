@@ -8,9 +8,9 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { removeTurn, setTurns } from '../../redux/slices/turnsSlice';
 import { activesTurnsService, deleteTurnService, turnUpdateService } from './services/turns';
 import FormUpdateOrder from './components/FormUpdateOrder';
-import EditIcon from '@/components/svg/EditIcon';
-import TrashIcon from '@/components/svg/TrashIcon';
-import NotifyIcon from '@/components/svg/NotifyIcon';
+/* icons */
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash,faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = () => {
   // const [storage, setStorage] = useState<Turn[]>([]);
@@ -61,26 +61,22 @@ const Dashboard = () => {
               {listTurns.map((order: Turn) => (
                 <li key={order.turnId} className={styles.order}>
                   <div>
-                    <span>ID {order.turnId} </span>
-                    <span>Tiempo: {order.estimatedTime}</span>
-                    <span></span>
+                    <span>Turno:{order.turnId} </span>
+                    <span>Tiempo restante: {order.estimatedTime}</span>
                   </div>
-                  <div className={styles.orderButtonContainer}>
-                    <div className={styles.orderButton} onClick={() => handleFinishTurn(order)} title='Entregar'>
-                      <NotifyIcon svgProp={{ width: 25, height: 25 }} />
-                    </div>
-                    <div
+                  <div>
+                    <button onClick={() => handleFinishTurn(order)} className={styles.orderButton} type='button'>
+                      <FontAwesomeIcon icon={faCheck} /><span>Entregar</span>
+                    </button>
+                    <button onClick={() => {setIsUpdate({ isUpdate: true, order });}}
                       className={styles.orderButton}
-                      onClick={() => {
-                        setIsUpdate({ isUpdate: true, order });
-                      }}
-                      title='Editar'
+                      type='button'
                     >
-                      <EditIcon svgProp={{ width: 25, height: 25 }} />
-                    </div>
-                    <div className={styles.orderButton} onClick={() => deleteOrden(order)} title='Eliminar'>
-                      <TrashIcon svgProp={{ width: 25, height: 25 }} />
-                    </div>
+                      <FontAwesomeIcon icon={faPlus} /><span>sumar</span>
+                    </button>
+                    <button className={styles.orderButton} type='button' onClick={() => deleteOrden(order)}>
+                      <FontAwesomeIcon icon={faTrash} /><span>eliminar</span>
+                    </button>
                   </div>
                 </li>
               ))}

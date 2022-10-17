@@ -36,7 +36,7 @@ export default function Register() {
   return (
     <div className={styles.loginContainer}>
       <div className={styles.imgContainer}>
-        <ImageLoginSvg svgProp={{ width: 500, height: 500 }} />
+        <ImageLoginSvg/>
       </div>
       <form onSubmit={handleRegisterSubmit} className={styles.formContainer}>
         <span className={styles.formContainer_logo}>
