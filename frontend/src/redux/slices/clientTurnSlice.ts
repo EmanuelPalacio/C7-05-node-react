@@ -18,10 +18,13 @@ export const ClientTurnSlice = createSlice({
     setTurn: (state, action: PayloadAction<Turn>) => {
       return action.payload;
     },
+    resetTurn: () => {
+      return ClientTurnEmptyState;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setTurn } = ClientTurnSlice.actions;
+export const { setTurn, resetTurn } = ClientTurnSlice.actions;
 
 export default ClientTurnSlice.reducer;
