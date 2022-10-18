@@ -1,6 +1,6 @@
 const swaggerOptions = {
   swaggerDefinition: {
-    //openapi: "3.0.3",
+    openapi: "3.0.3",
     info: {
       title: "No country",
       version: "1.0.0",
