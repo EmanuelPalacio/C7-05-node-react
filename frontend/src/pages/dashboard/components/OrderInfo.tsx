@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPlus, faCheck, faQrcode } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '../styles/dashboard.module.css';
-import { useEffect, useRef, useState } from 'react';
-import QrImage from './QrImage';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import QrModal from './QrModal';
 
 interface props {
   order: Turn;
@@ -29,6 +29,15 @@ const OrderInfo = ({ order, handleFinishTurn, setIsUpdate, deleteOrder }: props)
     setTime(totalTime - Date.now());
   }, [totalTime]);
 
+  const escFunction = useCallback((event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      closeQr();
+    }
+  }, []);
+  useEffect(() => {
+    document.addEventListener('keydown', escFunction, false);
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(
       () => {
@@ -48,10 +57,16 @@ const OrderInfo = ({ order, handleFinishTurn, setIsUpdate, deleteOrder }: props)
     setIsShowQR(true);
   };
 
+  const toggleQr = () => {
+    setIsShowQR(!isShowQR);
+  };
+
+  const closeQr = () => {
+    setIsShowQR(false);
+  };
+
   return (
     <>
-      {/* <div className={styles.qrModal}>{isShowQR && <QrImage qrCode={order.turnId} />}</div> */}
-
       <div>
         <span>Turno:{order.turnId} </span>
         <span>Tiempo: {order.estimatedTime}</span>
@@ -81,6 +96,7 @@ const OrderInfo = ({ order, handleFinishTurn, setIsUpdate, deleteOrder }: props)
           <span>Eliminar</span>
         </button>
       </div>
+      <div>{isShowQR && <QrModal id={order.turnId} toggleModal={toggleQr} />}</div>
     </>
   );
 };
