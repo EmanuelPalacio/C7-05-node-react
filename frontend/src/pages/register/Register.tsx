@@ -50,6 +50,7 @@ export default function Register() {
           name='email'
           placeholder='Correo electrónico'
           value={inputValue.email}
+          required
         />
         <input
           onChange={handleChangeInput}
@@ -65,6 +66,7 @@ export default function Register() {
           aria-describedby='password-constraints'
           title='La contraseña debe tener entre 8 y 12 caracteres, al menos una letra mayúscula, una minúscula, un número y un carácter especial'
           pattern='(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}'
+          required
         />
         <input
           onChange={handleChangeInput}
@@ -76,6 +78,7 @@ export default function Register() {
           minLength={8}
           autoComplete='new-password'
           value={inputValue.repeatPassword}
+          required
         />
         {/*    <div id='password-constraints'>Oco o mas</div> */}
         <button type='submit' className={styles.formContainer_button}>
