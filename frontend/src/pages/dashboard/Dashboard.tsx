@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import DashboardOrder from './components/DashboardOrder';
 import OrderInfo from './components/OrderInfo';
 import styles from './styles/dashboard.module.css';
@@ -22,6 +22,19 @@ const Dashboard = () => {
   const activeModal = () => {
     modal ? setModal(false) : setModal(true);
   };
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
+  const escFunction = useCallback((event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  }, []);
+  useEffect(() => {
+    document.addEventListener('keydown', escFunction, false);
+  }, []);
 
   const deleteOrden = (order: Turn) => {
     deleteTurnService(order.turnId).then((res) => {
