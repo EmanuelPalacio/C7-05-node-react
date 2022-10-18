@@ -17,12 +17,12 @@
 
 .modal {
   position: relative;
-  height: 40%;
-  width: 40%;
+  height: 50%;
+  width: 50%;
   background-color: var(--highlight);
   border-radius: 20px;
   overflow: hidden;
-  padding-top: 3.75rem;
+  padding-top: 1rem;
 }
 .modalButton {
   position: absolute;
@@ -35,15 +35,14 @@
   transform: scale(1.2);
   color: var(--primary);
 }
-.modalForm,
-.qrModal {
+.modalForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 15px;
   height: 100%;
-  padding: 3rem;
+  padding: 2rem;
 }
 .modalForm > input {
   text-align: center;

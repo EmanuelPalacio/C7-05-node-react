@@ -35,7 +35,6 @@ const ChartClient = ()=>{
     for (let i = 0; i <months.length; i++){
         datasets.push({x:months[i], y: (newList.filter(e => e === months[i]).length)})
     }
-    console.log(datasets)
     const options = {
         /* Establezca el estilo de la etiqueta del lienzo en un ancho y alto del 100%. Esto asegurará que siempre se ajuste al 100% del ancho y la altura de sus contenedores.
         Para el conjunto de valores de opciones responsive: true & maintenanceAspectRatio: false. Esto asegurará que el gráfico responda a las actualizaciones de tamaño mientras ignora la relación de aspecto.
