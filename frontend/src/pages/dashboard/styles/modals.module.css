@@ -10,6 +10,7 @@
   height: 100vh;
   background-color: var(--modalTransparency);
   padding: 0 !important;
+  margin: 0 !important;
 }
 .window div {
   width: unset !important;
@@ -42,7 +43,7 @@
   align-items: center;
   gap: 15px;
   height: 100%;
-  padding: 2rem;
+  padding: 0 3rem;
 }
 .modalForm > input {
   text-align: center;
@@ -74,9 +75,16 @@ select {
 }
 
 .qrModal {
+  display: flex;
+  flex-direction: column;
   background-color: var(--highlight);
   padding: 1rem;
-  margin: 0.5rem;
+  border-radius: 100px;
+  overflow: hidden;
+}
+.qrModal h2 {
+  margin: 0;
+  padding-top: 1rem;
 }
 .qrImg {
   object-fit: contain;
@@ -91,5 +99,8 @@ select {
 @media screen and (max-width: 700px) {
   .modal {
     width: 80%;
+  }
+  .qrModal h2 {
+    font-size: 1.5rem;
   }
 }
