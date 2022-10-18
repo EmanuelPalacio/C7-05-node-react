@@ -6,6 +6,7 @@
 }
 
 input, button, select, span {
+  text-align: center;
   font-size: 16px;
 }
 
