@@ -145,7 +145,7 @@
 }
 @media (max-width: 600px) {
   .dashboardContainer {
-    margin: 0 30px;
+    margin: 0 5px;
     display: grid;
     align-content: center;
     grid-template-rows: 100px 60px 1fr;
