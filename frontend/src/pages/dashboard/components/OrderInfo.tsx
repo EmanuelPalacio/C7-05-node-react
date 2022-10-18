@@ -70,7 +70,8 @@ const OrderInfo = ({ order, handleFinishTurn, setIsUpdate, deleteOrder }: props)
       <div>
         <span>Turno:{order.turnId} </span>
         <span>Tiempo: {order.estimatedTime}</span>
-        <span>Tiempo restante: {`${Math.floor(minuteTime)}:${Math.floor(secondTime)}`}</span>
+        <span>{minuteTime < 0 ? 'Demora de ' :'Listo en: '} 
+              {`${minuteTime < 0 ? Math.floor(minuteTime)*-1 : Math.floor(minuteTime)}:${Math.floor(secondTime)}`}min</span>
       </div>
       <div>
         <button onClick={showQR} className={styles.orderButton} type='button'>
