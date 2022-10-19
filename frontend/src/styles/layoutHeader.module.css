@@ -76,6 +76,6 @@
 @media (max-width: 500px) {
   .layoutHeader {
     justify-content: start;
-    margin-left: 15px;
+    margin-left: 10px;
   }
 }
