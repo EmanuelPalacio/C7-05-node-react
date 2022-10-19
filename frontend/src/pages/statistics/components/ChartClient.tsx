@@ -27,10 +27,12 @@ interface months {
 }
 
 const ChartClient = ()=>{
-    const listTurns = useAppSelector((state) => state.Turns);
-    const month = (e:string) => new Intl.DateTimeFormat('es-ES', { month: 'long'}).format(new Date(e));
-    const newList = listTurns.map(e => month(e.turnDate))
     const months:string[] = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+    const listTurns = useAppSelector((state) => state.completedShifts);
+    const month = (e:string) => new Intl.DateTimeFormat('es-ES', { month: 'long'}).format(new Date(e));
+    const newList = listTurns.map((e) => {
+        return month(e.turnDate)
+    })
     const datasets:Array<months> = []
     for (let i = 0; i <months.length; i++){
         datasets.push({x:months[i], y: (newList.filter(e => e === months[i]).length)})
