@@ -65,10 +65,17 @@
 .div_passwordInput {
   display: flex;
   justify-content: center;
+  position: relative;
+
 }
 
 .formContainer_passwordinput {
-  width: 57%;
+  width: 100%;
+}
+
+.iconShowPassword {
+  position: absolute;
+  right: 0;
 }
 
 .formContainer_button {
