@@ -18,7 +18,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
-app.use(cors());
+app.use(
+  cors({
+    origin: '*',
+  }),
+);
 app.use(compression());
 
 //middlewares
