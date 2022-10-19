@@ -18,7 +18,7 @@ import { turnAdapter } from './adapter/turn.adapter';
 export default function Client() {
   const [isOpen2, setisOpen2] = useState(false);
   const [turnFinished, setTurnFinished] = useState<boolean>(false);
-  const { turnId } = useParams();
+  const { turnId } = useParams<string>();
   const dispatch = useAppDispatch();
   const turn = useAppSelector((state) => state.ClientTurn);
   const [message] = useSuscribeToEvent(`${API_URL}/turns/${turnId}`);
@@ -66,6 +66,7 @@ export default function Client() {
   }, [message]);
 
   useEffect(() => {
+    console.log(`${window.location.origin}/client/${turnId}`);
     onesignal.runOneSignal().then(async (id) => {
       if (turnId) await onesignal.showPrompt(turnId);
       onesignal.showCategories();
