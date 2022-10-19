@@ -34,10 +34,10 @@ export default function OrderFinished() {
 
   return (
     <div className={styles.finishedContainer}>
-      <h2>Orden lista</h2>
+      <h2>Pedido listo</h2>
       <p>Por favor, pase a retirar su pedido</p>
       <form onSubmit={onSubmitQualification} className={styles.ratingContainer}>
-        <h3>Califique el servicio</h3>
+        <h3>Califique el servicio. Tu comentario nos ayuda a mejorar.</h3>
         <div className={styles.rating}>
           <div className={styles.radioContainer}>
             <input onChange={handleChangeQualification} type='radio' id='star1' name='rate' value={1} />
