@@ -16,7 +16,7 @@ const DashboardOrder = ({ activeModal }: props) => {
   const [finalEstimatedTime, setFinalEstimatedTime] = useState<number>(0);
   const [errorMessage, setErrorMessage] = useState<string>();
   const [client, setClient] = useState<{ time: string; categorie: number | string }>({
-    time: '5',
+    time: '0',
     categorie: '',
   });
   const foods = useAppSelector((state) => state.Foods);
@@ -25,7 +25,7 @@ const DashboardOrder = ({ activeModal }: props) => {
   useEffect(() => {
     if (foods.length > 0) {
       setClient({
-        time: '5',
+        time: '0',
         categorie: foods[0].foodId.toString(),
       });
     }
@@ -82,6 +82,7 @@ const DashboardOrder = ({ activeModal }: props) => {
               <div className={styles.divSelectContainer}>
                 <strong>Agregar tiempo</strong>
                 <select title='timeSelect' name='time' onChange={handleChange}>
+                  <option value={0}> 0 min</option>
                   <option value={5}> 5 min</option>
                   <option value={10}>10 min</option>
                   <option value={15}>15 min</option>
