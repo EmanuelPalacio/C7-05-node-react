@@ -1,10 +1,10 @@
-.loginContainer{
+.loginContainer {
   height: 100vh;
   margin: 0 20px;
   display: grid;
   align-content: center;
   grid-template-columns: 40% 60%;
-  grid-template-areas: "left right";
+  grid-template-areas: 'left right';
 }
 
 h2 {
@@ -12,7 +12,7 @@ h2 {
   margin-bottom: 30px;
 }
 
-.imgContainer{
+.imgContainer {
   grid-area: right;
   display: flex;
   justify-content: center;
@@ -26,18 +26,18 @@ h2 {
   height: auto;
   position: relative;
 }
-#nubes{
+#nubes {
   animation: nube 3s ease-in-out infinite;
 }
 @keyframes nube {
-  35%{
-  transform: translate(0,-5px)
+  35% {
+    transform: translate(0, -5px);
   }
-  70%{
-    transform: translate(0,5px)
-    }
-  100%{
-    transform: translate(0)
+  70% {
+    transform: translate(0, 5px);
+  }
+  100% {
+    transform: translate(0);
   }
 }
 
@@ -52,38 +52,47 @@ h2 {
   margin-bottom: 50px;
 }
 
-.formContainer_logo{
+.formContainer_logo {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 30px;
 }
 
-.formContainer_input{
+.formContainer_input,
+.formContainer_passwordinput {
+  margin-bottom: 2rem;
+}
+
+.div_passwordInput {
+  display: flex;
+  justify-content: center;
+}
+
+.formContainer_passwordinput {
+  width: 55%;
+}
+
+.formContainer_button {
   margin-bottom: 1rem;
 }
 
-.formContainer_button{
-  margin-bottom: 1rem;
-}
-
-.formContainer_errorMessage{
+.formContainer_errorMessage {
   color: rgb(247, 58, 58);
   margin-bottom: 1.25rem;
 }
 
-
 @media (max-width: 1020px) {
-  .loginContainer{
+  .loginContainer {
     margin: 0;
     align-content: flex-start;
     justify-content: center;
     gap: 40px;
     grid-template-columns: 1fr;
-    grid-template-areas:  "left"
-                          "right";
+    grid-template-areas:
+      'left'
+      'right';
   }
-
 }
 @media (max-width: 1020px) {
   .imgContainer {
@@ -92,7 +101,7 @@ h2 {
 }
 
 @media (max-width: 600px) {
-  .formContainer_input{
+  .formContainer_input {
     margin-bottom: 30px;
     font-size: 16px;
   }

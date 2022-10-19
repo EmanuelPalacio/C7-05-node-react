@@ -1,50 +1,48 @@
-.dashboardContainer{
+.dashboardContainer {
   margin: 0 100px;
   display: grid;
   align-content: center;
   grid-template-rows: 60px 1fr;
 }
-.dashboardHeader{
+.dashboardHeader {
   display: flex;
   justify-content: center;
   align-items: flex-start;
 }
 
-.dashboardFilter{
+.dashboardFilter {
   display: flex;
   align-items: center;
   border-bottom: 3px solid var(--primary);
 }
-.dashboardBody{
+.dashboardBody {
   position: relative;
   height: 75vh;
   overflow: hidden;
   border-bottom: 3px solid var(--primary);
-}
-.dashboardBody:hover{
   overflow-y: scroll;
 }
 
 .dashboardBody::-webkit-scrollbar {
-  width: 20px;               /* width of the entire scrollbar */
+  width: 20px; /* width of the entire scrollbar */
 }
 
 .dashboardBody::-webkit-scrollbar-track {
-  background: white;        /* color of the tracking area */
+  background: white; /* color of the tracking area */
 }
 
 .dashboardBody::-webkit-scrollbar-thumb {
-  background-color: var(--primary);    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid white;  /* creates padding around scroll thumb */
+  background-color: var(--primary); /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid white; /* creates padding around scroll thumb */
 }
 
-.orderContainer{
+.orderContainer {
   position: absolute;
   margin: 0 15%;
   width: 70%;
 }
-.orderContainer > ul{
+.orderContainer > ul {
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -52,33 +50,37 @@
   padding: 0;
 }
 
-.order{
+.order {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(90.01deg, var(--primary) -5.74%, rgba(72, 202, 228, 0.7) 49.63%, var(--primary) 104.99%);
   height: 80px;
   border-radius: 80px;
+  box-shadow: var(--shadow);
 }
-.order div:nth-child(1){
+
+.order div:nth-child(1) {
+  display: flex;
+  justify-content: start;
+  padding: 0 1rem;
   text-align: center;
   width: 50%;
   gap: 15px;
   font-size: 1.2rem;
 }
-.order div:nth-child(1) span:nth-child(2){
+.order div:nth-child(1) {
   margin-left: 15px;
 }
-.order div:nth-child(2){
+.order div:nth-child(2) {
   display: inherit;
   margin-right: 20px;
   min-width: 30%;
   gap: 15px;
   font-size: 1.2rem;
-  
 }
 
-.orderButton{
+.orderButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,55 +88,49 @@
   width: 20px;
   border-radius: 50%;
   color: var(--secondary);
-  transition: all 2s linear;
+  transition: all 0.25s linear;
   background: var(--highlight);
-  transition: border-radius 0s;
-  transition: width 1s;
 }
 .orderButton span {
-  visibility: hidden;
+  display: none;
   opacity: 0;
   position: absolute;
   width: 0;
-  transition: opacity 2s linear;
+  transition: opacity 0.25s linear;
 }
-.orderButton:hover{
+.orderButton:hover {
   justify-content: start;
-  width: 200px;
+  width: 175px;
   border-radius: 50px;
   color: rgb(0, 211, 35);
 }
-.orderButton:hover:nth-child(3){
+.orderButton:hover:nth-child(3) {
   color: rgb(238, 2, 2);
 }
 .orderButton:hover > span {
-  width: 200px;
+  display: block;
+  width: 150px;
   visibility: visible;
   opacity: 1;
+  transition: opacity 1s linear;
 }
 
-
-.orderButton:hover{
+.orderButton:hover {
   transform: scale(1.1);
 }
 
-
-
-
-
 @media (max-width: 1300px) {
-  .orderContainer{
+  .orderContainer {
     margin: 0 5%;
     width: 90%;
   }
-  
 }
 @media (max-width: 950px) {
-  .orderContainer{
+  .orderContainer {
     margin: 0;
     width: 100%;
   }
-  .order{
+  .order {
     position: relative;
     flex-direction: column;
     justify-content: center;
@@ -142,13 +138,14 @@
     border-radius: 100px;
     gap: 5px;
   }
-  .order div:nth-child(1){
+  .order div:nth-child(1) {
+    justify-content: center;
     width: 100%;
   }
 }
 @media (max-width: 600px) {
-  .dashboardContainer{
-    margin: 0 30px;
+  .dashboardContainer {
+    margin: 0 5px;
     display: grid;
     align-content: center;
     grid-template-rows: 100px 60px 1fr;

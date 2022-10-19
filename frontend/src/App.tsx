@@ -29,7 +29,7 @@ function App() {
             </Route>
           </Route>
           <Route path='/client/:turnId' element={<Client />} />
-          <Route path='*' element={<h1 style={{ display: 'flex', justifyContent: 'center' }}>404 - Not Found!</h1>} />
+          <Route path='*' element={<h1 style={{ textAlign: 'center' }}>404 - Not Found!</h1>} />
         </Routes>
       </BrowserRouter>
     </div>

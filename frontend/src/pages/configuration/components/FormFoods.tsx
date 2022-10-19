@@ -68,9 +68,9 @@ export default function FormFoods({ updateForm, setUpdateForm }: IProps) {
 
   return (
     <div className={styles.formContainer}>
-      <h3>Crea una categoria </h3>
+      <h3>Crea una categoría </h3>
       <form onSubmit={updateForm.foodId ? handleSubmitUpdateForm : handleSubmitForm} className={styles.formContainer}>
-        <input onChange={handleChangeForm} value={foodForm.foodName} type='text' name='foodName' placeholder='Nombre categoria' />
+        <input onChange={handleChangeForm} value={foodForm.foodName} type='text' name='foodName' placeholder='Nombre categoría' maxLength={16}/>
         <div className={styles.timeContainer}>
           <span>Tiempo estimado</span>
           <select value={foodForm.time} onChange={handleChangeForm} title='timeSelect' name='time'>

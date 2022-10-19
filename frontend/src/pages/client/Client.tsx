@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setTurn } from '@/redux/slices/clientTurnSlice';
 import { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import * as onesignal from './services/onesignal';
 import CountDown from './components/CountDown';
 import ModalDialog from './components/ModalDialog';
@@ -83,7 +83,7 @@ export default function Client() {
             <OrderFinished />
           ) : (
             <>
-              <h2>Su orden estara lista en</h2>
+              <h2>Su pedido estará listo en</h2>
               <CountDown />
             </>
           )}
@@ -96,7 +96,7 @@ export default function Client() {
             </p>
           </div>
           <footer>
-            <span>Siguenos en:</span>
+            <span>Síguenos en:</span>
             <div className={styles.clientRRSS}>
               <a href='https://www.instagram.com' title='Instagram link' target='_blank' rel='noreferrer noopener'>
                 <IgLogo svgProp={{ width: 30, height: 30 }} />
