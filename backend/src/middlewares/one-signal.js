@@ -31,7 +31,8 @@ notification.contents = {
 
 const crearNotificacion = async (userId, turnId) => {
   notification.include_player_ids = [userId];
-  notification.url = `client/${turnId}`;
+  // notification.url = `client/${turnId}`;
+  notification.web_url = `https://candid-unicorn-467eb3.netlify.app/client/${turnId}`;
   const { id } = await client.createNotification(notification);
 
   const response = await client.getNotification(ONESIGNAL_APP_ID, id);

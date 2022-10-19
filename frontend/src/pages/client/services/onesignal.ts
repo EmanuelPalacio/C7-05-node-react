@@ -10,8 +10,6 @@ export async function runOneSignal() {
     serviceWorkerPath: 'OneSignalSDKWorker.js',
     // eslint-disable-next-line camelcase
     safari_web_id: 'web.onesignal.auto.2473987d-7114-4e84-8494-f768208d432f',
-    notificationClickHandlerMatch: 'origin',
-    notificationClickHandlerAction: 'focus',
 
     promptOptions: {
       slidedown: {
