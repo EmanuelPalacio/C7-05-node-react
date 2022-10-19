@@ -50,8 +50,8 @@ const OrderInfo = ({ order, handleFinishTurn, setIsUpdate, deleteOrder }: props)
     return () => clearInterval(interval);
   }, [parsedDeadline]);
 
-  const minuteTime = (time / MINUTE) % 60;
-  const secondTime = time >= 0 ? (time / SECOND) % 60 : ((time / SECOND) % 60) * -1;
+  const minuteTime = Math.abs((time / MINUTE) % 60);
+  const secondTime = Math.abs((time / SECOND) % 60);
 
   const showQR = () => {
     setIsShowQR(true);
@@ -70,8 +70,10 @@ const OrderInfo = ({ order, handleFinishTurn, setIsUpdate, deleteOrder }: props)
       <div>
         <span>Turno:{order.turnId} </span>
         <span>Tiempo: {order.estimatedTime}</span>
-        <span>{minuteTime < 0 ? 'Demora de ' :'Listo en: '} 
-              {`${minuteTime < 0 ? Math.floor(minuteTime)*-1 : Math.floor(minuteTime)}:${Math.floor(secondTime)}`}min</span>
+        <span className={`${time < 0 && styles.isRed}`}>
+          {time < 0 ? 'Demora de ' : 'Listo en: '}
+          {`${Math.floor(minuteTime)}`.padStart(2, '0')}:{`${Math.floor(secondTime)}`.padStart(2, '0')} min
+        </span>
       </div>
       <div>
         <button onClick={showQR} className={styles.orderButton} type='button'>
