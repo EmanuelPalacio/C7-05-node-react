@@ -1,4 +1,4 @@
-<h1 align="center">C7-05-NODE-REACT</h1>
+<h1 align="center" ><img height="32px" src="./frontend/src/assets/Logo.svg"/> Q`Rápido</h1>
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
@@ -23,24 +23,24 @@
 </ol>
 </details>
 
-
 <h2>Información General</h2>
 <h3>Acerca del Proyecto</h3>
 <p align="justify">
-Sistema de turnos y aviso al cliente
+  Consiste en un sistema de control de turnos y avisos.
 </p>
 
 <h3>Tecnologías</h3>
 
 En este proyecto usamos las siguientes tecnologías:
-* [ReactJS](https://es.reactjs.org/)
-* [Node.Js](https://nodejs.org/es/)
-* [Editor visual studio code](https://code.visualstudio.com/)
+
+- [ReactJS](https://es.reactjs.org/)
+- [Node.Js](https://nodejs.org/es/)
+<!-- - [Editor visual studio code](https://code.visualstudio.com/) -->
 
 <h2>Como Iniciar</h2>
 <h3>Pre requisitos</h3>
 
-* [Node.Js](https://nodejs.org/es/)
+- [Node.Js](https://nodejs.org/es/)
 
 <h3>Instalación</h3>
 
@@ -58,14 +58,16 @@ En este proyecto usamos las siguientes tecnologías:
    cd /backend
    npm install
    ```
-<h2>Uso</h2>
-<h3>Iniciar Frontend</h3>
+   <h2>Uso</h2>
+   <h3>Iniciar Frontend</h3>
 
 Sintaxis to execute the program.
 'file-path' as reference of the route of the file
-   ```sh
-   npm run start 'file-path'
-   ```
+
+```sh
+npm run start 'file-path'
+```
+
 <h3>Iniciar Backend</h3>
  
    <p>To execute all the test files</p>
@@ -74,15 +76,14 @@ Sintaxis to execute the program.
    npm run test 
    ```
 
-   
-
 <h2>Integrantes</h2>
 
-  <strong>Q/A Tester: </strong>
+<strong>Q/A Tester: </strong>
+
   <li>Pamela Suarez</li>
   <strong>Frontend: </strong>
   <li>Isaac Celi</li>
-  <li>Emanual Palacio</li>
+  <li>Emanuel Palacio</li>
   <strong>FullStack:</strong>
   <li>Hugo Iturrieta</li>
   <strong>Backend: </strong>
