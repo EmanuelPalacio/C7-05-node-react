@@ -41,7 +41,7 @@ En este proyecto usamos las siguientes tecnologías:
   <li>Pamela Suarez  <a target="_blank" href="https://www.linkedin.com/in/suarezpamelaqa/"><img  width="20px" height="20px" src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmT3rEWw0KwxXzlpI_BpGFOCQmGN4Bxy53pidk-bfuo02PpRqwIXqZ9ISLN5Nk0AJOg2Z_7JqZA=w1265-h817" /></a></li>
   <strong>Frontend: </strong>
   <li>Isaac Celi  <a target="_blank" href="https://www.linkedin.com/in/sebasceliamores/"><img  width="20px" height="20px" src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmT3rEWw0KwxXzlpI_BpGFOCQmGN4Bxy53pidk-bfuo02PpRqwIXqZ9ISLN5Nk0AJOg2Z_7JqZA=w1265-h817" /></a></li>
-  <li>Emanual Palacio  <a target="_blank" href="https://www.linkedin.com/in/emanuel-palacio/"><img  width="20px" height="20px" src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmT3rEWw0KwxXzlpI_BpGFOCQmGN4Bxy53pidk-bfuo02PpRqwIXqZ9ISLN5Nk0AJOg2Z_7JqZA=w1265-h817" /></a></li></li>
+  <li>Emanuel Palacio  <a target="_blank" href="https://www.linkedin.com/in/emanuel-palacio/"><img  width="20px" height="20px" src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmT3rEWw0KwxXzlpI_BpGFOCQmGN4Bxy53pidk-bfuo02PpRqwIXqZ9ISLN5Nk0AJOg2Z_7JqZA=w1265-h817" /></a></li></li>
   <strong>FullStack:</strong>
   <li>Hugo Iturrieta  <a target="_blank" href="https://www.linkedin.com/in/hugoiturrieta/"><img  width="20px" height="20px" src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmT3rEWw0KwxXzlpI_BpGFOCQmGN4Bxy53pidk-bfuo02PpRqwIXqZ9ISLN5Nk0AJOg2Z_7JqZA=w1265-h817" /></a></li>
   <strong>Backend: </strong>
