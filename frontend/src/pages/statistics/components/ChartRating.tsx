@@ -57,7 +57,7 @@ const ChartRating = ()=>{
     },
   }
   const data = {
-  labels: ['muy malo', 'malo', 'nose', 'bueno', 'excelente'],
+  labels: ['Muy malo', 'Malo', 'No sé', 'Bueno', 'Excelente'],
   datasets: [
     {
       data: rating,

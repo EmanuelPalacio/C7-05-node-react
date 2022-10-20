@@ -94,7 +94,7 @@ const DashboardOrder = ({ activeModal }: props) => {
                 </select>
               </div>
               <div className={styles.divSelectContainer}>
-                <strong>Categoria comida</strong>
+                <strong>Categoría comida</strong>
                 {foods.length > 0 ? (
                   <select title='categorie' name='categorie' onChange={handleChange}>
                     {foods.map((food) => (
@@ -104,7 +104,7 @@ const DashboardOrder = ({ activeModal }: props) => {
                     ))}
                   </select>
                 ) : (
-                  <p>Sin categorias creadas</p>
+                  <p>Sin categorías creadas</p>
                 )}
               </div>
               <span>
