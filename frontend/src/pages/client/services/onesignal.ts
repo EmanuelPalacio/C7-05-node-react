@@ -60,10 +60,12 @@ export async function runOneSignal() {
 export async function showPrompt(idTurn: string) {
   await OneSignal.showSlidedownPrompt({ force: true });
   OneSignal.on('subscriptionChange', async () => {
+    // Cuando el usuario acepta recibir notificaciones
     const id = await OneSignal.getUserId();
     if (id) {
       console.log(`Registrando notificacion con id ${id}`);
       registerNotificationId(idTurn, id);
+      showCategories();
     }
   });
 }

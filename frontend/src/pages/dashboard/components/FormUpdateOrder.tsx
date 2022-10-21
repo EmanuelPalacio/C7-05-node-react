@@ -67,7 +67,7 @@ const FormUpdateOrder = ({ activeModal, order }: props) => {
               <input type='number' name='table' placeholder='Agregar tiempo' readOnly />
               <p>Tiempo estimado: {order.estimatedTime}</p>
               <p>Termina a las: {date}</p>
-              <p>Seleccione los minutos que desea sumar a la orden</p>
+              <p>Seleccione los minutos que desea sumar al pedido</p>
               <select title='timeSelect' name='time' onChange={handleChange}>
                 <option value={5}> 5 min</option>
                 <option value={10}>10 min</option>
@@ -78,7 +78,7 @@ const FormUpdateOrder = ({ activeModal, order }: props) => {
                 <option value={35}>35 min</option>
                 <option value={40}>40 min</option>
               </select>
-              <button type='submit'>Actualizar orden</button>
+              <button type='submit'>Actualizar pedido</button>
             </form>
           </div>
         ) : (

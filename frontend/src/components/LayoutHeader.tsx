@@ -23,7 +23,6 @@ export default function LayoutHeader() {
   return (
     <>
       <div className={styles.header}>
-        <div></div>
         <div className={styles.layoutHeader}>
           <Link to='/dashboard' className={`${styles.headerLink} ${handleLinkActive('/dashboard')}`}>
             Pedidos
@@ -32,10 +31,10 @@ export default function LayoutHeader() {
             Estadísticas
           </Link>
           <Link to='/configuration' className={`${styles.headerLink} ${handleLinkActive('/configuration')}`}>
-            Configuración
+          Categorías
           </Link>
+          <LogoutBtn />
         </div>
-        <LogoutBtn />
       </div>
       <Outlet />
     </>

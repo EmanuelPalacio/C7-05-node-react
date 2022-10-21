@@ -16,7 +16,7 @@ const DashboardOrder = ({ activeModal }: props) => {
   const [finalEstimatedTime, setFinalEstimatedTime] = useState<number>(0);
   const [errorMessage, setErrorMessage] = useState<string>();
   const [client, setClient] = useState<{ time: string; categorie: number | string }>({
-    time: '5',
+    time: '0',
     categorie: '',
   });
   const foods = useAppSelector((state) => state.Foods);
@@ -25,7 +25,7 @@ const DashboardOrder = ({ activeModal }: props) => {
   useEffect(() => {
     if (foods.length > 0) {
       setClient({
-        time: '5',
+        time: '0',
         categorie: foods[0].foodId.toString(),
       });
     }
@@ -78,10 +78,11 @@ const DashboardOrder = ({ activeModal }: props) => {
               X
             </button>
             <form onSubmit={onSubmitCreateTurn} className={`${styles.modalForm}`}>
-              <input type='text' name='table' placeholder='Generar Orden' readOnly />
+              <input type='text' name='table' placeholder='Generar Pedido' readOnly />
               <div className={styles.divSelectContainer}>
                 <strong>Agregar tiempo</strong>
                 <select title='timeSelect' name='time' onChange={handleChange}>
+                  <option value={0}> 0 min</option>
                   <option value={5}> 5 min</option>
                   <option value={10}>10 min</option>
                   <option value={15}>15 min</option>
@@ -93,7 +94,7 @@ const DashboardOrder = ({ activeModal }: props) => {
                 </select>
               </div>
               <div className={styles.divSelectContainer}>
-                <strong>Categoria comida</strong>
+                <strong>Categoría comida</strong>
                 {foods.length > 0 ? (
                   <select title='categorie' name='categorie' onChange={handleChange}>
                     {foods.map((food) => (
@@ -103,13 +104,13 @@ const DashboardOrder = ({ activeModal }: props) => {
                     ))}
                   </select>
                 ) : (
-                  <p>Sin categorias creadas</p>
+                  <p>Sin categorías creadas</p>
                 )}
               </div>
               <span>
                 <strong>Tiempo estimado:</strong> {finalEstimatedTime} min
               </span>
-              <button type='submit'>Generar orden</button>
+              <button type='submit'>Generar pedido</button>
               <span className={styles.errorMessage}>{errorMessage}</span>
             </form>
           </div>

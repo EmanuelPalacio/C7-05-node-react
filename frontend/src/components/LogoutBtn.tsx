@@ -2,8 +2,8 @@ import { useAppDispatch } from '@/redux/hooks';
 import { setCashier } from '@/redux/slices/cashierSlice';
 import styles from '@/styles/layoutHeader.module.css';
 import { useNavigate } from 'react-router-dom';
-import LogOutIcon from './svg/LogOutIcon';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faArrowRightFromBracket} from '@fortawesome/free-solid-svg-icons'
 export default function LogoutBtn() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -15,9 +15,9 @@ export default function LogoutBtn() {
   };
 
   return (
-    <div className={styles.logoutContainer} onClick={logout}>
-      <span className={styles.textLogoutNone}>Cerrar sesión</span>
-      <LogOutIcon svgProp={{ width: 25, height: 25 }} />
-    </div>
+    <button type='button' onClick={logout} className={`${styles.logoutBtn}`} >
+      <FontAwesomeIcon icon={faArrowRightFromBracket} size='xl'/>
+      <span>Cerrar sesión</span>
+    </button>
   );
 }

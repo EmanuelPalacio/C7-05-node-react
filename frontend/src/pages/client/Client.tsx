@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setTurn } from '@/redux/slices/clientTurnSlice';
 import { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import * as onesignal from './services/onesignal';
 import CountDown from './components/CountDown';
 import ModalDialog from './components/ModalDialog';
@@ -18,10 +18,9 @@ import { turnAdapter } from './adapter/turn.adapter';
 export default function Client() {
   const [isOpen2, setisOpen2] = useState(false);
   const [turnFinished, setTurnFinished] = useState<boolean>(false);
-  const { turnId } = useParams();
+  const { turnId } = useParams<string>();
   const dispatch = useAppDispatch();
   const turn = useAppSelector((state) => state.ClientTurn);
-  const location = useLocation();
   const [message] = useSuscribeToEvent(`${API_URL}/turns/${turnId}`);
 
   useEffect(() => {
@@ -67,9 +66,11 @@ export default function Client() {
   }, [message]);
 
   useEffect(() => {
+    console.log(`${window.location.origin}/client/${turnId}`);
     onesignal.runOneSignal().then(async (id) => {
-      if (turnId) await onesignal.showPrompt(turnId);
-      onesignal.showCategories();
+      if (turnId) {
+        await onesignal.showPrompt(turnId);
+      }
       if (id && turnId) {
         onesignal.registerNotificationId(turnId, id);
       }
@@ -84,7 +85,7 @@ export default function Client() {
             <OrderFinished />
           ) : (
             <>
-              <h2>Su orden estara lista en</h2>
+              <h2>Su pedido estará listo en</h2>
               <CountDown />
             </>
           )}
@@ -97,7 +98,7 @@ export default function Client() {
             </p>
           </div>
           <footer>
-            <span>Siguenos en:</span>
+            <span>Síguenos en:</span>
             <div className={styles.clientRRSS}>
               <a href='https://www.instagram.com' title='Instagram link' target='_blank' rel='noreferrer noopener'>
                 <IgLogo svgProp={{ width: 30, height: 30 }} />

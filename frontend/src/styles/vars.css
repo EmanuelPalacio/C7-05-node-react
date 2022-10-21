@@ -1,7 +1,9 @@
 :root {
-  --primary: rgb(179, 255, 253);
+  --primary: rgb(64, 171, 232);
   --secondary: rgb(15, 76, 117);
-  --modalTransparency: rgba(15, 76, 117, 0.7);
+  --third: rgb(21, 0, 255);
+  --modalTransparency: rgba(64, 171, 232, 0.8);
   --highlight: rgb(255, 255, 255);
-  --borderBottom: rgb(100, 208, 227);
+  --borderBottom: rgb(64, 171, 232);
+  --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }

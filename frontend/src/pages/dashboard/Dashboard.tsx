@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import DashboardOrder from './components/DashboardOrder';
+import OrderInfo from './components/OrderInfo';
 import styles from './styles/dashboard.module.css';
 /* redux */
 import { Turn } from '../../models/turns.type';
@@ -8,9 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { removeTurn, setTurns } from '../../redux/slices/turnsSlice';
 import { activesTurnsService, deleteTurnService, turnUpdateService } from './services/turns';
 import FormUpdateOrder from './components/FormUpdateOrder';
-import EditIcon from '@/components/svg/EditIcon';
-import TrashIcon from '@/components/svg/TrashIcon';
-import NotifyIcon from '@/components/svg/NotifyIcon';
+/* icons */
 
 const Dashboard = () => {
   // const [storage, setStorage] = useState<Turn[]>([]);
@@ -23,6 +22,19 @@ const Dashboard = () => {
   const activeModal = () => {
     modal ? setModal(false) : setModal(true);
   };
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
+  const escFunction = useCallback((event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  }, []);
+  useEffect(() => {
+    document.addEventListener('keydown', escFunction, false);
+  }, []);
 
   const deleteOrden = (order: Turn) => {
     deleteTurnService(order.turnId).then((res) => {
@@ -39,6 +51,10 @@ const Dashboard = () => {
     turnUpdateService(order.turnId, dataUpdate).then((res) => {
       res && dispatch(removeTurn(order));
     });
+  };
+
+  const handleSetUpdate = (order: Turn) => {
+    setIsUpdate({ isUpdate: true, order });
   };
 
   useEffect(() => {
@@ -60,28 +76,7 @@ const Dashboard = () => {
             <ul>
               {listTurns.map((order: Turn) => (
                 <li key={order.turnId} className={styles.order}>
-                  <div>
-                    <span>ID {order.turnId} </span>
-                    <span>Tiempo: {order.estimatedTime}</span>
-                    <span></span>
-                  </div>
-                  <div className={styles.orderButtonContainer}>
-                    <div className={styles.orderButton} onClick={() => handleFinishTurn(order)} title='Entregar'>
-                      <NotifyIcon svgProp={{ width: 25, height: 25 }} />
-                    </div>
-                    <div
-                      className={styles.orderButton}
-                      onClick={() => {
-                        setIsUpdate({ isUpdate: true, order });
-                      }}
-                      title='Editar'
-                    >
-                      <EditIcon svgProp={{ width: 25, height: 25 }} />
-                    </div>
-                    <div className={styles.orderButton} onClick={() => deleteOrden(order)} title='Eliminar'>
-                      <TrashIcon svgProp={{ width: 25, height: 25 }} />
-                    </div>
-                  </div>
+                  <OrderInfo order={order} handleFinishTurn={handleFinishTurn} setIsUpdate={handleSetUpdate} deleteOrder={deleteOrden} />
                 </li>
               ))}
             </ul>

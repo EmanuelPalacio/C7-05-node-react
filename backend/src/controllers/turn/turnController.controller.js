@@ -79,12 +79,10 @@ exports.registerNotificationId = async (req, res, next) => {
 
   try {
     let turnBody = await turnService.getTurn(idTurn); //Obtengo el turno de la base de datos
-    turnBody = turnBody;
     if (turnBody.notification_id !== idNotification) {
       //Me fijo si ya está vinculada la id de la notificación
       turnBody.notification_id = idNotification;
       let newTurn = await turnService.updateTurn(idTurn, turnBody);
-      newTurn = newTurn;
       let timeout = new Date(newTurn.turn_date);
 
       //Timer que envía una notificación TODO
@@ -98,7 +96,7 @@ exports.registerNotificationId = async (req, res, next) => {
         }
         let timeleft = Math.ceil((timeout - new Date()) / 1000); //TODO cambiar resta de objetos DATE a milisegundos
         if (timeleft < 5 || !turn.is_active) {
-          onesignal.crearNotificacion(idNotification);
+          onesignal.crearNotificacion(idNotification, idTurn);
           clearInterval(intervalId);
         }
       }, 1000 * 1);

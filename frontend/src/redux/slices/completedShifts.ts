@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { Turn } from '@/models/turns.type';
 
-const ClientTurnEmptyState: Turn = {
+const ClientTurnEmptyState: Turn[] = [{
   turnId: '',
   isActive: false,
   notificationId: '',
@@ -9,22 +9,23 @@ const ClientTurnEmptyState: Turn = {
   totalTime: 0,
   turnDate: '0',
   foodId: null,
-};
+}];
 
-export const ClientTurnSlice = createSlice({
-  name: 'clientTurn',
+export const completedShifts = createSlice({
+  name: 'completedShifts',
   initialState: ClientTurnEmptyState,
   reducers: {
-    setTurn: (state, action: PayloadAction<Turn>) => {
-      return action.payload;
+    setShifts: (state, action: PayloadAction<Turn[]>) => {
+      state = action.payload;
+      return state;
     },
-    resetTurn: () => {
+    resetShifts: () => {
       return ClientTurnEmptyState;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setTurn, resetTurn } = ClientTurnSlice.actions;
+export const { setShifts, resetShifts } = completedShifts.actions;
 
-export default ClientTurnSlice.reducer;
+export default completedShifts.reducer;
