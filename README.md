@@ -1,4 +1,5 @@
-<h1 align="center" ><img height="32px" src="./frontend/src/assets/Logo.svg"/> Q`Rápido</h1>
+<h1 align="center">C7-05-NODE-REACT</h1>
+<h2 align="center" ><img height="24px" src="./frontend/src/assets/Logo.svg"/> Q`Rápido</h1>
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
@@ -11,14 +12,7 @@
         <li><a href="#tecnologías">Tecnologías</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#como-iniciar">Como Iniciar</a>
-      <ul>
-        <li><a href="#pre-requisitos">Pre requisitos</a></li>
-        <li><a href="#instalación">Instalación</a></li>
-      </ul>
-    </li>
-    <li><a href="#uso">Uso</a></li>
+    <li><a href="#demo">Demo</a></li>
     <li><a href="#integrantes">Integrantes</a></li>
 </ol>
 </details>
@@ -28,6 +22,10 @@
 <p align="justify">
   Consiste en un sistema de control de turnos y avisos.
 </p>
+<img src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmSEdw6P4T7m7G-v5I_jabYl8JY3QN7kEQNxSjASSny6txwKIVXwwwQcSCmYYoSZ9JtYxxOLeq0=w1265-h897"/>
+
+<h3>Demo</h3>
+<p> https://qrapido.netlify.app/</p>
 
 <h3>Tecnologías</h3>
 
@@ -85,7 +83,7 @@ npm run start 'file-path'
   <li>Isaac Celi</li>
   <li>Emanuel Palacio</li>
   <strong>FullStack:</strong>
-  <li>Hugo Iturrieta</li>
+  <li>Hugo Iturrieta  <a target="_blank" href="https://www.linkedin.com/in/hugoiturrieta/"><img  width="20px" height="20px" src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmT3rEWw0KwxXzlpI_BpGFOCQmGN4Bxy53pidk-bfuo02PpRqwIXqZ9ISLN5Nk0AJOg2Z_7JqZA=w1265-h817" /></a></li>
   <strong>Backend: </strong>
-  <li>Maximiliano Miño</li>
-  <li>Valeria Mancilla</li>
+  <li>Maximiliano Miño  <a target="_blank" href="https://www.linkedin.com/in/maximiliano-mi%C3%B1o-4876221a9/"><img  width="20px" height="20px" src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmT3rEWw0KwxXzlpI_BpGFOCQmGN4Bxy53pidk-bfuo02PpRqwIXqZ9ISLN5Nk0AJOg2Z_7JqZA=w1265-h817" /></a></li>
+  <li>Valeria Mancilla  <a target="_blank" href="https://www.linkedin.com/in/valeria-mancilla/"><img  width="20px" height="20px" src="https://lh3.googleusercontent.com/drive-viewer/AJc5JmT3rEWw0KwxXzlpI_BpGFOCQmGN4Bxy53pidk-bfuo02PpRqwIXqZ9ISLN5Nk0AJOg2Z_7JqZA=w1265-h817" /></a></li>
