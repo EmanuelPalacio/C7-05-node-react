@@ -1,0 +1,50 @@
+@import './varsAndFonts.css';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--font-family-regular);
+  font-size: var(--font-size-regular);
+  font-weight: 400;
+}
+body {
+  min-height: 100vh;
+  background-color: rgb(var(--color-background));
+}
+:is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-family-title);
+  font-weight: 700;
+}
+h1 {
+  font-size: var(--font-size-title);
+}
+h2 {
+  font-size: calc(var(--font-size-title) - 0.2rem);
+}
+h3 {
+  font-size: calc(var(--font-size-title) - 0.4rem);
+}
+h4 {
+  font-size: calc(var(--font-size-title) - 0.6rem);
+}
+h5 {
+  font-size: calc(var(--font-size-title) - 0.8rem);
+}
+h6 {
+  font-size: calc(var(--font-size-title) - 1rem);
+}
+a {
+  color: rgb(var(--color-secondary));
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: inherit;
+}
+a:hover {
+  color: rgb(var(--color-fourt));
+}
+li,
+ol {
+  list-style: none;
+}
