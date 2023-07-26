@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  src:
+    local('Nunito'),
+    url('../assets/fonts/Nunito-VariableFont_wght.woff2') format('woff2 supports variations'),
+    url('../assets/fonts/Nunito-VariableFont_wght.woff2') format('woff2-variations'),
+    url('../assets/fonts/Nunito-VariableFont_wght.woff') format('woff supports variations'),
+    url('../assets/fonts/Nunito-VariableFont_wght.woff') format('woff-variations');
+}
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  src:
+    local('Raleway'),
+    url('../assets/fonts/Raleway-VariableFont_wght.woff2') format('woff2 supports variations'),
+    url('../assets/fonts/Raleway-VariableFont_wght.woff2') format('woff2-variations'),
+    url('../assets/Raleway-VariableFont_wght.woff') format('woff supports variations'),
+    url('../assets/Raleway-VariableFont_wght.woff') format('woff-variations');
+}
+
+:root {
+  --color-primary: 64, 171, 232;
+  --color-secondary: 15, 76, 117;
+  --color-third: 21, 0, 255;
+  --color-fourt: 100, 208, 227;
+  --color-background: 247, 247, 247;
+  --color-shadow: 0, 0, 0;
+
+  --font-family-title: 'Relaway', sans-serif;
+  --font-family-regular: 'Nunito', sans-serif;
+
+  --font-size-title: 3rem;
+  --font-size-regular: 1rem;
+}
