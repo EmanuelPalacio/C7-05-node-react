@@ -1,8 +1,0 @@
-.listFoodsContainer {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 100%;
-  height: 100%;
-}
