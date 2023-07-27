@@ -1,0 +1,27 @@
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: calc(var(--font-size-regular) + 0.2rem);
+  font-weight: var(--font-weight-regular-bold);
+  color: rgb(var(--color-secondary));
+  height: 50px;
+  width: 100%;
+  max-width: 200px;
+  border-radius: 15px;
+  border: 1px solid rgb(var(--color-primary));
+  background-color: rgb(var(--color-primary));
+  -webkit-box-shadow:
+    inset 2px 2px 5px 0px rgba(var(--color-background)),
+    inset -2px -2px 5px 0px rgba(var(--color-shadow));
+  -moz-box-shadow:
+    inset 2px 2px 5px 0px rgba(var(--color-background)),
+    inset -2px -2px 5px 0px rgba(var(--color-shadow));
+  box-shadow:
+    inset 2px 2px 5px 0px rgba(var(--color-background)),
+    inset -2px -2px 5px 0px rgba(var(--color-shadow));
+}
+.btn:active {
+  transform: scale(0.9);
+}
