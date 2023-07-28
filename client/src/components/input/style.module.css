@@ -20,3 +20,6 @@
 .container:focus-within {
   background-color: rgba(var(--color-primary) / 30%);
 }
+.container:has(.containerInput:invalid) {
+  background-color: rgb(247, 147, 147);
+}
