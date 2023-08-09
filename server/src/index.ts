@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import express, { json, urlencoded } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -36,3 +37,14 @@ connectSQL
   .catch((err) => {
     console.log('sql connection failed', err);
   });
+=======
+import express from 'express';
+import { PORT } from './config/vars';
+
+const app = express();
+
+app.use(express.json());
+app.listen(PORT, () => {
+  console.log('se inicio en el puerto', PORT);
+});
+>>>>>>> 5b0a29e43ac64cb573039e2f2fffd762e32592c1
