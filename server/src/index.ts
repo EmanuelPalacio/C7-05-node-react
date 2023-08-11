@@ -3,7 +3,6 @@ import cors from 'cors';
 import morgan from 'morgan';
 import { PORT } from './config/vars';
 import router from './routes';
-import { database } from './config';
 import createTableModels from './models';
 
 const app = express();
@@ -28,13 +27,4 @@ app.listen(PORT, () => {
 });
 
 /* ------ DATABASE ------- */
-
-database
-  .connect()
-  .then(() => {
-    console.log('SQL connection successful ');
-  })
-  .catch((err) => {
-    console.log('sql connection failed', err);
-  });
 createTableModels();
