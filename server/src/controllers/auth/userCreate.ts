@@ -13,7 +13,7 @@ export default function userCreate(req: Request, res: Response) {
       uid,
       password: passwordEncrypt,
     };
-    console.log(createUser(data));
+    console.log(createUser(data).then());
     res.status(200).json({
       ok: true,
       msg: 'User created successfully',

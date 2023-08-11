@@ -27,4 +27,4 @@ app.listen(PORT, () => {
 });
 
 /* ------ DATABASE ------- */
-createTableModels();
+createTableModels().then();

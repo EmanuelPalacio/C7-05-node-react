@@ -3,10 +3,13 @@ import { database } from '../config';
 const createTableFoods = async (): Promise<void> => {
   try {
     database.query({
-      text: `CREATE TABLE IF NOT EXISTS foods(
-        userId integer NOT NULL REFERENCES users (uid),
-        name VARCHAR(20),
-        category  VARCHAR(15)
+      text: `CREATE TABLE IF NOT EXISTS foods (
+        id SERIAL NOT NULL,
+        name VARCHAR(20) NOT NULL,
+        description VARCHAR(255) NOT NULL,
+        uid uuid NOT NULL,
+        PRIMARY KEY (id),
+        FOREIGN KEY (uid) REFERENCES users (uid)
       )`,
     });
   } catch (error) {
