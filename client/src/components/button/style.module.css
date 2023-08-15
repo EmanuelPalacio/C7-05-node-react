@@ -9,19 +9,15 @@
   height: 50px;
   width: 100%;
   max-width: 200px;
-  border-radius: 15px;
-  border: 1px solid rgb(var(--color-primary));
-  background-color: rgb(var(--color-primary));
-  -webkit-box-shadow:
-    inset 2px 2px 5px 0px rgba(var(--color-background)),
-    inset -2px -2px 5px 0px rgba(var(--color-shadow));
-  -moz-box-shadow:
-    inset 2px 2px 5px 0px rgba(var(--color-background)),
-    inset -2px -2px 5px 0px rgba(var(--color-shadow));
-  box-shadow:
-    inset 2px 2px 5px 0px rgba(var(--color-background)),
-    inset -2px -2px 5px 0px rgba(var(--color-shadow));
+  border-radius: 25px;
+  background: linear-gradient(90deg, rgb(var(--color-primary)) 35%, rgb(var(--color-fourt)) 100%);
+  box-shadow: 1px 1px 5px 0px rgba(var(--color-shadow) / 80%);
+  -webkit-box-shadow: 1px 1px 5px 0px rgba(var(--color-shadow) / 80%);
+  -moz-box-shadow: 1px 1px 5px 0px rgba(var(--color-shadow) / 80%);
 }
 .btn:active {
   transform: scale(0.9);
+}
+.btn:hover {
+  transform: scale(1.1);
 }
