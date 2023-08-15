@@ -3,7 +3,7 @@ import { User, UserRequest } from '../../types/User';
 import { encrypt, idGenerate } from '../../utils';
 import { createUser } from '../../services/database';
 
-export default function userCreate(req: Request, res: Response) {
+export default async function register(req: Request, res: Response) {
   try {
     const { password, ...rest }: UserRequest = req.body;
     const passwordEncrypt = encrypt.toEncrypt(password);
@@ -13,7 +13,7 @@ export default function userCreate(req: Request, res: Response) {
       uid,
       password: passwordEncrypt,
     };
-    console.log(createUser(data).then());
+    await createUser(data);
     res.status(200).json({
       ok: true,
       msg: 'User created successfully',
