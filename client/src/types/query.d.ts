@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface Fetch {
-  get: (url?: string) => Promise<any>;
-  post: (body: object, url?: string) => Promise<any>;
-  put: (body: object, url?: string) => Promise<any>;
-  delete: (body: object, url?: string) => Promise<any>;
+  get: (url: string) => Promise<any>;
+  post: (url: string, body: object, url?: string) => Promise<any>;
+  put: (url: string, body: object, url?: string) => Promise<any>;
+  delete: (url: string, body: object, url?: string) => Promise<any>;
 }
 
 export interface LoginResponse {

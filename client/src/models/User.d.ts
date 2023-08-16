@@ -11,6 +11,9 @@ export interface UserRegister extends UserLogin {
   companyName: string;
 }
 
-export interface User extends UserRegister {
-  uid: Uid;
+export interface User extends Omit<UserRegister, 'password'> {
+  uid: Uid | null;
+  token: string;
+  status: 'pending' | 'fulfilled' | 'reject' | 'idle';
+  error: object;
 }

@@ -1,7 +1,7 @@
 import { Fetch } from '../types/query';
 import { API } from './vars';
 
-const queryWhitBody = async (body: object, url?: string): Promise<unknown> => {
+const queryWhitBody = async (url: string, body: object): Promise<unknown> => {
   const options: RequestInit = {
     method: 'POST',
     headers: {
@@ -9,8 +9,7 @@ const queryWhitBody = async (body: object, url?: string): Promise<unknown> => {
     },
     body: JSON.stringify(body),
   };
-  const api = url ? url : API;
-  const response = await fetch(api, options);
+  const response = await fetch(API + url, options);
   return await response.json();
 };
 
@@ -22,8 +21,7 @@ const fetchApi: Fetch = {
         'Content-Type': 'application/json',
       },
     };
-    const api = url ? url : API;
-    const response = await fetch(api, options);
+    const response = await fetch(API + url, options);
     return await response.json();
   },
   post: queryWhitBody,
