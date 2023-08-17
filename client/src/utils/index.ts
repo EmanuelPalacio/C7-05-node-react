@@ -1,1 +1,1 @@
-export { default as webTokenDecode } from './webTokenDecode';
+export * from './storage';
