@@ -1,25 +1,66 @@
 .container {
   display: block;
-  padding: 10px;
   width: 100%;
+}
+.containerInput {
+  display: grid;
+  grid-template-columns: 30px 1fr 30px;
+  grid-template-rows: 30px;
+  gap: 0 10px;
+  width: 100%;
+  padding: 10px;
   border-radius: 15px;
+  font-size: calc(var(--font-size-regular) + 0.2rem);
+  font-weight: var(--font-weight-regular-bold);
+  color: rgba(var(--color-secondary));
   box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
   -webkit-box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
   -moz-box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
 }
-.containerInput {
-  width: 100%;
-  height: 30px;
+.input {
   outline: none;
   background-color: transparent;
   text-align: center;
-  font-size: calc(var(--font-size-regular) + 0.2rem);
-  font-weight: var(--font-weight-regular-bold);
-  color: rgba(var(--color-secondary));
 }
-.container:focus-within {
-  background-color: rgba(var(--color-primary) / 30%);
+.inputIcon {
+  object-fit: contain;
+  height: 30px;
 }
-.container:has(.containerInput:invalid) {
+.inputIcon_hidden {
+  filter: grayscale(80%);
+}
+.btn {
+  cursor: pointer;
+  background-color: transparent;
+}
+.btn:hover {
+  transform: scale(1.2);
+}
+.btn:active {
+  transform: scale(1);
+}
+.containerInput:focus-within {
+  background-color: rgba(var(--color-primary) / 15%);
+}
+.containerInput:has(.input:invalid) {
   background-color: rgb(247, 147, 147);
+}
+.error {
+  display: none;
+  position: relative;
+  color: rgb(231, 2, 2);
+  font-weight: 600;
+  align-self: start;
+  padding: 10px 0 0 1rem;
+}
+.error::before {
+  position: absolute;
+  content: '*';
+  left: 0.2rem;
+  justify-content: center;
+  align-items: center;
+  color: rgb(231, 2, 2);
+}
+.container:has(.input:invalid) .error {
+  display: block;
 }
