@@ -1,5 +1,5 @@
 import { database } from '../../config';
-import { User } from '../../types/User';
+import { User } from '../../types/userRequest';
 
 export default async function createUser(user: User): Promise<void> {
   const query = {

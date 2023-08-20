@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { User, UserRequest } from '../../types/User';
+import { User, UserRequest } from '../../types/userRequest';
 import { encrypt, idGenerate } from '../../utils';
 import { createUser } from '../../services/database';
 

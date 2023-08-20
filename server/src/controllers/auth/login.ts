@@ -1,24 +1,35 @@
 import { Request, Response } from 'express';
-import { askForTableData } from '../../services/database';
+import { verifiyEmail } from '../../services/database';
+import encript from '../../utils/encrypt';
 import tables from '../../types/enumTables';
 import { webTokenGenerate } from '../../utils';
 
 export default async function login(req: Request, res: Response) {
+  const { email, password } = req.body;
   try {
-    const { email } = req.body;
-    const data = await askForTableData(tables.users);
-    const user = data.find((user) => user.email === email);
-    const token = user !== undefined && webTokenGenerate(user.uid);
-    res.status(200).json({
+    const query = await verifiyEmail(tables.users, email);
+    const checkPassword = encript.validate(password, query.password);
+    if (!query) {
+      return res.status(400).json({
+        ok: false,
+        msg: `the email: ${email} not exist`,
+      });
+    }
+    if (!checkPassword) {
+      return res.status(400).json({
+        ok: false,
+        msg: `password is incorrect`,
+      });
+    }
+    return res.status(200).json({
       ok: true,
-      msg: 'Successfully verified account',
-      token,
+      msg: `successfully accessed`,
+      token: webTokenGenerate(query.uid),
     });
   } catch (error) {
-    console.log('🚀 ~ file: userCreate.ts:22 ~ userCreate ~ error:', error);
-    res.status(500).json({
+    return res.status(500).json({
       ok: false,
-      error,
+      msg: `server error`,
     });
   }
 }
