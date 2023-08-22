@@ -10,6 +10,9 @@ const queryWhitBody = async (url: string, body: object): Promise<unknown> => {
     body: JSON.stringify(body),
   };
   const response = await fetch(API + url, options);
+  if (!response.ok) {
+    throw await response.json();
+  }
   return await response.json();
 };
 
@@ -22,6 +25,9 @@ const fetchApi: Fetch = {
       },
     };
     const response = await fetch(API + url, options);
+    if (!response.ok) {
+      throw await response.json();
+    }
     return await response.json();
   },
   post: queryWhitBody,

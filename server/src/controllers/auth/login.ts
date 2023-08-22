@@ -8,7 +8,8 @@ export default async function login(req: Request, res: Response) {
   const { email, password } = req.body;
   try {
     const query = await verifiyEmail(tables.users, email);
-    const checkPassword = encript.validate(password, query.password);
+    const checkPassword = query && encript.validate(password, query.password);
+    const token = checkPassword && webTokenGenerate(query.uid);
     if (!query) {
       return res.status(400).json({
         ok: false,
@@ -24,7 +25,7 @@ export default async function login(req: Request, res: Response) {
     return res.status(200).json({
       ok: true,
       msg: `successfully accessed`,
-      token: webTokenGenerate(query.uid),
+      token,
     });
   } catch (error) {
     return res.status(500).json({

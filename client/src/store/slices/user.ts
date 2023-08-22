@@ -3,12 +3,12 @@ import { User, UserLogin } from '../../models/User';
 import { loginService } from '../../services/auth';
 import jwtDecode from 'jwt-decode';
 import { JwtDecode } from '../../types/jwtDecode';
-import { getLocalStorage, setLocalStorage } from '../../utils';
+import { clearLocalStorage, getLocalStorage, setLocalStorage } from '../../utils';
 
-const userLoginData: Pick<User, 'uid' | 'token'> | null = getLocalStorage('userLogin');
-const initialState: User = {
-  token: userLoginData?.token || '',
-  uid: userLoginData?.uid || null,
+const storageState: Pick<User, 'uid' | 'token' | 'email'> | null = getLocalStorage('userLogin');
+const userState: User = {
+  token: '',
+  uid: null,
   name: '',
   surname: '',
   companyName: '',
@@ -16,15 +16,17 @@ const initialState: User = {
   error: {},
   status: 'idle',
 };
+const initialState = storageState ? { ...userState, ...storageState } : userState;
 
 export const login = createAsyncThunk('user/login', async (body: UserLogin, { rejectWithValue }) => {
   try {
     const data = await loginService(body);
     const { uid } = jwtDecode<JwtDecode>(data.token);
-    const newObject = { uid, token: data.token };
+    const newObject = { uid, token: data.token, email: body.email };
     setLocalStorage('userLogin', newObject);
     return newObject;
   } catch (error) {
+    clearLocalStorage();
     return rejectWithValue(error);
   }
 });
@@ -42,9 +44,8 @@ export const user = createSlice({
       state.uid = action.payload.uid;
       state.status = 'fulfilled';
     });
-    builder.addCase(login.rejected, (state, action) => {
-      state.status = 'reject';
-      state.error = action.error;
+    builder.addCase(login.rejected, (_state, action) => {
+      return { ...initialState, status: 'reject', error: action.payload };
     });
   },
 });
