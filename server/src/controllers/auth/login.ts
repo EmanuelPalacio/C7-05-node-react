@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { verifiyEmail } from '../../services/database';
+import { searchUserByEmail } from '../../services/database';
 import encript from '../../utils/encrypt';
 import tables from '../../types/enumTables';
 import { webTokenGenerate } from '../../utils';
@@ -7,7 +7,7 @@ import { webTokenGenerate } from '../../utils';
 export default async function login(req: Request, res: Response) {
   const { email, password } = req.body;
   try {
-    const query = await verifiyEmail(tables.users, email);
+    const query = await searchUserByEmail(tables.users, email);
     const checkPassword = query && encript.validate(password, query.password);
     const token = checkPassword && webTokenGenerate(query.uid);
     if (!query) {
