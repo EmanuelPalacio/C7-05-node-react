@@ -1,18 +1,17 @@
-import express, { json, urlencoded } from 'express';
+import { json, urlencoded } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import { PORT } from './config/vars';
 import router from './routes';
 import createTableModels from './models';
+import { allowOrigin, app, server } from './config';
 
-const app = express();
-
-/* ------ SERVER CONFIG ------- */
+/* ------ SERVErserver CONFIG ------- */
 app.use(morgan('dev'));
 //middlewares
 app.use(
   cors({
-    origin: 'http://localhost:5173/',
+    origin: allowOrigin,
     methods: 'GET,POST,PUT,DELETE',
     credentials: true,
   })
@@ -22,9 +21,9 @@ app.use(urlencoded({ extended: true }));
 // Routes
 app.use('/api', router);
 
-app.listen(PORT, () => {
-  console.log('server iniciado PORT || ', PORT);
-});
+server.listen(PORT);
 
 /* ------ DATABASE ------- */
 createTableModels().then();
+/* ----- RESET CONSOLE ------ */
+console.clear();

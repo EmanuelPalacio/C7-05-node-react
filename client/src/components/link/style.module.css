@@ -1,0 +1,6 @@
+.link {
+  color: rgb(var(--color-primary));
+}
+.link_active {
+  color: red;
+}

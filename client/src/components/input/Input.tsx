@@ -8,7 +8,7 @@ interface Input extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
-export default function Input({ type, onChange, placeholder, id, required, pattern, error, value, icon, buttonIcon }: Input) {
+export default function Input({ type, onChange, placeholder, id, required, pattern, error, value, icon, buttonIcon, maxLength }: Input) {
   const [isType, setIsType] = useState(type);
   return (
     <>
@@ -24,6 +24,7 @@ export default function Input({ type, onChange, placeholder, id, required, patte
             onChange={onChange}
             value={value}
             placeholder={placeholder}
+            maxLength={maxLength}
           />
           {buttonIcon ? (
             <button className={style.btn} onClick={() => setIsType(isType === 'password' ? 'text' : 'password')}>

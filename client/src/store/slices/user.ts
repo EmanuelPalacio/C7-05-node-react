@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { User, UserLogin } from '../../models/User';
+import { User, UserLogin, UserRegister } from '../../models/User';
 import { loginService } from '../../services/auth';
 import jwtDecode from 'jwt-decode';
 import { JwtDecode } from '../../types/jwtDecode';
 import { clearLocalStorage, getLocalStorage, setLocalStorage } from '../../utils';
+import { registerSerivce } from '../../services/user';
 
 const storageState: Pick<User, 'uid' | 'token' | 'email'> | null = getLocalStorage('userLogin');
 const userState: User = {
@@ -30,7 +31,9 @@ export const login = createAsyncThunk('user/login', async (body: UserLogin, { re
     return rejectWithValue(error);
   }
 });
-
+export const register = createAsyncThunk('user/register', async (body: UserRegister) => {
+  return await registerSerivce(body);
+});
 export const user = createSlice({
   name: 'user',
   initialState,
