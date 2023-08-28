@@ -1,11 +1,18 @@
 import { NavLink } from 'react-router-dom';
 import style from './style.module.css';
 
-export default function ({ param }: { param: string }) {
+interface NavLink {
+  children: React.ReactNode;
+  param: string;
+}
+
+export default function ({ children, param }: NavLink) {
   return (
     <NavLink
       to={`/dashboard/${param}`}
       className={({ isActive, isPending }) => (isPending ? `${style.link}` : isActive ? `${style.link_active}` : '')}
-    ></NavLink>
+    >
+      {children}
+    </NavLink>
   );
 }

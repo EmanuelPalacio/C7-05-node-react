@@ -3,6 +3,7 @@ import style from './style.module.css';
 import { Btn, LoginGoogle } from '..';
 import imgLogo from '../../assets/images/logo.svg';
 import { useAppDispatch } from '../../hooks/reduxHooks';
+import { Link, useLocation } from 'react-router-dom';
 
 interface TypeForm {
   children: ReactNode;
@@ -16,6 +17,7 @@ export default function Form({ children, formDispatch }: TypeForm): React.ReactE
     event.preventDefault();
     dispatch(formDispatch());
   };
+  const { pathname } = useLocation();
   return (
     <div className={style.formContainer}>
       <div className={style.logoContainer}>
@@ -24,10 +26,17 @@ export default function Form({ children, formDispatch }: TypeForm): React.ReactE
       <form className={style.form} onSubmit={handleSubmit}>
         {children}
         <Btn type='submit'>Ingresar</Btn>
+        {pathname === '/' ? (
+          <Link to='/register'>¿No eres usuario? Registrate</Link>
+        ) : (
+          <Link to='/'>¿Ya tienes una cuenta? Inicia sesión</Link>
+        )}
       </form>
-      <div className={style.otherLogins}>
-        <LoginGoogle />
-      </div>
+      {pathname === '/' ? (
+        <div className={style.otherLogins}>
+          <LoginGoogle />
+        </div>
+      ) : null}
     </div>
   );
 }

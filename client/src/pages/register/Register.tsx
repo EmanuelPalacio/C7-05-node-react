@@ -7,6 +7,7 @@ import { Input, Form } from '../../components';
 import { useField } from '../../hooks';
 import { UserRegister } from '../../models/User';
 import { regularExpressions } from '../../utils/regularExpressions';
+import { register } from '../../store/slices/user';
 
 export default function Register() {
   const [data, setData] = useField<UserRegister>({
@@ -17,9 +18,27 @@ export default function Register() {
     password: '',
   });
   return (
-    <Form formDispatch={() => {}}>
-      <Input id='name' type='text' placeholder='Nombre' icon={profile} onChange={setData} value={data.name} maxLength={20} />
-      <Input id='surname' type='text' placeholder='Apellido' icon={profile} onChange={setData} value={data.surname} maxLength={20} />
+    <Form formDispatch={() => register(data)}>
+      <Input
+        id='name'
+        type='text'
+        placeholder='Nombre'
+        icon={profile}
+        onChange={setData}
+        value={data.name}
+        maxLength={20}
+        error='El campo es requerido'
+      />
+      <Input
+        id='surname'
+        type='text'
+        placeholder='Apellido'
+        icon={profile}
+        onChange={setData}
+        value={data.surname}
+        maxLength={20}
+        error='El campo es requerido'
+      />
       <Input
         id='companyName'
         type='text'
@@ -28,6 +47,7 @@ export default function Register() {
         onChange={setData}
         value={data.companyName}
         maxLength={20}
+        error='El campo es requerido'
       />
       <Input
         id='email'

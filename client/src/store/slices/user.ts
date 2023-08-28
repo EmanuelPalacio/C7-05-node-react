@@ -31,8 +31,12 @@ export const login = createAsyncThunk('user/login', async (body: UserLogin, { re
     return rejectWithValue(error);
   }
 });
-export const register = createAsyncThunk('user/register', async (body: UserRegister) => {
-  return await registerSerivce(body);
+export const register = createAsyncThunk('user/register', async (body: UserRegister, { rejectWithValue }) => {
+  try {
+    return await registerSerivce(body);
+  } catch (error) {
+    return rejectWithValue(error);
+  }
 });
 export const user = createSlice({
   name: 'user',
@@ -49,6 +53,16 @@ export const user = createSlice({
     });
     builder.addCase(login.rejected, (_state, action) => {
       return { ...initialState, status: 'reject', error: action.payload };
+    });
+    builder.addCase(register.pending, (state) => {
+      state.status = 'pending';
+    });
+    builder.addCase(register.fulfilled, (state) => {
+      state.status = 'fulfilled';
+    });
+    builder.addCase(register.rejected, (state, action) => {
+      state.status = 'reject';
+      state.error = action.payload;
     });
   },
 });

@@ -3,9 +3,14 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  aspect-ratio: 1;
   height: 50px;
-  border-radius: 10px;
+  border-radius: 25px;
+  border: 1px solid rgba(var(--color-secondary));
+  padding: 5px;
+}
+.btn p {
+  font-size: calc(var(--font-size-title) - 1.5rem);
+  padding: 0 10px;
 }
 .img {
   filter: drop-shadow(2px 2px 1px rgba(var(--color-shadow)));

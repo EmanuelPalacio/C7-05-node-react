@@ -35,6 +35,9 @@ h5 {
 h6 {
   font-size: calc(var(--font-size-title) - 1rem);
 }
+p {
+  color: rgb(var(--color-secondary));
+}
 a {
   color: rgb(var(--color-secondary));
   font-weight: 500;

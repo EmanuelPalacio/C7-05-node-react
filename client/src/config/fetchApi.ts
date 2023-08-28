@@ -11,7 +11,8 @@ const queryWhitBody = async (url: string, body: object): Promise<unknown> => {
   };
   const response = await fetch(API + url, options);
   if (!response.ok) {
-    throw await response.json();
+    const error = await response.json();
+    throw { ...error, status: response.status };
   }
   return await response.json();
 };
@@ -26,7 +27,8 @@ const fetchApi: Fetch = {
     };
     const response = await fetch(API + url, options);
     if (!response.ok) {
-      throw await response.json();
+      const error = await response.json();
+      throw { ...error, status: response.status };
     }
     return await response.json();
   },
