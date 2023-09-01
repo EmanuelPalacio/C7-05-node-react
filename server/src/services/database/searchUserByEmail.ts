@@ -1,5 +1,5 @@
 import { database } from '../../config';
-import { User } from '../../types/userRequest';
+import { User } from '../../types/user';
 import tables from '../../types/enumTables';
 
 export default async function searchUserByEmail(table: tables, email: string): Promise<User> {

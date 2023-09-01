@@ -13,6 +13,7 @@
   font-size: calc(var(--font-size-regular) + 0.2rem);
   font-weight: var(--font-weight-regular-bold);
   color: rgba(var(--color-secondary));
+  background-color: rgba(var(--color-background));
   box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
   -webkit-box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
   -moz-box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
@@ -40,7 +41,7 @@
   transform: scale(1);
 }
 .containerInput:focus-within {
-  background-color: rgba(var(--color-primary) / 15%);
+  background-color: rgba(var(--color-fourt));
 }
 .containerInput:has(.input:invalid) {
   background-color: rgb(247, 147, 147);

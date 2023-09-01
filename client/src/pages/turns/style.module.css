@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  place-content: center;
+  height: calc(100vh - 80px);
+}
+.container_turn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+}
+.container_turn > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+  width: 70%;
+  border-radius: 30px;
+  background: linear-gradient(180deg, rgba(var(--color-fourt)) 0%, rgba(var(--color-primary)) 50%, rgba(var(--color-fourt)) 100%);
+}
+.container_form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.container_listTunrs {
+  width: 60%;
+}

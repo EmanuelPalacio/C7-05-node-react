@@ -1,5 +1,5 @@
 const enum tables {
   users = 'users',
-  foods = 'foods',
+  turns = 'turns',
 }
 export default tables;

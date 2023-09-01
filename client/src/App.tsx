@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { Home, Register } from './pages';
+import { Home, Register, Turns } from './pages';
 import { ProtectedRoute, PublicRoute } from './components';
 
 export default function App() {
@@ -11,7 +11,7 @@ export default function App() {
       </Route>
       <Route path='/' element={<ProtectedRoute />}>
         <Route path='/dashboard' element={<Navigate replace to='/dashboard/turns' />} />
-        <Route path='/dashboard/turns' element={<h1>hola</h1>} />
+        <Route path='/dashboard/turns' element={<Turns />} />
         <Route path='/dashboard/statistics' element={<h1>statistics</h1>} />
       </Route>
       <Route path='/*' element={<Navigate replace to='/404' />} />
