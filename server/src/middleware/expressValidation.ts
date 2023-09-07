@@ -6,7 +6,7 @@ const expressValidation = (req: Request, res: Response, next: NextFunction) => {
   if (!errors.isEmpty()) {
     return res.status(400).json(errors);
   }
-  next();
+  return next();
 };
 
 export default expressValidation;

@@ -6,7 +6,7 @@ interface NavLink {
   param: string;
 }
 
-export default function ({ children, param }: NavLink) {
+export default function Link({ children, param }: NavLink) {
   return (
     <NavLink
       to={`/dashboard/${param}`}

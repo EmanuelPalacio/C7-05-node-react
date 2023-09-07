@@ -18,14 +18,50 @@
   height: 80%;
   width: 70%;
   border-radius: 30px;
-  background: linear-gradient(180deg, rgba(var(--color-fourt)) 0%, rgba(var(--color-primary)) 50%, rgba(var(--color-fourt)) 100%);
+  box-shadow:
+    50px 50px 100px 10px rgba(var(--color-shadow) / 40%),
+    10px 5px 30px 0px rgba(var(--color-shadow) / 30%) inset;
+  -webkit-box-shadow:
+    50px 50px 100px 10px rgba(var(--color-shadow) / 40%),
+    10px 5px 30px 0px rgba(var(--color-shadow) / 30%) inset;
+  -moz-box-shadow:
+    50px 50px 100px 10px rgba(var(--color-shadow) / 40%),
+    10px 5px 30px 0px rgba(var(--color-shadow) / 30%) inset;
 }
 .container_form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 }
-.container_listTunrs {
+.container_options {
+  text-align: center;
+  height: 50px;
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
+  -webkit-box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
+  -moz-box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
+  outline: none;
+}
+.container_options:focus-within {
+  background-color: rgba(var(--color-fourt));
+}
+.container_options option {
+  border-radius: 15px;
+}
+.container_info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   width: 60%;
+}
+.qr_container {
+  padding: 1rem;
+  border-radius: 15px;
+  box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
+  -webkit-box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
+  -moz-box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
 }

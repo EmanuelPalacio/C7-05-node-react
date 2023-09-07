@@ -1,3 +1,5 @@
+export { default as QRanimate } from './QRanimate/QRanimate';
+export { default as QrCode } from './QRcode/QrCode';
 export { default as Btn } from './button/Btn';
 export { default as Form } from './form/Form';
 export { default as Input } from './input/Input';

@@ -15,6 +15,5 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'no-console': 'warn',
-    'no-useless-escape': '0',
   },
 };
