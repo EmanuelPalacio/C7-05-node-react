@@ -8,6 +8,7 @@ export default function App() {
       <Route path='/' element={<PublicRoute />}>
         <Route path='/' element={<Home />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/:id' element={<p>hola</p>} />
       </Route>
       <Route path='/' element={<ProtectedRoute />}>
         <Route path='/dashboard' element={<Navigate replace to='/dashboard/turns' />} />

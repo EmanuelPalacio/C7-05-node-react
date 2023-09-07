@@ -12,7 +12,12 @@ export default function registerTurn(req: Request, res: Response) {
     res.status(200).json({
       ok: true,
       msg: 'create turn successfully',
-      id,
+      data: {
+        id,
+        name,
+        time,
+        creationDate,
+      },
     });
   } catch (error) {
     console.log('🚀 ~ file: registerTurn.ts:13 ~ registerTurn ~ error:', error);

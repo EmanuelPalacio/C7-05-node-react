@@ -1,12 +1,17 @@
 import { Fetch } from '../types/query';
 import { API } from './vars';
 
-const queryWhitBody = async (url: string, body: object): Promise<unknown> => {
+const queryWhitBody = async (url: string, body: object, method: string, auth?: string): Promise<unknown> => {
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+
+  if (auth) {
+    headers['Authorization'] = auth;
+  }
   const options: RequestInit = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    method,
+    headers,
     body: JSON.stringify(body),
   };
   const response = await fetch(API + url, options);
@@ -32,9 +37,9 @@ const fetchApi: Fetch = {
     }
     return await response.json();
   },
-  post: queryWhitBody,
-  put: queryWhitBody,
-  delete: queryWhitBody,
+  post: async (url: string, body: object, auth?: string) => queryWhitBody(url, body, 'POST', auth),
+  put: async (url: string, body: object, auth?: string) => queryWhitBody(url, body, 'PUT', auth),
+  delete: async (url: string, body: object, auth?: string) => queryWhitBody(url, body, 'DELETE', auth),
 };
 
 export default fetchApi;

@@ -3,15 +3,19 @@ import person from '../../assets/images/inputIcons/profile.png';
 import style from './style.module.css';
 import { useField } from '../../hooks';
 import { GenerateTurn } from '../../models/Turn';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { createTurn } from '../../store/slices/turn';
 
 export default function Turns() {
+  const dispatch = useAppDispatch();
+  const turn = useAppSelector((store) => store.turn);
   const [data, setData] = useField<GenerateTurn>({
     name: '',
     time: undefined,
   });
   const handleForm = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('🚀 ~ file: Turns.tsx:11 ~ Turns ~ data:', data);
+    dispatch(createTurn(data));
   };
   return (
     <section className={style.container}>
@@ -33,8 +37,8 @@ export default function Turns() {
       </div>
       <div className={style.container_info}>
         <div className={style.qr_container}>
-          <QrCode />
-          <QRanimate />
+          {turn.id && turn.status === 'fulfilled' ? <QrCode id={turn.id} /> : <QRanimate />}
+          <h3>{turn.id ? `#${turn.id}` : 'Creando turno...'}</h3>
         </div>
       </div>
     </section>

@@ -9,7 +9,7 @@
   padding: 5px;
 }
 .btn p {
-  font-size: calc(var(--font-size-title) - 1.5rem);
+  font-size: calc(var(--font-size-title) - 0.8rem);
   padding: 0 10px;
 }
 .img {

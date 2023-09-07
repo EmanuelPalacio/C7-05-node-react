@@ -1,3 +1,5 @@
+import { Status } from '../types/status';
+
 export type Uid = `${string}-${string}-${string}-${string}-${string}`;
 
 export interface UserLogin {
@@ -14,6 +16,6 @@ export interface UserRegister extends UserLogin {
 export interface User extends Omit<UserRegister, 'password'> {
   uid: Uid | null;
   token: string;
-  status: 'pending' | 'fulfilled' | 'reject' | 'idle';
-  error: any;
+  status: Status;
+  error: unknown;
 }
