@@ -1,7 +1,8 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/reduxHooks';
 import style from './styles/publicStyle.module.css';
+import { useAppSelector } from '../../hooks/reduxHooks';
 import imgHome from '../../assets/images/login.svg';
+import { Error } from '..';
 
 export default function PublicRoute() {
   const userState = useAppSelector((store) => store.user);
@@ -13,6 +14,7 @@ export default function PublicRoute() {
       <div className={style.containerSvg}>
         <img src={imgHome} alt='imagen de inicio' className={style.imageSvg} />
       </div>
+      {userState.error ? <Error status={userState.error.status} /> : null}
     </section>
   ) : (
     <Navigate replace to='/dashboard/turns' />

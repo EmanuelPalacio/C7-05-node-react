@@ -22,7 +22,14 @@ export const createTurn = createAsyncThunk('turn/register', async (body: Generat
 const turn = createSlice({
   name: 'turn',
   initialState,
-  reducers: {},
+  reducers: {
+    reset: () => {
+      return { ...initialState };
+    },
+    errorTurnClear: (state) => {
+      return (state.error = undefined);
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(createTurn.pending, (state) => {
       state.status = 'pending';
@@ -31,9 +38,9 @@ const turn = createSlice({
       return { ...state, status: 'fulfilled', ...action.payload.data };
     });
     builder.addCase(createTurn.rejected, (state, action) => {
-      return { ...state, status: 'reject', error: action.payload };
+      return { ...state, error: action.payload };
     });
   },
 });
-
+export const { reset, errorTurnClear } = turn.actions;
 export default turn.reducer;

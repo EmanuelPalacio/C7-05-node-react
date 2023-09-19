@@ -5,6 +5,7 @@ import { useField } from '../../hooks';
 import { GenerateTurn } from '../../models/Turn';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { createTurn } from '../../store/slices/turn';
+import webTurn from '../../assets/images/webTurn.png';
 
 export default function Turns() {
   const dispatch = useAppDispatch();
@@ -38,7 +39,10 @@ export default function Turns() {
       <div className={style.container_info}>
         <div className={style.qr_container}>
           {turn.id && turn.status === 'fulfilled' ? <QrCode id={turn.id} /> : <QRanimate />}
-          <h3>{turn.id ? `#${turn.id}` : 'Creando turno...'}</h3>
+          <h3>Abrir en otra pantalla</h3>
+          <a href='/dashboard/scan' target='_blank'>
+            <img src={webTurn} alt='turno' />
+          </a>
         </div>
       </div>
     </section>

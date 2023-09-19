@@ -70,3 +70,6 @@
   -webkit-box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
   -moz-box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
 }
+.qr_container > a:hover {
+  transform: scale(1.1);
+}

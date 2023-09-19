@@ -17,5 +17,5 @@ export interface User extends Omit<UserRegister, 'password'> {
   uid: Uid | null;
   token: string;
   status: Status;
-  error: unknown;
+  error: any;
 }

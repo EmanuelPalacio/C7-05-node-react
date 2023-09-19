@@ -1,10 +1,12 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/reduxHooks';
-import { Link } from '..';
+import { Error, Link } from '..';
 import style from './styles/protectedStyle.module.css';
 
 export default function ProtectedRoute() {
   const userState = useAppSelector((store) => store.user);
+  const turnState = useAppSelector((store) => store.turn);
+  const error = turnState.error?.status || userState.error?.status;
   return userState.token ? (
     <>
       <nav className={style.menu}>
@@ -18,6 +20,7 @@ export default function ProtectedRoute() {
         </ul>
       </nav>
       <Outlet />
+      {error ? <Error status={error} /> : null}
     </>
   ) : (
     <Navigate replace to='/' />

@@ -7,13 +7,13 @@ export default function checkToken(req: Request, res: Response, next: NextFuncti
   try {
     const validate = authorization && jwt.verify(authorization, KEY_GENERATE_TOKEN);
     if (!authorization) {
-      return res.status(404).json({
+      return res.status(401).json({
         ok: false,
         msg: 'token not found ',
       });
     }
     if (typeof validate === 'string') {
-      return res.status(400).json({
+      return res.status(401).json({
         ok: false,
         msg: 'Invalid Token',
       });

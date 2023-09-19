@@ -15,5 +15,5 @@ export interface TurnResponse {
 }
 export interface TurnSlice extends Turn {
   status: Status;
-  error: unknown;
+  error: any;
 }

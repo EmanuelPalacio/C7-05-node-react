@@ -14,7 +14,7 @@ const userState: User = {
   surname: '',
   companyName: '',
   email: '',
-  error: {},
+  error: undefined,
   status: 'idle',
 };
 const initialState = storageState ? { ...userState, ...storageState } : userState;
@@ -41,10 +41,15 @@ export const register = createAsyncThunk('user/register', async (body: UserRegis
 export const user = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    reset: () => {
+      return { ...initialState };
+    },
+    errorUserClear: (state) => (state.error = undefined),
+  },
   extraReducers: (builder) => {
-    builder.addCase(login.pending, (state) => {
-      state.status = 'pending';
+    builder.addCase(login.pending, () => {
+      return { ...initialState, status: 'pending' };
     });
     builder.addCase(login.fulfilled, (state, action) => {
       state.token = action.payload.token;
@@ -66,5 +71,6 @@ export const user = createSlice({
     });
   },
 });
+export const { reset, errorUserClear } = user.actions;
 
 export default user.reducer;

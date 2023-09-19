@@ -28,7 +28,7 @@ const validateCreateUser = [
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(403).json({ error: errors.array() });
+      return res.status(404).json({ error: errors.array() });
     }
     next();
     return;
