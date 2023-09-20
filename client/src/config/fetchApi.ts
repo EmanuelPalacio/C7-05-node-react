@@ -9,13 +9,13 @@ const queryWhitBody = async (url: string, method: string, auth?: string, body?: 
     method,
     headers,
   };
-  const response = await fetch(API + url, options);
   if (auth) {
     headers['Authorization'] = auth;
   }
   if (body) {
     options['body'] = JSON.stringify(body);
   }
+  const response = await fetch(API + url, options);
   if (!response.ok) {
     const error = await response.json();
 

@@ -4,11 +4,12 @@ import { Btn, LoginGoogle } from '..';
 import imgLogo from '../../assets/images/logo.svg';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { Link, useLocation } from 'react-router-dom';
+import { AsyncThunkAction } from '@reduxjs/toolkit';
 
 interface TypeForm {
   children: ReactNode;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  formDispatch: any;
+  formDispatch: () => AsyncThunkAction<any, any, any>;
 }
 
 export default function Form({ children, formDispatch }: TypeForm): React.ReactElement<TypeForm> {
