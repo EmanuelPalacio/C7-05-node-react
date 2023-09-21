@@ -6,7 +6,7 @@ import { JwtDecode } from '../../types/jwtDecode';
 import { clearLocalStorage, getLocalStorage, setLocalStorage } from '../../utils';
 import { registerSerivce } from '../../services/user';
 
-const storageState: Pick<User, 'uid' | 'token' | 'email'> | null = getLocalStorage('userLogin');
+const storageState = getLocalStorage<Pick<User, 'uid' | 'token' | 'email'> | null>('userLogin');
 const userState: User = {
   token: '',
   uid: null,
@@ -43,7 +43,11 @@ export const user = createSlice({
   initialState,
   reducers: {
     reset: () => {
-      return { ...initialState };
+      return initialState;
+    },
+    logOut: () => {
+      clearLocalStorage();
+      return userState;
     },
     errorUserClear: (state) => (state.error = undefined),
   },
@@ -71,6 +75,6 @@ export const user = createSlice({
     });
   },
 });
-export const { reset, errorUserClear } = user.actions;
+export const { reset, errorUserClear, logOut } = user.actions;
 
 export default user.reducer;
