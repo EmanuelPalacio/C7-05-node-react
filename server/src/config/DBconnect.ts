@@ -1,7 +1,10 @@
 import { Pool } from 'pg';
 import { SQL_DB, SQL_PASSWORD, SQL_PORT, SQL_URL, SQL_USERNAME } from './vars';
-
-export const database = new Pool({
+interface Consult<T> {
+  text: string;
+  values?: Array<T>;
+}
+const db = new Pool({
   user: SQL_USERNAME,
   host: SQL_URL,
   database: SQL_DB,
@@ -11,3 +14,9 @@ export const database = new Pool({
     rejectUnauthorized: false,
   },
 });
+export async function database<T>(consult: Consult<T>) {
+  const connect = await db.connect();
+  const data = await connect.query(consult);
+  connect.release();
+  return data;
+}

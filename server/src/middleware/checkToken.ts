@@ -4,6 +4,7 @@ import { KEY_GENERATE_TOKEN } from '../config';
 
 export default function checkToken(req: Request, res: Response, next: NextFunction) {
   const { authorization } = req.headers;
+
   try {
     const validate = authorization && jwt.verify(authorization, KEY_GENERATE_TOKEN);
     if (!authorization) {
@@ -21,6 +22,7 @@ export default function checkToken(req: Request, res: Response, next: NextFuncti
     req.body.uid = validate?.uid;
     return next();
   } catch (error) {
+    console.log('🚀 ~ file: checkToken.ts:25 ~ checkToken ~ error:', error);
     if (error instanceof TokenExpiredError) {
       return res.status(401).json({
         ok: false,

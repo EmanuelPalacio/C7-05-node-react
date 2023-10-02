@@ -7,5 +7,5 @@ export default async function createUser(user: User): Promise<void> {
     values: [user.uid, user.name, user.surname, user.companyName, user.email, user.password],
   };
 
-  await database.query(query);
+  await database(query);
 }

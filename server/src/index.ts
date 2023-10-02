@@ -3,10 +3,11 @@ import cors from 'cors';
 import morgan from 'morgan';
 import { PORT } from './config/vars';
 import router from './routes';
-import createTableModels from './models';
-import { allowOrigin, app, server } from './config';
+/* import createTableModels from './models'; */
+import { allowOrigin, app, io, server } from './config';
+import listenToSocket from './controllers/sockets/listenToSockets';
 
-/* ------ SERVErserver CONFIG ------- */
+/* ------ SERVER CONFIG ------- */
 app.use(morgan('dev'));
 //middlewares
 app.use(
@@ -24,6 +25,9 @@ app.use('/api', router);
 server.listen(PORT);
 
 /* ------ DATABASE ------- */
-createTableModels().then();
+/* createTableModels(); */
+/* ------ WEB SOCKET ------- */
+io.on('connection', listenToSocket);
+
 /* ----- RESET CONSOLE ------ */
 console.clear();

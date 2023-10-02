@@ -3,7 +3,7 @@ import tables from '../types/enumTables';
 
 const createTableUser = async (): Promise<void> => {
   try {
-    database.query({
+    database({
       text: `CREATE TABLE IF NOT EXISTS ${tables.users} (
         uid uuid NOT NULL,
         name VARCHAR(20) NOT NULL,
