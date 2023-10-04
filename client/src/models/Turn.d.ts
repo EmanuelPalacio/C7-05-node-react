@@ -1,4 +1,5 @@
 import { Status } from '../types/status';
+import { Uid } from './User';
 
 export interface GenerateTurn {
   name: string;
@@ -16,4 +17,12 @@ export interface TurnResponse {
 export interface TurnSlice extends Turn {
   status: Status;
   error: any;
+}
+export interface ListTurn {
+  id: string;
+  creationdate: Date;
+  enddate: null | Date;
+  name: string;
+  time: number;
+  uid: Uid;
 }

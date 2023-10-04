@@ -1,6 +1,7 @@
 .svg {
   aspect-ratio: 1;
-  width: 250px;
+  height: 100%;
+  max-width: 250px;
 }
 .svg > g {
   opacity: 0;
