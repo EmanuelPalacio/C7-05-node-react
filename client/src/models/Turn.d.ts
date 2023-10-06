@@ -21,7 +21,7 @@ export interface TurnSlice extends Turn {
 export interface ListTurn {
   id: string;
   creationdate: Date;
-  enddate: null | Date;
+  enddate: Date;
   name: string;
   time: number;
   uid: Uid;

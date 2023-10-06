@@ -3,7 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import { PORT } from './config/vars';
 import router from './routes';
-/* import createTableModels from './models'; */
+import createTableModels from './models';
 import { allowOrigin, app, io, server } from './config';
 import listenToSocket from './controllers/sockets/listenToSockets';
 
@@ -25,7 +25,7 @@ app.use('/api', router);
 server.listen(PORT);
 
 /* ------ DATABASE ------- */
-/* createTableModels(); */
+createTableModels();
 /* ------ WEB SOCKET ------- */
 io.on('connection', listenToSocket);
 

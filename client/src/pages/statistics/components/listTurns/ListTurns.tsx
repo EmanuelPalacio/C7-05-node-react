@@ -1,4 +1,5 @@
 import { ListTurn } from '../../../../models/Turn';
+import Timer from '../timer/Timer';
 import style from './style.module.css';
 
 export default function ListTurns({ arrayList }: { arrayList: ListTurn[] }) {
@@ -19,7 +20,9 @@ export default function ListTurns({ arrayList }: { arrayList: ListTurn[] }) {
                 <span>#</span>
                 {e.id}
               </td>
-              <td>{e.time}</td>
+              <td>
+                <Timer endDate={e.enddate} />
+              </td>
               <td>{e.name}</td>
             </tr>
           );

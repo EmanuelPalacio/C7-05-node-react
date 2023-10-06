@@ -9,4 +9,5 @@ export interface TurnRequest {
 export interface TurnCreate extends TurnRequest {
   id: string;
   creationDate: Date;
+  endDate: Date;
 }

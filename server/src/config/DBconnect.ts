@@ -16,7 +16,13 @@ const db = new Pool({
 });
 export async function database<T>(consult: Consult<T>) {
   const connect = await db.connect();
-  const data = await connect.query(consult);
-  connect.release();
-  return data;
+  try {
+    const data = await connect.query(consult);
+    return data;
+  } catch (error) {
+    console.log('🚀 ~ file: DBconnect.ts:23 ~ error:', error);
+    return;
+  } finally {
+    connect.release();
+  }
 }

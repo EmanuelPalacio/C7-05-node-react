@@ -10,7 +10,7 @@ const createTableTurns = async (): Promise<void> => {
         name VARCHAR(20) NOT NULL,
         time INTEGER NOT NULL,
         creationDate TIMESTAMP NOT NULL,
-        endDate TIMESTAMP,
+        endDate TIMESTAMP NOT NULL,
         PRIMARY KEY (id),
         FOREIGN KEY (uid) REFERENCES users (uid)
       )`,

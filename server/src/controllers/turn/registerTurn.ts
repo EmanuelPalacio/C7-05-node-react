@@ -7,8 +7,9 @@ export default function registerTurn(req: Request, res: Response) {
   const { uid, time, name }: TurnRequest = req.body;
   const id = turnIdGenerate();
   const creationDate = new Date();
+  const endDate = new Date(creationDate.getTime() + time * 60 * 1000);
   try {
-    createTurn({ id, uid, name, time, creationDate });
+    createTurn({ id, uid, name, time, creationDate, endDate });
     res.status(200).json({
       ok: true,
       msg: 'create turn successfully',
@@ -17,6 +18,7 @@ export default function registerTurn(req: Request, res: Response) {
         name,
         time,
         creationDate,
+        endDate,
       },
     });
   } catch (error) {
