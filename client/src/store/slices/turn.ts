@@ -29,6 +29,9 @@ const turn = createSlice({
     errorTurnClear: (state) => {
       return (state.error = undefined);
     },
+    setError: (state) => {
+      state.error = { status: 401 };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(createTurn.pending, (state) => {
@@ -42,5 +45,5 @@ const turn = createSlice({
     });
   },
 });
-export const { reset, errorTurnClear } = turn.actions;
+export const { reset, errorTurnClear, setError } = turn.actions;
 export default turn.reducer;

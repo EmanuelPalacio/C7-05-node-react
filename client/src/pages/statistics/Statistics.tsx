@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 import style from './style.module.css';
-import { useAppSelector, useWebsocket } from '../../hooks';
+import { useAppDispatch, useAppSelector, useWebsocket } from '../../hooks';
 import { ListTurn } from '../../models/Turn';
 import ListTurns from './components/listTurns/ListTurns';
 import CircleChart from './components/circleChart/CircleChart';
 import ChartLine from './components/chartLine/ChartLine';
 import { QRanimate, QrCode } from '../../components';
 import Timer from './components/timer/Timer';
+import { setError } from '../../store/slices/turn';
 
 export default function Statistics() {
+  const dispatch = useAppDispatch();
   const socket = useWebsocket();
   const { uid } = useAppSelector((store) => store.user);
   const [list, setList] = useState<ListTurn[]>([]);
@@ -24,7 +26,11 @@ export default function Statistics() {
     socket.on('turnsList', (data) => {
       setList(data);
     });
+    socket.on('error', () => {
+      dispatch(setError());
+    });
     return () => {
+      socket.off('error');
       socket.off('turnsList');
       socket.off('getTurns');
     };
