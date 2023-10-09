@@ -1,5 +1,5 @@
 import { QRCodeSVG } from 'qrcode.react';
 
-export default function QrCode({ id }: { id: string }) {
-  return <QRCodeSVG value={`/${id}`} size={250} fgColor='rgb(var(--color-primary))' bgColor='transparent' />;
+export default function QrCode({ id, size }: { id: string; size?: number }) {
+  return <QRCodeSVG value={`/${id}`} size={size} style={{ height: '100%' }} fgColor='rgb(var(--color-primary))' bgColor='transparent' />;
 }

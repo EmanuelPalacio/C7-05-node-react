@@ -66,11 +66,25 @@
   align-items: center;
 }
 
-.finish_turn > div {
-  height: 80%;
+.finish_QR,
+.finish_animate {
   padding: 1rem;
   border-radius: 15px;
   box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
   -webkit-box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
   -moz-box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
+}
+.finish_animate {
+  height: 80%;
+}
+.finish_data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: 40%;
+}
+.finish_data > p > span {
+  color: rgb(var(--color-primary));
 }
