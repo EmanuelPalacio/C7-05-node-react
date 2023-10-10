@@ -4,7 +4,7 @@ import { Btn } from '..';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { errorTurnClear } from '../../store/slices/turn';
 import { clearLocalStorage } from '../../utils';
-import { errorUserClear, reset } from '../../store/slices/user';
+import { errorUserClear, logOut } from '../../store/slices/user';
 
 export default function Error({ status }: { status: number }) {
   const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ export default function Error({ status }: { status: number }) {
         clearLocalStorage();
         dispatch(errorTurnClear());
         dispatch(errorUserClear());
-        dispatch(reset());
+        dispatch(logOut());
       };
       break;
     case 403:

@@ -5,6 +5,8 @@ import jwtDecode from 'jwt-decode';
 import { JwtDecode } from '../../types/jwtDecode';
 import { clearLocalStorage, getLocalStorage, setLocalStorage } from '../../utils';
 import { registerSerivce } from '../../services/user';
+import { RootState } from '../store';
+import refreshTokenService from '../../services/auth/refreshTokenService';
 
 const storageState = getLocalStorage<Pick<User, 'uid' | 'token' | 'email'> | null>('userLogin');
 const userState: User = {
@@ -17,7 +19,9 @@ const userState: User = {
   error: undefined,
   status: 'idle',
 };
-const initialState = storageState ? { ...userState, ...storageState } : userState;
+const initialState = () => {
+  return storageState ? { ...userState, ...storageState } : userState;
+};
 
 export const login = createAsyncThunk('user/login', async (body: UserLogin, { rejectWithValue }) => {
   try {
@@ -38,12 +42,21 @@ export const register = createAsyncThunk('user/register', async (body: UserRegis
     return rejectWithValue(error);
   }
 });
+
+export const refreshToken = createAsyncThunk('user/token', async (_, { rejectWithValue, getState }) => {
+  const { user } = getState() as RootState;
+  try {
+    return refreshTokenService(user.token);
+  } catch (error) {
+    rejectWithValue(error);
+  }
+});
 export const user = createSlice({
   name: 'user',
-  initialState,
+  initialState: initialState(),
   reducers: {
     reset: () => {
-      return initialState;
+      return initialState();
     },
     logOut: () => {
       clearLocalStorage();
@@ -52,16 +65,16 @@ export const user = createSlice({
     errorUserClear: (state) => (state.error = undefined),
   },
   extraReducers: (builder) => {
-    builder.addCase(login.pending, () => {
-      return { ...initialState, status: 'pending' };
+    builder.addCase(login.pending, (state) => {
+      return { ...state, status: 'pending' };
     });
     builder.addCase(login.fulfilled, (state, action) => {
       state.token = action.payload.token;
       state.uid = action.payload.uid;
       state.status = 'fulfilled';
     });
-    builder.addCase(login.rejected, (_state, action) => {
-      return { ...initialState, status: 'reject', error: action.payload };
+    builder.addCase(login.rejected, (state, action) => {
+      return { ...state, status: 'reject', error: action.payload };
     });
     builder.addCase(register.pending, (state) => {
       state.status = 'pending';
@@ -70,6 +83,17 @@ export const user = createSlice({
       state.status = 'fulfilled';
     });
     builder.addCase(register.rejected, (state, action) => {
+      state.status = 'reject';
+      state.error = action.payload;
+    });
+    builder.addCase(refreshToken.pending, (state) => {
+      state.status = 'pending';
+    });
+    builder.addCase(refreshToken.fulfilled, (state, action) => {
+      state.status = 'fulfilled';
+      state.token = action.payload.token;
+    });
+    builder.addCase(refreshToken.rejected, (state, action) => {
       state.status = 'reject';
       state.error = action.payload;
     });

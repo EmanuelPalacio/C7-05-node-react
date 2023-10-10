@@ -9,7 +9,7 @@ export default function webTokenGenerate(id: string): string {
     KEY_GENERATE_TOKEN,
     {
       algorithm: 'HS256',
-      expiresIn: 1200, // 20 minutes
+      expiresIn: 60 * 120, // 120 minutes
     }
   );
   return token;
