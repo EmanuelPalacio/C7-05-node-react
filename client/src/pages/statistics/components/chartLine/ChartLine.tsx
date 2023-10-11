@@ -1,63 +1,30 @@
-import { ResponsiveContainer, AreaChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis, Area } from 'recharts';
+import { ResponsiveContainer, AreaChart, CartesianGrid, Tooltip, XAxis, YAxis, Area } from 'recharts';
+import { ListTurn } from '../../../../models/Turn';
 
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-];
-export default function ChartLine() {
+export default function ChartLine({ data }: { data: ListTurn[] }) {
+  const hours: Array<{
+    hour: string;
+    quantity: number;
+  }> = [];
+
+  for (let hour = 0; hour <= 23; hour++) {
+    hours.push({
+      hour: hour.toString().padStart(2, '0') + ':00',
+      quantity: 0,
+    });
+  }
+  data.forEach((element) => {
+    const date = new Date(element.enddate).getHours();
+    hours[date].quantity++;
+  });
   return (
     <ResponsiveContainer width='90%' height='90%'>
-      <AreaChart
-        width={500}
-        height={400}
-        data={data}
-        margin={{
-          top: 10,
-          right: 30,
-          left: 0,
-          bottom: 0,
-        }}
-      >
+      <AreaChart width={500} height={400} data={hours}>
         <CartesianGrid strokeDasharray='4 4' />
-        <XAxis dataKey='name' />
-        <YAxis />
+        <XAxis dataKey='hour' />
+        <YAxis dataKey='quantity' />
         <Tooltip />
-        <Legend />
-        <Area type='monotone' dataKey='pv' stroke='rgb(var(--color-secondary))' activeDot={{ r: 8 }} />
+        <Area type='monotone' dataKey='quantity' stroke='rgb(var(--color-secondary))' activeDot={{ r: 8 }} />
       </AreaChart>
     </ResponsiveContainer>
   );

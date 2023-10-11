@@ -69,7 +69,7 @@ export default function Statistics() {
           <CircleChart />
         </div>
         <div className={`${style.line_chart} ${style.shadow_effect}`}>
-          <ChartLine />
+          <ChartLine data={list} />
         </div>
       </div>
     </section>
