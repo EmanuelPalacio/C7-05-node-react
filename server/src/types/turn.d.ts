@@ -10,4 +10,5 @@ export interface TurnCreate extends TurnRequest {
   id: string;
   creationDate: Date;
   endDate: Date;
+  state: 'in progress' | 'delayed';
 }

@@ -9,7 +9,7 @@ export default function registerTurn(req: Request, res: Response) {
   const creationDate = new Date();
   const endDate = new Date(creationDate.getTime() + time * 60 * 1000);
   try {
-    createTurn({ id, uid, name, time, creationDate, endDate });
+    createTurn({ id, uid, name, time, creationDate, endDate, state: 'in progress' });
     res.status(200).json({
       ok: true,
       msg: 'create turn successfully',

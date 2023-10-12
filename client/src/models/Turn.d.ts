@@ -25,4 +25,5 @@ export interface ListTurn {
   name: string;
   time: number;
   uid: Uid;
+  state: 'in progress' | 'delayed';
 }

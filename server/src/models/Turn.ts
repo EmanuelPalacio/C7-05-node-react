@@ -11,6 +11,7 @@ const createTableTurns = async (): Promise<void> => {
         time INTEGER NOT NULL,
         creationDate TIMESTAMP NOT NULL,
         endDate TIMESTAMP NOT NULL,
+        state VARCHAR(20) NOT NULL,
         PRIMARY KEY (id),
         FOREIGN KEY (uid) REFERENCES users (uid)
       )`,
