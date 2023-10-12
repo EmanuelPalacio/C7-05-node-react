@@ -3,3 +3,4 @@ export { default as createUser } from './createUser';
 export { default as searchTurn } from './searchTurn';
 export { default as searchUserByEmail } from './searchUserByEmail';
 export { default as searchUserById } from './searchUserById';
+export { default as updateTurns } from './updateTurns';
