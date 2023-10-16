@@ -2,12 +2,11 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { GenerateTurn, TurnSlice } from '../../models/Turn';
 import { registerTurn } from '../../services/turn';
 import { RootState } from '../store';
+import { setLocalStorage } from '../../utils';
 
-const initialState: TurnSlice = {
+const initialState: Partial<TurnSlice> = {
   id: '',
   name: '',
-  time: undefined,
-  creationDate: undefined,
   status: 'idle',
   error: undefined,
 };
@@ -23,6 +22,10 @@ const turn = createSlice({
   name: 'turn',
   initialState,
   reducers: {
+    setTurn: (state, action) => {
+      setLocalStorage('turn', action.payload);
+      return { ...state, ...action.payload };
+    },
     reset: () => {
       return { ...initialState };
     },
@@ -38,6 +41,7 @@ const turn = createSlice({
       state.status = 'pending';
     });
     builder.addCase(createTurn.fulfilled, (state, action) => {
+      setLocalStorage('turn', action.payload.data);
       return { ...state, status: 'fulfilled', ...action.payload.data };
     });
     builder.addCase(createTurn.rejected, (state, action) => {
@@ -45,5 +49,5 @@ const turn = createSlice({
     });
   },
 });
-export const { reset, errorTurnClear, setError } = turn.actions;
+export const { reset, errorTurnClear, setError, setTurn } = turn.actions;
 export default turn.reducer;

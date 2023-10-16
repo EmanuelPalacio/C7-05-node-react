@@ -14,7 +14,6 @@ export default function CircleChart({ data }: { data: ListTurn[] }) {
       quantity: 0,
     },
   ];
-  console.log('🚀 ~ file: CircleChart.tsx:17 ~ CircleChart ~ chartData:', chartData);
   data.forEach((e) => {
     if (e.state === 'delayed') {
       chartData[0].quantity++;

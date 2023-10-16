@@ -14,10 +14,7 @@ export interface TurnResponse {
   msg: string;
   data: Turn;
 }
-export interface TurnSlice extends Turn {
-  status: Status;
-  error: any;
-}
+
 export interface ListTurn {
   id: string;
   creationdate: Date;
@@ -27,3 +24,8 @@ export interface ListTurn {
   uid: Uid;
   state: 'in progress' | 'delayed';
 }
+export interface TurnSlice extends ListTurn {
+  status: Status;
+  error: unknown;
+}
+export interface TurnUpdate extends Pick<'uid', 'id', 'state', ListTurn> {}

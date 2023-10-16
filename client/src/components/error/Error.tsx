@@ -15,6 +15,7 @@ export default function Error({ status }: { status: number }) {
       errorMessage = 'Intentalo nueva muente';
       action = () => {
         dispatch(errorTurnClear());
+        dispatch(errorUserClear());
       };
       break;
     case 401:
