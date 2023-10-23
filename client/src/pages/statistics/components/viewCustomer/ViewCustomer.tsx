@@ -1,3 +1,4 @@
+import { Socket } from 'socket.io-client';
 import style from './style.module.css';
 import webTurn from '../../../../assets/images/webTurn.png';
 import { QRanimate, QrCode } from '../../../../components';
@@ -6,8 +7,11 @@ import Timer from '../timer/Timer';
 import { useAppDispatch } from '../../../../hooks';
 import { setTurn } from '../../../../store/slices/turn';
 import { Uid } from '../../../../models/User';
-export default function ViewCustomer({ turn, user }: { turn: ListTurn | undefined; user: Uid | null }) {
+export default function ViewCustomer({ turn, user, socket }: { socket: Socket; turn: ListTurn | undefined; user: Uid | null }) {
   const dispatch = useAppDispatch();
+  const turnCompleted = (data: { id: string; uid: Uid }) => {
+    socket.emit('finishTurn', data);
+  };
   return turn && user ? (
     <>
       <div className={style.finish_QR}>
@@ -23,8 +27,8 @@ export default function ViewCustomer({ turn, user }: { turn: ListTurn | undefine
         </p>
         <p>{turn.name}</p>
         <Timer endDate={turn.enddate} />
-        <button>Entregar</button>
-        <button>Demorar</button>
+        <button onClick={() => turnCompleted({ uid: user, id: turn.id })}>Entregar</button>
+        <button onClick={() => socket.emit('testing')}>Demorar</button>
       </div>
     </>
   ) : (

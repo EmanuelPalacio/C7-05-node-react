@@ -22,7 +22,7 @@ export interface ListTurn {
   name: string;
   time: number;
   uid: Uid;
-  state: 'in progress' | 'delayed';
+  state: 'in progress' | 'delayed' | 'completed';
 }
 export interface TurnSlice extends ListTurn {
   status: Status;

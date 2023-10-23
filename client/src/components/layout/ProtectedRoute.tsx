@@ -1,10 +1,9 @@
-import { useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import style from './styles/protectedStyle.module.css';
 import logo from '../../assets/images/logo.svg';
 import logout from '../../assets/images/logout.png';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
-import { logOut, refreshToken } from '../../store/slices/user';
+import { logOut } from '../../store/slices/user';
 import { Error, Link } from '..';
 
 export default function ProtectedRoute() {
@@ -12,10 +11,6 @@ export default function ProtectedRoute() {
   const userState = useAppSelector((store) => store.user);
   const turnState = useAppSelector((store) => store.turn);
   const error = turnState.error?.status || userState.error?.status;
-  useEffect(() => {
-    const interval = setInterval(() => dispatch(refreshToken()), 115 * 60 * 1000);
-    return () => clearInterval(interval);
-  }, [dispatch, userState.token]);
 
   return userState.token ? (
     <>

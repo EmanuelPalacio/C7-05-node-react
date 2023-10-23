@@ -10,10 +10,10 @@ export interface TurnCreate extends TurnRequest {
   id: string;
   creationDate: Date;
   endDate: Date;
-  state: 'in progress' | 'delayed';
+  state: 'in progress' | 'delayed' | 'completed';
 }
 export interface TurnUpdate {
   uid: Uid;
   id: string;
-  state: 'in progress' | 'delayed';
+  state: 'in progress' | 'delayed' | 'completed';
 }
