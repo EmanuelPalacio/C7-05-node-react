@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
-import { io } from 'socket.io-client';
 import style from './style.module.css';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { ListTurn } from '../../models/Turn';
 import ListTurns from './components/listTurns/ListTurns';
 import CircleChart from './components/circleChart/CircleChart';
 import ChartLine from './components/chartLine/ChartLine';
-
 import { setError } from '../../store/slices/turn';
 import ViewCustomer from './components/viewCustomer/ViewCustomer';
-import { URL } from '../../config';
+import { socket } from '../../config';
 
 export default function Statistics() {
   const dispatch = useAppDispatch();
@@ -20,20 +18,15 @@ export default function Statistics() {
   const selectTurn = (data: ListTurn) => {
     setTurn(data);
   };
-  const socket = io(URL, {
-    autoConnect: false,
-    auth: {
+  useEffect(() => {
+    socket.auth = {
       token,
       uid,
-    },
-  });
-
-  useEffect(() => {
+    };
     socket.connect();
-    console.log('repite');
     socket.emit('getTurns', uid);
     socket.on('turnsList', (data) => {
-      console.log('🚀 ~ file: Statistics.tsx:27 ~ socket.on ~ data:', data);
+      console.log('🚀 ~ file: Statistics.tsx:29 ~ socket.on ~ data:', data);
       setList(data);
     });
     socket.on('error', () => {
@@ -56,7 +49,7 @@ export default function Statistics() {
       </div>
       <div className={style.container_statics}>
         <div className={`${style.finish_turn} ${style.shadow_effect}`}>
-          <ViewCustomer turn={turn} user={uid} socket={socket} />
+          <ViewCustomer turn={turn} user={uid} />
         </div>
         <div className={`${style.pie_chart} ${style.shadow_effect}`}>
           <CircleChart data={list} />

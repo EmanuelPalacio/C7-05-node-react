@@ -24,14 +24,15 @@ export default function listenToSocket(socket: Socket) {
     });
 
     socket.on('finishTurn', async ({ uid, id }: { uid: Uid; id: string }) => {
-      console.log('completed');
       await updateTurns({ uid, id, state: 'completed' });
       const data = await searchTurn(uid);
-      console.log('🚀 ~ file: listenToSockets.ts:27 ~ socket.on ~ data:', data);
-      io.emit('turnsList', data);
+      socket.emit('turnsList', data);
     });
-    socket.on('testing', () => {
-      console.log('testing');
+    socket.on('delay', async ({ uid, id, min }: { uid: Uid; id: string; min: number }) => {
+      console.log('delay');
+      await updateTurns({ uid, id, state: 'delayed', min });
+      const data = await searchTurn(uid);
+      socket.emit('turnsList', data);
     });
   } catch (error) {
     if (error instanceof TokenExpiredError) {

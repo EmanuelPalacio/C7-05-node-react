@@ -16,4 +16,5 @@ export interface TurnUpdate {
   uid: Uid;
   id: string;
   state: 'in progress' | 'delayed' | 'completed';
+  min?: min;
 }
