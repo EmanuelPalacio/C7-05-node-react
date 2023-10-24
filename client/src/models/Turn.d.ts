@@ -26,6 +26,6 @@ export interface ListTurn {
 }
 export interface TurnSlice extends ListTurn {
   status: Status;
-  error: unknown;
+  error: any;
 }
 export interface TurnUpdate extends Pick<'uid', 'id', 'state', ListTurn> {}
