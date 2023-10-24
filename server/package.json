@@ -4,7 +4,7 @@
   "description": "APIrest Qrapido",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": " npm install && tsc",
     "start": "node build/index.js",
     "dev": "cross-env NODE_ENV=develoment ts-node-dev src/index.ts",
     "test": ""
