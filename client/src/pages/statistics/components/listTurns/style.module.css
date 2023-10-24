@@ -1,0 +1,40 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.table th {
+  font-family: var(--font-family-title);
+  font-weight: var(--font-weight-regular-bold);
+  width: calc(100% / 3);
+  padding: 10px;
+  border-bottom: 1px solid rgb(var(--color-primary));
+}
+.table > thead {
+  background: linear-gradient(0deg, rgb(var(--color-primary)), rgb(var(--color-fourt)), rgb(var(--color-primary)));
+  position: sticky;
+  top: 0;
+  box-shadow: -10px 0px 20px -5px rgba(var(--color-shadow) / 70%) inset;
+  -webkit-box-shadow: -10px 0px 20px -5px rgba(var(--color-shadow) / 70%) inset;
+  -moz-box-shadow: -10px 0px 20px -5px rgba(var(--color-shadow) / 70%) inset;
+}
+
+.table tbody td {
+  text-align: center;
+}
+.table tbody tr:hover {
+  background-color: rgba(var(--color-fourt) / 50%);
+}
+.table tbody td > span {
+  color: rgb(var(--color-primary));
+  font-weight: 700;
+  font-size: 1rem;
+}
+.table > tbody > tr {
+  height: 30px;
+  border-bottom: 1px solid rgb(var(--color-primary));
+}
+.table > tbody > tr:last-child {
+  border-bottom: 0px solid rgb(var(--color-primary));
+}

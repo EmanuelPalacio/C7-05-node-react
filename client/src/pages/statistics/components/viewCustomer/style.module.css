@@ -1,0 +1,58 @@
+.finish_QR {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.finish_QR > button > img {
+  cursor: pointer;
+  width: 3rem;
+}
+.finish_QR,
+.finish_animate {
+  padding: 1rem;
+  border-radius: 15px;
+  box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
+  -webkit-box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
+  -moz-box-shadow: 5px 5px 10px 0px rgba(var(--color-shadow) / 80%) inset;
+}
+.finish_animate {
+  height: 80%;
+}
+.finish_data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: 40%;
+}
+.finish_data > p,
+.finish_data > p > span {
+  font-size: var(--font-size-title);
+}
+
+.finish_data > p > span {
+  color: rgb(var(--color-primary));
+}
+.finish_data > span {
+  font-size: calc(var(--font-size-title) - 0.8rem);
+  color: rgb(var(--color-primary));
+}
+.finish_data > button {
+  cursor: pointer;
+  color: rgb(var(--color-secondary));
+  font-weight: var(--font-weight-regular-bold);
+  padding: 5px 10px;
+  border-radius: 30px;
+  background-color: greenyellow;
+}
+.finish_data > button:last-child {
+  background-color: transparent;
+  border: 1px solid rgb(var(--color-fourt));
+}
+.finish_data > button:hover {
+  transform: scale(1.1);
+}
+.finish_data > button:active {
+  transform: scale(0.9);
+}

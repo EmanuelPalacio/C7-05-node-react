@@ -1,0 +1,34 @@
+.container {
+  top: 0;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(var(--color-background) / 50%);
+  backdrop-filter: blur(2px);
+}
+
+.alert {
+  display: inherit;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1;
+  width: 40%;
+  background-color: rgba(var(--color-background));
+  border-radius: 20px;
+  box-shadow: 0 0 100px 20px rgb(231, 2, 2);
+}
+
+.alert > img {
+  aspect-ratio: 1;
+  width: 70%;
+  max-width: 400px;
+}
+.alert > p {
+  font-size: calc(var(--font-size-title) - 0.5rem);
+  color: rgb(231, 2, 2);
+  margin: 5px;
+}

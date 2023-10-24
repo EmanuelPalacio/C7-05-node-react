@@ -1,0 +1,25 @@
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  height: 50px;
+  border-radius: 25px;
+  border: 1px solid rgba(var(--color-secondary));
+  padding: 5px;
+}
+.btn p {
+  font-size: calc(var(--font-size-title) - 0.8rem);
+  padding: 0 10px;
+}
+.img {
+  filter: drop-shadow(2px 2px 1px rgba(var(--color-shadow)));
+  object-fit: contain;
+  height: 100%;
+}
+.btn:hover {
+  transform: scale(1.1);
+}
+.btn:active {
+  transform: scale(0.9);
+}

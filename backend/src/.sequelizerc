@@ -1,7 +1,0 @@
-var path = require('path')
-
-module.exports = {
-  'config':          path.resolve('dao/db', 'config.json'),
-  'migrations-path': path.resolve('dao/migrations'),
-  'models-path' : path.resolve('dao/models')
-}

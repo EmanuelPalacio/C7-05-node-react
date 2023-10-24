@@ -1,0 +1,23 @@
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: calc(var(--font-size-regular) + 0.2rem);
+  font-weight: var(--font-weight-regular-bold);
+  color: rgb(var(--color-secondary));
+  height: 50px;
+  width: 100%;
+  max-width: 200px;
+  border-radius: 25px;
+  background: linear-gradient(90deg, rgb(var(--color-primary)) 35%, rgb(var(--color-fourt)) 100%);
+  box-shadow: 1px 1px 5px 0px rgba(var(--color-shadow) / 80%);
+  -webkit-box-shadow: 1px 1px 5px 0px rgba(var(--color-shadow) / 80%);
+  -moz-box-shadow: 1px 1px 5px 0px rgba(var(--color-shadow) / 80%);
+}
+.btn:active {
+  transform: scale(0.9);
+}
+.btn:hover {
+  transform: scale(1.1);
+}

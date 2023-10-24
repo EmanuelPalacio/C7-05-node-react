@@ -20,16 +20,16 @@
 }
 
 :root {
-  --color-primary: 64, 171, 232;
-  --color-secondary: 15, 76, 117;
-  --color-third: 21, 0, 255;
-  --color-fourt: 100, 208, 227;
-  --color-background: 247, 247, 247;
-  --color-shadow: 0, 0, 0;
+  --color-primary: 64 171 232;
+  --color-secondary: 15 76 117;
+  --color-third: 21 0 255;
+  --color-fourt: 100 208 227;
+  --color-background: 247 247 247;
+  --color-shadow: 72 91 93;
 
   --font-family-title: 'Relaway', sans-serif;
   --font-family-regular: 'Nunito', sans-serif;
-
-  --font-size-title: 3rem;
+  --font-size-title: 2rem;
   --font-size-regular: 1rem;
+  --font-weight-regular-bold: 600;
 }

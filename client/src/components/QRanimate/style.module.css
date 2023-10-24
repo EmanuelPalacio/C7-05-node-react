@@ -1,0 +1,17 @@
+.svg {
+  aspect-ratio: 1;
+  height: 100%;
+  max-width: 250px;
+}
+.svg > g {
+  opacity: 0;
+  animation: loading 1.5s linear alternate infinite;
+}
+@keyframes loading {
+  to {
+    opacity: 0;
+  }
+  from {
+    opacity: 1;
+  }
+}
