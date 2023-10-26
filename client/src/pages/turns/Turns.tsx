@@ -5,7 +5,7 @@ import webTurn from '../../assets/images/webTurn.png';
 import { useField } from '../../hooks';
 import { GenerateTurn } from '../../models/Turn';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
-import { createTurn } from '../../store/slices/turn';
+import { createTurn, reset } from '../../store/slices/turn';
 
 export default function Turns() {
   const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ export default function Turns() {
   };
   return (
     <section className={style.container}>
-      <div className={style.container_turn}>
+      <div className={`${style.container_turn} ${turn.id ? style.container_desactive : ''}`}>
         <div>
           <h1 className={style.container_title}>Crear Turno</h1>
           <form className={style.container_form} onSubmit={handleForm}>
@@ -37,13 +37,23 @@ export default function Turns() {
           </form>
         </div>
       </div>
-      <div className={style.container_info}>
+      <div className={`${style.container_info} ${turn.id ? style.container_active : ''}`}>
         <div className={style.qr_container}>
           {turn.id && user.uid && turn.status === 'fulfilled' ? <QrCode data={{ uid: user.uid, id: turn.id, size: 250 }} /> : <QRanimate />}
-          <h3>Abrir en otra pantalla</h3>
-          <a href='/dashboard/scan' target='_blank'>
-            <img src={webTurn} alt='turno' />
-          </a>
+          <div className={`${turn.id ? style.container_desactive : ''}`}>
+            <h3>Abrir en otra pantalla</h3>
+            <a href='/dashboard/scan' target='_blank'>
+              <img src={webTurn} alt='turno' />
+            </a>
+          </div>
+          <Btn
+            type='button'
+            action={() => {
+              dispatch(reset());
+            }}
+          >
+            Generar otro turno
+          </Btn>
         </div>
       </div>
     </section>

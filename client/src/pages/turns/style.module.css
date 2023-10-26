@@ -74,3 +74,31 @@
 .qr_container > a:hover {
   transform: scale(1.1);
 }
+@media (width <= 1200px) {
+  .container_turn > div {
+    width: 80%;
+  }
+  .container_info,
+  .container_turn {
+    width: 50%;
+  }
+}
+/* @media (width <= 992px) {
+  .container_info {
+    display: none;
+  }
+} */
+@media (width <= 800px) {
+  .container_info {
+    display: none;
+  }
+  .container_turn {
+    width: 100%;
+  }
+  .container_active {
+    display: flex;
+  }
+  .container_desactive {
+    display: none;
+  }
+}
