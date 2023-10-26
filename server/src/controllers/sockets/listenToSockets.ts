@@ -1,7 +1,7 @@
 import { Socket } from 'socket.io';
 import { KEY_GENERATE_TOKEN, io } from '../../config';
 import { Uid } from '../../types/user';
-import { searchTurn, updateTurns } from '../../services/database';
+import { searchTurn, searchTurnById, updateTurns } from '../../services/database';
 import { TokenExpiredError, verify } from 'jsonwebtoken';
 
 export default function listenToSocket(socket: Socket) {
@@ -33,6 +33,12 @@ export default function listenToSocket(socket: Socket) {
       await updateTurns({ uid, id, state: 'delayed', min });
       const data = await searchTurn(uid);
       socket.emit('turnsList', data);
+    });
+    socket.on('CustomerView', async (data) => {
+      socket.join(data.id + data.uid);
+      const search = await searchTurnById(data);
+      console.log('🚀 ~ file: listenToSockets.ts:40 ~ socket.on ~ search:', search);
+      socket.emit('CustomerViewData', search);
     });
   } catch (error) {
     if (error instanceof TokenExpiredError) {

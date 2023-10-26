@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { Home, Register, Scan, Statistics, Turns } from './pages';
+import { CustomerView, Home, Register, Scan, Statistics, Turns } from './pages';
 import { ProtectedRoute, PublicRoute } from './components';
 
 export default function App() {
@@ -15,7 +15,7 @@ export default function App() {
         <Route path='/dashboard/statistics' element={<Statistics />} />
       </Route>
       <Route path='/dashboard/scan' element={<Scan />} />
-      <Route path='scan/:uid/:id' element={<h1>hola</h1>} />
+      <Route path='scan/:uid/:id' element={<CustomerView />} />
       <Route path='/*' element={<Navigate replace to='/404' />} />
       <Route path='/404' element={<h1>404</h1>} />
     </Routes>

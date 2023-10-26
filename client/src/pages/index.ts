@@ -1,5 +1,11 @@
+export { default as CustomerView } from './customerView/CustomerView';
 export { default as Home } from './home/Home';
 export { default as Register } from './register/Register';
 export { default as Scan } from './scan/Scan';
 export { default as Statistics } from './statistics/Statistics';
+export { default as ChartLine } from './statistics/components/chartLine/ChartLine';
+export { default as CircleChart } from './statistics/components/circleChart/CircleChart';
+export { default as ListTurns } from './statistics/components/listTurns/ListTurns';
+export { default as Timer } from './statistics/components/timer/Timer';
+export { default as ViewCustomer } from './statistics/components/viewCustomer/ViewCustomer';
 export { default as Turns } from './turns/Turns';
