@@ -3,6 +3,7 @@ export { default as QrCode } from './QRcode/QrCode';
 export { default as Btn } from './button/Btn';
 export { default as Error } from './error/Error';
 export { default as Form } from './form/Form';
+export { default as QRillustration } from './illustration/QRillustration';
 export { default as Input } from './input/Input';
 export { default as ProtectedRoute } from './layout/ProtectedRoute';
 export { default as PublicRoute } from './layout/PublicRoute';

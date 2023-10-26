@@ -1,8 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import style from './styles/publicStyle.module.css';
 import { useAppSelector } from '../../hooks/reduxHooks';
-import imgHome from '../../assets/images/login.svg';
-import { Error } from '..';
+import { Error, QRanimate, QRillustration } from '..';
 
 export default function PublicRoute() {
   const userState = useAppSelector((store) => store.user);
@@ -12,7 +11,9 @@ export default function PublicRoute() {
         <Outlet />
       </div>
       <div className={style.containerSvg}>
-        <img src={imgHome} alt='imagen de inicio' className={style.imageSvg} />
+        <QRillustration classStyle={style.imageSvg}>
+          <QRanimate />
+        </QRillustration>
       </div>
       {userState.error ? <Error status={userState.error.status} /> : null}
     </section>

@@ -8,14 +8,15 @@
   gap: 1rem;
   border-radius: 30px;
   box-shadow:
-    50px 50px 100px 10px rgba(var(--color-shadow) / 40%),
-    10px 5px 30px 0px rgba(var(--color-shadow) / 30%) inset;
+    50px 50px 100px 10px rgba(var(--color-shadow) / 60%),
+    10px 5px 30px 0px rgba(var(--color-shadow) / 60%) inset;
   -webkit-box-shadow:
-    50px 50px 100px 10px rgba(var(--color-shadow) / 40%),
-    10px 5px 30px 0px rgba(var(--color-shadow) / 30%) inset;
+    50px 50px 100px 10px rgba(var(--color-shadow) / 60%),
+    10px 5px 30px 0px rgba(var(--color-shadow) / 60%) inset;
   -moz-box-shadow:
-    50px 50px 100px 10px rgba(var(--color-shadow) / 40%),
-    10px 5px 30px 0px rgba(var(--color-shadow) / 30%) inset;
+    50px 50px 100px 10px rgba(var(--color-shadow) / 60%),
+    10px 5px 30px 0px rgba(var(--color-shadow) / 60%) inset;
+  background-color: rgba(var(--color-background));
 }
 .logoContainer {
   display: flex;

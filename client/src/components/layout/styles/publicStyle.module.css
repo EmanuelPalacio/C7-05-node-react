@@ -1,6 +1,15 @@
 .home {
   display: flex;
   height: 100vh;
+  background: linear-gradient(90deg, rgba(43, 86, 244, 1) 42%, rgba(64, 171, 232, 1) 100%);
+}
+.home::before {
+  content: '';
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  clip-path: ellipse(40% 50% at 90% 50%);
+  background-color: rgb(var(--color-background));
 }
 .login,
 .containerSvg {
@@ -11,6 +20,7 @@
 }
 .imageSvg {
   width: 90%;
+  z-index: 1;
 }
 .otherLogins {
   display: flex;

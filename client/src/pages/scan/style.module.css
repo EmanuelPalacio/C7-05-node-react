@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle, rgba(64, 171, 232, 1) 10%, rgba(43, 86, 244, 1) 100%);
+}
+.container::before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  clip-path: circle(35% at 50% 50%);
+  background-color: rgba(var(--color-background));
+  z-index: 1;
+}
+.name {
+  text-align: center;
+  text-wrap: balance;
+  color: rgba(var(--color-secondary));
+  font-size: calc(var(--font-size-title) - 0.5rem);
+}
+.name > span {
+  font-size: inherit;
+  color: rgba(var(--color-primary));
+}
+.svg {
+  z-index: 2;
+  height: 90%;
+  max-width: 90vw;
+}

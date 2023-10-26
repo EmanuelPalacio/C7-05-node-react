@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import style from './style.module.css';
-import { Btn, LoginGoogle } from '..';
+import { Btn /* , LoginGoogle  */ } from '..';
 import imgLogo from '../../assets/images/logo.svg';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { Link, useLocation } from 'react-router-dom';
@@ -26,18 +26,24 @@ export default function Form({ children, formDispatch }: TypeForm): React.ReactE
       </div>
       <form className={style.form} onSubmit={handleSubmit}>
         {children}
-        <Btn type='submit'>Ingresar</Btn>
+
         {pathname === '/' ? (
-          <Link to='/register'>¿No eres usuario? Registrate</Link>
+          <>
+            <Btn type='submit'>Ingresar</Btn>
+            <Link to='/register'>¿No eres usuario? Registrate</Link>
+          </>
         ) : (
-          <Link to='/'>¿Ya tienes una cuenta? Inicia sesión</Link>
+          <>
+            <Btn type='submit'>Ristrarse</Btn>
+            <Link to='/'>¿Ya tienes una cuenta? Inicia sesión</Link>
+          </>
         )}
       </form>
-      {pathname === '/' ? (
+      {/* {pathname === '/' ? (
         <div className={style.otherLogins}>
           <LoginGoogle />
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 }
