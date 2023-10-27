@@ -8,6 +8,7 @@
   width: 100vw;
   background-color: rgba(var(--color-background) / 50%);
   backdrop-filter: blur(2px);
+  z-index: 10;
 }
 
 .alert {
