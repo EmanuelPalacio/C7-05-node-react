@@ -74,6 +74,12 @@
 .qr_container > a:hover {
   transform: scale(1.1);
 }
+.container__screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 @media (width <= 1200px) {
   .container_turn > div {
     width: 80%;
@@ -83,11 +89,6 @@
     width: 50%;
   }
 }
-/* @media (width <= 992px) {
-  .container_info {
-    display: none;
-  }
-} */
 @media (width <= 800px) {
   .container_info {
     display: none;

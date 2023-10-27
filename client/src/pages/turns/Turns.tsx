@@ -40,7 +40,7 @@ export default function Turns() {
       <div className={`${style.container_info} ${turn.id ? style.container_active : ''}`}>
         <div className={style.qr_container}>
           {turn.id && user.uid && turn.status === 'fulfilled' ? <QrCode data={{ uid: user.uid, id: turn.id, size: 250 }} /> : <QRanimate />}
-          <div className={`${turn.id ? style.container_desactive : ''}`}>
+          <div className={`${style.container__screen} ${turn.id ? style.container_desactive : ''}`}>
             <h3>Abrir en otra pantalla</h3>
             <a href='/dashboard/scan' target='_blank'>
               <img src={webTurn} alt='turno' />
