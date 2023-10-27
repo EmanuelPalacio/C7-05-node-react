@@ -26,7 +26,6 @@ export default function Statistics() {
     socket.connect();
     socket.emit('getTurns', uid);
     socket.on('turnsList', (data) => {
-      console.log('🚀 ~ file: Statistics.tsx:29 ~ socket.on ~ data:', data);
       setList(data);
     });
     socket.on('error', () => {
@@ -40,6 +39,9 @@ export default function Statistics() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    if (turn) setTurn(list.find((e) => e.id === turn.id));
+  }, [list]);
   return (
     <section className={style.container}>
       <div className={style.container_table}>

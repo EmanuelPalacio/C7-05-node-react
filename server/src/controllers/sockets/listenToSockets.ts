@@ -29,15 +29,15 @@ export default function listenToSocket(socket: Socket) {
       socket.emit('turnsList', data);
     });
     socket.on('delay', async ({ uid, id, min }: { uid: Uid; id: string; min: number }) => {
-      console.log('delay');
       await updateTurns({ uid, id, state: 'delayed', min });
       const data = await searchTurn(uid);
+      const changedShift = data?.find((e) => e.id === id);
+      socket.to(id + uid).emit('delayNotice', changedShift);
       socket.emit('turnsList', data);
     });
     socket.on('CustomerView', async (data) => {
       socket.join(data.id + data.uid);
       const search = await searchTurnById(data);
-      console.log('🚀 ~ file: listenToSockets.ts:40 ~ socket.on ~ search:', search);
       socket.emit('CustomerViewData', search);
     });
   } catch (error) {

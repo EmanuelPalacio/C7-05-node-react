@@ -5,8 +5,26 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
+  background: linear-gradient(90deg, rgba(43, 86, 244, 1) 42%, rgba(64, 171, 232, 1) 100%);
+}
+.container::before {
+  position: absolute;
+  content: '';
+  background-color: rgba(var(--color-background));
+  aspect-ratio: 1;
+  width: 70%;
+  min-width: 380px;
+  max-width: 600px;
+  border-radius: 50%;
 }
 .svg {
   width: 100%;
-  max-width: 350px;
+  max-width: 300px;
+}
+.svg,
+.container span {
+  z-index: 1;
+}
+.container span {
+  font-size: var(--font-size-title);
 }
