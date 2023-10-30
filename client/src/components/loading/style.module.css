@@ -1,0 +1,22 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+.loading > img {
+  animation: rotation 1.5s linear both infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  80% {
+    transform: rotate(calc(360deg / 6));
+  }
+  100% {
+    transform: rotate(calc(360deg / 6));
+  }
+}
