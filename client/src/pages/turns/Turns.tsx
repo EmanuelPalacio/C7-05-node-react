@@ -6,6 +6,7 @@ import { useField } from '../../hooks';
 import { GenerateTurn } from '../../models/Turn';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { createTurn, reset } from '../../store/slices/turn';
+import Loading from '../../components/loading/Loading';
 
 export default function Turns() {
   const dispatch = useAppDispatch();
@@ -35,6 +36,7 @@ export default function Turns() {
             </select>
             <Btn type='submit'>Generar turno</Btn>
           </form>
+          {turn.status === 'pending' && <Loading />}
         </div>
       </div>
       <div className={`${style.container_info} ${turn.id ? style.container_active : ''}`}>

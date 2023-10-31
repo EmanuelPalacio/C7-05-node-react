@@ -4,7 +4,7 @@
 }
 .containerInput {
   display: grid;
-  grid-template-columns: 30px 1fr 30px;
+  grid-template-columns: 30px calc(100% - 90px) 30px;
   grid-template-rows: 30px;
   gap: 0 10px;
   width: 100%;

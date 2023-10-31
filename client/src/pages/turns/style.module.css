@@ -12,6 +12,7 @@
   height: 100%;
 }
 .container_turn > div {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,6 +30,7 @@
   -moz-box-shadow:
     50px 50px 100px 10px rgba(var(--color-shadow) / 40%),
     10px 5px 30px 0px rgba(var(--color-shadow) / 30%) inset;
+  overflow: hidden;
 }
 .container_form {
   display: flex;

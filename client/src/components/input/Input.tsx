@@ -27,7 +27,7 @@ export default function Input({ type, onChange, placeholder, id, required, patte
             maxLength={maxLength}
           />
           {buttonIcon ? (
-            <button className={style.btn} onClick={() => setIsType(isType === 'password' ? 'text' : 'password')}>
+            <button type='button' className={style.btn} onClick={() => setIsType(isType === 'password' ? 'text' : 'password')}>
               <img
                 src={buttonIcon}
                 alt={`boton ${id} icon`}

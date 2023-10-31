@@ -2,9 +2,10 @@ import { ReactNode } from 'react';
 import style from './style.module.css';
 import { Btn /* , LoginGoogle  */ } from '..';
 import imgLogo from '../../assets/images/logo.svg';
-import { useAppDispatch } from '../../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
 import { Link, useLocation } from 'react-router-dom';
 import { AsyncThunkAction } from '@reduxjs/toolkit';
+import Loading from '../loading/Loading';
 
 interface TypeForm {
   children: ReactNode;
@@ -14,6 +15,7 @@ interface TypeForm {
 
 export default function Form({ children, formDispatch }: TypeForm): React.ReactElement<TypeForm> {
   const dispatch = useAppDispatch();
+  const user = useAppSelector((store) => store.user);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     dispatch(formDispatch());
@@ -44,6 +46,7 @@ export default function Form({ children, formDispatch }: TypeForm): React.ReactE
           <LoginGoogle />
         </div>
       ) : null} */}
+      {user.status === 'pending' && <Loading />}
     </div>
   );
 }
